@@ -100,7 +100,6 @@ export default function Home() {
   const handlePasswordKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && isPasswordValid) {
       setShowPasswordPrompt(false);
-      // Redirecionar o usuário para /unlocked
       window.location.href = "/unlocked";
     }
   };
@@ -146,6 +145,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center h-screen">
           <div className="mt-48 gap-4 flex flex-col h-full items-center ">
             <Image
+              priority
               className="rounded-full border"
               src="https://github.com/pablokaliel.png"
               alt="s"
