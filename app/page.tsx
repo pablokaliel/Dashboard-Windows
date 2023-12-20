@@ -15,7 +15,7 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [showSeconds, setShowSeconds] = useState(false);
   const [timeFormat, setTimeFormat] = useState("HH:mm");
-  const [time, setTime] = useState("");
+  const [, setTime] = useState("");
   const [date, setDate] = useState("");
   const [weather, setWeather] = useState<any>(null);
   const [locationAccess, setLocationAccess] = useState(false);
@@ -30,7 +30,6 @@ export default function Home() {
       }
     }
     window.addEventListener("keydown", handleKeyPress);
-
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
@@ -42,7 +41,6 @@ export default function Home() {
       setTime(format(currentDate, showSeconds ? "HH:mm:ss" : "HH:mm"));
       setDate(format(currentDate, "EEEE, d MMMM", { locale: ptBR }));
     }, 1000);
-
     return () => clearInterval(clockInterval);
   }, [showSeconds]);
 
@@ -84,7 +82,6 @@ export default function Home() {
       console.error("Error fetching weather data: ", error);
     }
   };
-  
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const enteredPassword = e.target.value;
@@ -117,6 +114,7 @@ export default function Home() {
             </div>
             <span className="text-xl">{date}</span>
           </div>
+
           {locationAccess ? (
             <div className="mb-24 flex gap-3 p-2 rounded-md bg-black/70">
               <Image src={suun} alt="sol" />
@@ -129,13 +127,16 @@ export default function Home() {
           ) : (
             <span>Confirme o acesso para poder ver a temperatura</span>
           )}
+
           <div className="flex justify-end mr-4 gap-4 w-full">
             <div className="hover:scale-125 transition-all">
               <Image src={wifi} alt="" />
             </div>
+
             <div className="hover:scale-125 transition-all">
               <Image src={speaker} alt="" />
             </div>
+
             <div className="hover:scale-125 transition-all">
               <Image src={battery} alt="" />
             </div>
@@ -153,6 +154,7 @@ export default function Home() {
               height={150}
             />
             <h1>Usuário</h1>
+
             <div className="flex flex-col items-center">
               <input
                 className="bg-[#1E1E1E]/70 rounded h-8 w-full focus:border border-blue-400"
@@ -170,9 +172,11 @@ export default function Home() {
             <div className="hover:scale-125 transition-all">
               <Image src={wifi} alt="" />
             </div>
+
             <div className="hover:scale-125 transition-all">
               <Image src={speaker} alt="" />
             </div>
+
             <div className="hover:scale-125 transition-all">
               <Image src={battery} alt="" />
             </div>

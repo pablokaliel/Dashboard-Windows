@@ -16,19 +16,143 @@ import { useEffect, useState } from "react";
 
 import { format } from "date-fns";
 import axios from "axios";
+type ModalContent = {
+  [key: string]: JSX.Element | undefined;
+};
+
+const buttonsModal = {
+  windows: [
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    { src: windows, alt: "clima", name: "item" },
+    // Adicione mais objetos conforme necessário
+  ],
+  // Adicione mais plataformas ou tipos de botões conforme necessário
+};
+
+const RecommendedModal = {
+  windows: [
+    { src: windows, title: "Clima", subtitle: "Item 1" },
+    { src: windows, title: "Clima", subtitle: "Item 2" },
+    { src: windows, title: "Clima", subtitle: "Item 3" },
+    { src: windows, title: "Clima", subtitle: "Item 4" },
+    { src: windows, title: "Clima", subtitle: "Item 5" },
+    { src: windows, title: "Clima", subtitle: "Item 6" },
+    // Adicione mais objetos conforme necessário
+  ],
+  // Adicione mais plataformas ou tipos de botões conforme necessário
+};
+
+const modalContents: ModalContent = {
+  windows: (
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-between">
+        <h2 className="text-[17px] font-bold">Pinned</h2>
+        <button className="bg-white/10 text-sm px-2 rounded">All Apps</button>
+      </div>
+      <div className="grid flex-1 grid-cols-6 ">
+        {buttonsModal.windows.map((button, index) => (
+          <button
+            key={index}
+            className="flex flex-col mb-4 items-center justify-center"
+          >
+            <Image src={button.src} alt={button.alt} />
+            <p className="text-sm font-normal">{button.name}</p>
+          </button>
+        ))}
+      </div>
+      <div className="flex justify-between">
+        <h2 className="text-[17px] font-bold">Recommended</h2>
+        <button className="bg-white/10 text-sm px-2 rounded">More</button>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {/* Itens recomendados */}
+        {RecommendedModal.windows.map((item, index) => (
+          <div
+            key={index}
+            className="flex px-10 items-center justify-start gap-4"
+          >
+            <Image src={item.src} alt={item.title} />
+            <button className="flex flex-col items-center justify-center">
+              <p className="text-sm">{item.title}</p>
+              <p className="text-xs text-gray-400">{item.subtitle}</p>
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  ),
+  explorer: (
+    <div>
+      <h2>Conteúdo específico para Explorer</h2>
+      <p>Aqui está o conteúdo para o Explorer...</p>
+      {/* Adicione outros elementos HTML conforme necessário */}
+    </div>
+  ),
+  search: (
+    <div>
+      <h2>Conteúdo específico para Search</h2>
+      <p>Aqui está o conteúdo para o Search...</p>
+      {/* Adicione outros elementos HTML conforme necessário */}
+    </div>
+  ),
+  desktopmaginer: (
+    <div>
+      <h2>Conteúdo específico para Desktop Magner</h2>
+      <p>Aqui está o conteúdo para o Desktop Magner...</p>
+      {/* Adicione outros elementos HTML conforme necessário */}
+    </div>
+  ),
+  chat: (
+    <div>
+      <h2>Conteúdo específico para Chat</h2>
+      <p>Aqui está o conteúdo para o Chat...</p>
+      {/* Adicione outros elementos HTML conforme necessário */}
+    </div>
+  ),
+  microsoft: (
+    <div>
+      <h2>Conteúdo específico para Microsoft</h2>
+      <p>Aqui está o conteúdo para o Microsoft...</p>
+      {/* Adicione outros elementos HTML conforme necessário */}
+    </div>
+  ),
+  // Adicione outros tipos de conteúdo conforme necessário
+};
 
 export default function Page() {
   const [showSeconds, setShowSeconds] = useState(false);
-  const [timeFormat, setTimeFormat] = useState("HH:mm");
+  const [, setTimeFormat] = useState("HH:mm");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   const [weather, setWeather] = useState<any>(null);
-  const [locationAccess, setLocationAccess] = useState(false);
+  const [, setLocationAccess] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState<string>("");
 
   const toggleModal = () => {
     setShowModal((prevShowModal) => !prevShowModal);
+  };
+
+  const toggleModalWithContent = (content: string) => {
+    setModalContent(content);
+    toggleModal();
   };
 
   useEffect(() => {
@@ -37,7 +161,6 @@ export default function Page() {
       setTime(format(currentDate, showSeconds ? "HH:mm:ss" : "HH:mm"));
       setDate(format(currentDate, "dd/MM/yyyy"));
     }, 1000);
-
     return () => clearInterval(clockInterval);
   }, [showSeconds]);
 
@@ -116,16 +239,28 @@ export default function Page() {
               )}
             </div>
           </div>
+
           <div className="flex flex-1 items-center justify-center gap-7">
-            <button onClick={toggleModal}>
+            <button onClick={() => toggleModalWithContent("windows")}>
               <Image src={windows} alt="clima" />
             </button>
-            <Image src={search} alt="clima" />
-            <Image src={maniger} alt="clima" />
-            <Image src={chat} alt="clima" />
-            <Image src={explorer} alt="clima" />
-            <Image src={microsoft} alt="clima" />
+            <button onClick={() => toggleModalWithContent("search")}>
+              <Image src={search} alt="clima" />
+            </button>
+            <button onClick={() => toggleModalWithContent("desktopmaginer")}>
+              <Image src={maniger} alt="clima" />
+            </button>
+            <button onClick={() => toggleModalWithContent("chat")}>
+              <Image src={chat} alt="clima" />
+            </button>
+            <button onClick={() => toggleModalWithContent("explorer")}>
+              <Image src={explorer} alt="clima" />
+            </button>
+            <button onClick={() => toggleModalWithContent("microsoft")}>
+              <Image src={microsoft} alt="clima" />
+            </button>
           </div>
+
           <div className=" w-[180px] mr-6 gap-2 flex ">
             <div className="flex gap-1">
               <Image src={overflow} alt="clima" />
@@ -133,6 +268,7 @@ export default function Page() {
               <Image src={speaker} alt="clima" />
               <Image src={battery} alt="clima" />
             </div>
+
             <div onClick={toggleSeconds} className="text-end text-xs">
               <p className="cursor-pointer">{time}</p>
               <p>{date}</p>
@@ -142,13 +278,30 @@ export default function Page() {
       </div>
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-          <div className="relative mx-auto  w-full h-full flex items-center justify-center">
-            <div className="bg-[#212121]/60 backdrop-blur-xl h-[680px] w-[700px] rounded shadow-lg">
-              <div className="flex justify-between items-center pl-10 pr-1- pt-10">
-                <h3 className="text-lg font-semibold">Meu Modal</h3>
+          <div className="relative mx-auto w-full h-full flex items-center justify-center">
+            <div className="bg-[#212121]/60 flex flex-col gap-10 backdrop-blur-xl w-[700px] rounded shadow-lg">
+              <div className="flex justify-between items-center px-10 pr-10 pt-10">
+                <div className="h-[45px]  w-full bg-[#1e1e1e]/70">
+                  <input
+                    className="w-full px-[55px] h-full bg-transparent"
+                    placeholder="type here to search"
+                  />
+                </div>
               </div>
-              <div className="px-10  bg-black/10">
-                <p>Conteúdo do modal aqui...</p>
+              <div className="px-10">
+                <div className=" ">{modalContents[modalContent]}</div>
+              </div>
+              <div className="h-16 border-t-[1.4px] flex-col flex justify-center border-white border-opacity-20 px-[70px] bg-black/10">
+                <div className="flex gap-3 items-center ">
+                  <Image
+                    src="https://github.com/pablokaliel.png"
+                    className="rounded-full"
+                    alt=""
+                    width={40}
+                    height={40}
+                  />
+                  <p className="text-sm font-normal">name</p>
+                </div>
               </div>
             </div>
           </div>
