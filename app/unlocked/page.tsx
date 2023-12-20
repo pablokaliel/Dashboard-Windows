@@ -10,7 +10,7 @@ import maniger from "../../public/icons/Desktop maniger.svg";
 import suun from "../../public/icons/Group 2.svg";
 import wifi from "../../public/icons/WiFi.svg";
 import speaker from "../../public/icons/Speaker.svg";
-import battery from "../../public/icons/battery.svg";
+import battery from "../../public/icons/Battery.svg";
 import overflow from "../../public/icons/Overflow.svg";
 import { useEffect, useState } from "react";
 
