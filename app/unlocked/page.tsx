@@ -130,6 +130,11 @@ export default function Page() {
     "/myloveall.mp3",
     // Adicione mais músicas conforme necessário
   ];
+
+  const audioRef = useRef(new Audio("/choraviola.mp3"));
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.Audio !== 'undefined') {
       // Se o ambiente suportar a API de áudio
@@ -143,11 +148,6 @@ export default function Page() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const audioRef = useRef(new Audio());
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
-
 
   const playPause = () => {
     const audio = audioRef.current;
