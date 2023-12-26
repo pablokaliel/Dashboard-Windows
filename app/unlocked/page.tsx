@@ -131,8 +131,15 @@ export default function Page() {
     // Adicione mais músicas conforme necessário
   ];
   useEffect(() => {
-    if (!isPlaying) {
-      playPause();
+    if (typeof window !== 'undefined' && typeof window.Audio !== 'undefined') {
+      // Se o ambiente suportar a API de áudio
+     
+      if (!isPlaying) {
+        playPause();
+      }
+      // Resto do seu código relacionado ao áudio
+    } else {
+      console.error('A API de áudio não é suportada neste ambiente.');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
