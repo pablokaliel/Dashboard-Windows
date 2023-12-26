@@ -31,6 +31,8 @@ import excel from "../../public/icons/tasks/Icon 12.svg";
 import store from "../../public/icons/tasks/Icon 13.svg";
 import calendary from "../../public/icons/tasks/Icon 14.svg";
 import camera from "../../public/icons/tasks/Icon 15.svg";
+import config from "../../public/icons/tasks/Icon 18.svg";
+import pencil from "../../public/icons/tasks/Icon 17.svg";
 import steam from "../../public/icons/tasks/steam.svg";
 import chrome from "../../public/icons/tasks/chrome.svg";
 import acessibility from "../../public/icons/tasks/acessibility.png";
@@ -47,6 +49,7 @@ import {
   Moon,
   Pause,
   PersonArmsSpread,
+  PlayPause,
   WifiHigh,
 } from "@phosphor-icons/react";
 
@@ -121,6 +124,72 @@ export default function Page() {
   const [date, setDate] = useState("");
   const [weather, setWeather] = useState<any>(null);
   const [, setLocationAccess] = useState(false);
+
+  const musicas = [
+    "/choraviola.mp3",
+    "/myloveall.mp3",
+    // Adicione mais músicas conforme necessário
+  ];
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const nextSong = () => {
+    const newIndex = currentSongIndex + 1;
+    if (newIndex >= musicas.length) {
+      setCurrentSongIndex(0); // Go back to the first song when reaching the end
+    } else {
+      setCurrentSongIndex(newIndex);
+    }
+  };
+  
+  const prevSong = () => {
+    const newIndex = currentSongIndex - 1;
+    if (newIndex < 0) {
+      setCurrentSongIndex(musicas.length - 1); // Go to the last song when going back from the first
+    } else {
+      setCurrentSongIndex(newIndex);
+    }
+  };
+
+  useEffect(() => {
+    audioRef.current.src = musicas[currentSongIndex];
+    if (isPlaying) {
+      audioRef.current.play().catch((error) => {
+        console.error('Error starting playback:', error);
+      });
+    }
+  }, [currentSongIndex]);
+
+  const audioRef = useRef(new Audio(musicas[currentSongIndex]));
+
+  const playPause = () => {
+    const audio = audioRef.current;
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch((error) => {
+        console.error('Erro ao iniciar a reprodução:', error);
+      });
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+  
+    const handleSongEnd = () => {
+      nextSong(); // Simply move to the next song when the current one ends
+    };
+  
+    audio.addEventListener('ended', handleSongEnd);
+  
+    return () => {
+      audio.removeEventListener('ended', handleSongEnd);
+    };
+  }, [currentSongIndex, musicas]);
+  
+  
+ 
 
   const [searchText, setSearchText] = useState<string>("");
   const [filteredButtons, setFilteredButtons] = useState<Button[]>([]);
@@ -314,12 +383,24 @@ export default function Page() {
 
   const [showSpeakerModal, setShowSpeakerModal] = useState(false);
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          // A reprodução começou com sucesso
+        })
+        .catch((error) => {
+          console.error("Erro ao iniciar a reprodução:", error);
+        });
+    }
+  }, []);
+
   // Função para alternar a exibição do modal do alto-falante
   const toggleSpeakerModal = () => {
     setShowSpeakerModal((prevShowSpeakerModal) => !prevShowSpeakerModal);
   };
 
-  const audioRef = useRef<HTMLAudioElement>(null);
   const [volume, setVolume] = useState(50);
 
   useEffect(() => {
@@ -368,7 +449,21 @@ export default function Page() {
               <span className="text-sm mt-2">Meus projetos</span>
             </button>
 
-            <button className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
+            <button
+              onClick={() => {
+                if (audioRef.current) {
+                  audioRef.current
+                    .play()
+                    .then(() => {
+                      // Reprodução iniciada com sucesso
+                    })
+                    .catch((error) => {
+                      console.error("Erro ao iniciar a reprodução:", error);
+                    });
+                }
+              }}
+              className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200"
+            >
               <div>
                 <Image src={spotify} alt="clima" width={30} height={30} />
               </div>
@@ -412,10 +507,17 @@ export default function Page() {
               <span className="text-sm mt-2">Chrome</span>
             </button>
           </div>
-          <audio ref={audioRef} controls autoPlay={true} style={{ position: 'absolute', left: '-9999px',opacity:0 }} >
-        <source src="/choraviola.mp3" type="audio/mpeg" />
-        Seu navegador não suporta o elemento de áudio.
-      </audio>
+          <audio
+            ref={audioRef}
+            loop
+            controls
+            autoPlay={true}
+            preload="auto"
+            style={{ position: "absolute", left: "-9999px", opacity: 0 }}
+          >
+            <source src="/choraviola.mp3" type="audio/mpeg" />
+            Seu navegador não suporta o elemento de áudio.
+          </audio>
         </div>
 
         <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
@@ -466,89 +568,7 @@ export default function Page() {
               <button onClick={toggleSpeakerModal}>
                 <Image src={speaker} alt="clima" />
               </button>
-              <div
-                onClick={toggleSpeakerModal}
-                className={`fixed ${
-                  showSpeakerModal ? "translate-y-0" : "translate-y-full"
-                } transition-transform duration-300 inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none`}
-              >
-                <div className="relative mx-auto w-full h-full flex items-end justify-end px-5 pb-[70px]">
-                  <div
-                    onClick={(e) => e.stopPropagation()}
-                    className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[400px] rounded shadow-lg"
-                  >
-                    <div className="px-5 gap-4 w-full py-8 grid grid-cols-3">
-                      <div className=" text-center">
-                        <div className="bg-[#60CDFF] mb-2 border rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] ">
-                          <WifiHigh size={21} weight="light" color="black" />
-                        </div>
-                        <span className=" text-sm">Wi-Fi</span>
-                      </div>
-                      <div className=" text-center">
-                        <div className="bg-[#60CDFF] mb-2 border rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] ">
-                          <Bluetooth size={21} weight="light" color="black" />
-                        </div>
-                        <span className=" text-sm">Bluetooth</span>
-                      </div>
-                      <div className=" text-center">
-                        <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
-                          <AirplaneInFlight size={21} weight="light" />
-                        </div>
-                        <span className=" text-sm">AirPlane Mode</span>
-                      </div>
-                      <div className=" text-center">
-                        <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
-                          <BatteryPlus size={32} weight="light" />
-                        </div>
-                        <span className=" text-sm">Battery Saver</span>
-                      </div>
-                      <div className=" text-center">
-                        <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
-                          <Moon size={21} weight="light" />
-                        </div>
-                        <span className=" text-sm">Focus Assist</span>
-                      </div>
-                      <div className=" text-center">
-                        <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 mb-2 border-white flex items-center justify-center w-[120px] h-[60px] ">
-                          <PersonArmsSpread size={21} weight="light" />
-                        </div>
-                        <span className=" text-sm">Acessibility</span>
-                      </div>
-                    </div>
-                    <div className="px-5">
-                      <div className="flex gap-5">
-                        <Image src={speaker} alt="" height={21} width={21} />
-                        <input
-                        className="w-full"
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={volume}
-                  onChange={(e) => setVolume(Number(e.target.value))}
-                />
-                      </div>
-                      <div className="flex mt-10 justify-between items-center">
-                      <CaretLeft size={21} weight="fill" />
-                      <Pause size={21} weight="fill" />
-                      <CaretRight size={21} weight="fill" />
-                      </div>
-                    </div>
 
-                    <div className="h-16 border-t-[1.4px] flex-col flex justify-center border-white border-opacity-20 px-[70px] bg-black/10">
-                      <div className="flex gap-3 items-center ">
-                        <Image
-                          src="https://github.com/pablokaliel.png"
-                          className="rounded-full"
-                          alt=""
-                          width={40}
-                          height={40}
-                        />
-                        <p className="text-sm font-normal">Pablo</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <Image src={battery} alt="clima" />
             </div>
             <div onClick={toggleSeconds} className="text-end text-xs">
@@ -599,8 +619,93 @@ export default function Page() {
           </div>
         </div>
       </div>
+      <div
+        onClick={toggleSpeakerModal}
+        className={`fixed ${
+          showSpeakerModal ? "translate-y-0" : "translate-y-full"
+        } transition-transform duration-300 inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none`}
+      >
+        <div className="relative mx-auto w-full h-full flex items-end justify-end px-5 pb-[70px]">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[400px] rounded shadow-lg"
+          >
+            <div className="px-5 gap-4 w-full py-8 grid grid-cols-3">
+              <div className=" text-center">
+                <div className="bg-[#60CDFF] mb-2 border rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] ">
+                  <WifiHigh size={21} weight="light" color="black" />
+                </div>
+                <span className=" text-sm">Wi-Fi</span>
+              </div>
+              <div className=" text-center">
+                <div className="bg-[#60CDFF] mb-2 border rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] ">
+                  <Bluetooth size={21} weight="light" color="black" />
+                </div>
+                <span className=" text-sm">Bluetooth</span>
+              </div>
+              <div className=" text-center">
+                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
+                  <AirplaneInFlight size={21} weight="light" />
+                </div>
+                <span className=" text-sm">AirPlane Mode</span>
+              </div>
+              <div className=" text-center">
+                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
+                  <BatteryPlus size={32} weight="light" />
+                </div>
+                <span className=" text-sm">Battery Saver</span>
+              </div>
+              <div className=" text-center">
+                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
+                  <Moon size={21} weight="light" />
+                </div>
+                <span className=" text-sm">Focus Assist</span>
+              </div>
+              <div className=" text-center">
+                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 mb-2 border-white flex items-center justify-center w-[120px] h-[60px] ">
+                  <PersonArmsSpread size={21} weight="light" />
+                </div>
+                <span className=" text-sm">Acessibility</span>
+              </div>
+            </div>
+            <div className="px-5">
+              <div className="flex gap-5">
+                <Image src={speaker} alt="" height={21} width={21} />
+                <input
+                  className="w-full"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={volume}
+                  onChange={(e) => setVolume(Number(e.target.value))}
+                />
+              </div>
+              <div className="flex mt-10 justify-between items-center">
+                <button onClick={prevSong}><CaretLeft size={21} weight="fill" /></button>
+                <button onClick={playPause}>
+                  {isPlaying ? (
+                    <Pause size={21} weight="fill" />
+                  ) : (
+                    <PlayPause size={21} weight="fill" />
+                  )}
+                </button>
+                <button onClick={nextSong}><CaretRight size={21} weight="fill" /></button>
+              </div>
+            </div>
 
-     
+            <div className="h-16 border-t-[1.4px] items-center flex justify-between border-white border-opacity-20 px-5 bg-black/10">
+              <div className="flex gap-1 items-center ">
+                <Image src={battery} alt="" width={21} height={21} />
+                <p className="text-sm font-normal">92%</p>
+              </div>
+              <div className="flex gap-2">
+                <Image src={pencil} alt="" width={18} height={18} />
+                <Image src={config} alt="" width={18} height={18} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
