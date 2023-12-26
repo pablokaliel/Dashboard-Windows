@@ -12,7 +12,7 @@ import wifi from "../../public/icons/WiFi.svg";
 import speaker from "../../public/icons/Speaker.svg";
 import battery from "../../public/icons/Battery.svg";
 import overflow from "../../public/icons/Overflow.svg";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import github from "../../public/icons/tasks/github.svg";
 import lixeira from "../../public/icons/tasks/Icon.png";
@@ -46,12 +46,13 @@ import {
   Bluetooth,
   CaretLeft,
   CaretRight,
-  Moon,
-  Pause,
-  PersonArmsSpread,
   PlayPause,
+  Pause,
+  Moon,
+  PersonArmsSpread,
   WifiHigh,
 } from "@phosphor-icons/react";
+import MusicPlayer from "../components/ReactPlayer";
 
 type ModalContent = {
   [key: string]: JSX.Element | undefined;
@@ -124,85 +125,42 @@ export default function Page() {
   const [date, setDate] = useState("");
   const [weather, setWeather] = useState<any>(null);
   const [, setLocationAccess] = useState(false);
-
   const musicas = [
-    "/choraviola.mp3",
-    "/myloveall.mp3",
+    '/choraviola.mp3',
+    '/myloveall.mp3',
     // Adicione mais músicas conforme necessário
   ];
 
-  const audioRef = useRef(new Audio("/choraviola.mp3"));
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentMusicIndex, setCurrentMusicIndex] = useState(0);
+  const [volume, setVolume] = useState(0.5);
+  const [isPlaying, setIsPlaying] = useState(true); // Adicione o estado para controlar play/pause
+
+  const handleNext = () => {
+    setCurrentMusicIndex((prevIndex) => (prevIndex + 1) % musicas.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentMusicIndex((prevIndex) =>
+      prevIndex === 0 ? musicas.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVolume(parseFloat(e.target.value));
+  };
+
+  const togglePlayPause = () => {
+    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  };
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && typeof window.Audio !== 'undefined') {
-      // Se o ambiente suportar a API de áudio
-     
-      if (!isPlaying) {
-        playPause();
-      }
-      // Resto do seu código relacionado ao áudio
-    } else {
-      console.error('A API de áudio não é suportada neste ambiente.');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIsPlaying(true); // Iniciar reprodução automaticamente ao montar o componente
   }, []);
 
-  const playPause = () => {
-    const audio = audioRef.current;
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play().catch((error) => {
-        console.error('Error starting playback:', error);
-      });
-    }
-    setIsPlaying(!isPlaying);
-  };
 
-  const nextSong = () => {
-    const newIndex = currentSongIndex + 1;
-    if (newIndex >= musicas.length) {
-      setCurrentSongIndex(0); // Go back to the first song when reaching the end
-    } else {
-      setCurrentSongIndex(newIndex);
-    }
-  };
-  
-  const prevSong = () => {
-    const newIndex = currentSongIndex - 1;
-    if (newIndex < 0) {
-      setCurrentSongIndex(musicas.length - 1); // Go to the last song when going back from the first
-    } else {
-      setCurrentSongIndex(newIndex);
-    }
-  };
-
-  useEffect(() => {
-    audioRef.current.src = musicas[currentSongIndex];
-    if (isPlaying) {
-      audioRef.current.play().catch((error) => {
-        console.error('Error starting playback:', error);
-      });
-    }
-  }, [currentSongIndex, isPlaying]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-
-    const handleSongEnd = () => {
-      nextSong(); // Simply move to the next song when the current one ends
-    };
-
-    audio.addEventListener('ended', handleSongEnd);
-
-    return () => {
-      audio.removeEventListener('ended', handleSongEnd);
-    };
-  }, [currentSongIndex]);
-  
- 
+useEffect(() => {
+  setIsPlaying(true);
+}, []);
 
   const [searchText, setSearchText] = useState<string>("");
   const [filteredButtons, setFilteredButtons] = useState<Button[]>([]);
@@ -396,19 +354,10 @@ export default function Page() {
 
   const [showSpeakerModal, setShowSpeakerModal] = useState(false);
 
-
   // Função para alternar a exibição do modal do alto-falante
   const toggleSpeakerModal = () => {
     setShowSpeakerModal((prevShowSpeakerModal) => !prevShowSpeakerModal);
   };
-
-  const [volume, setVolume] = useState(50);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume / 100;
-    }
-  }, [volume]);
 
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
@@ -433,6 +382,20 @@ export default function Page() {
 
   return (
     <main className="min-h-screen w-full">
+
+<MusicPlayer
+        handleNext={handleNext}
+        handlePrevious={handlePrevious}
+        handleVolumeChange={handleVolumeChange}
+        volume={volume}
+        currentMusicIndex={currentMusicIndex}
+        musicas={musicas}
+        isPlaying={isPlaying} // Passando o estado de reprodução como propriedade
+        setIsPlaying={setIsPlaying} 
+        togglePlayPause={togglePlayPause}
+        
+      />
+
       <div className="flex flex-col w-full h-screen ">
         <div className="flex h-full justify-between">
           <div className=" grid grid-cols-2 gap-2 h-fit">
@@ -451,18 +414,6 @@ export default function Page() {
             </button>
 
             <button
-              onClick={() => {
-                if (audioRef.current) {
-                  audioRef.current
-                    .play()
-                    .then(() => {
-                      // Reprodução iniciada com sucesso
-                    })
-                    .catch((error) => {
-                      console.error("Erro ao iniciar a reprodução:", error);
-                    });
-                }
-              }}
               className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200"
             >
               <div>
@@ -508,7 +459,6 @@ export default function Page() {
               <span className="text-sm mt-2">Chrome</span>
             </button>
           </div>
-       
         </div>
 
         <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
@@ -665,22 +615,18 @@ export default function Page() {
                 <input
                   className="w-full"
                   type="range"
-                  min="0"
-                  max="100"
-                  value={volume}
-                  onChange={(e) => setVolume(Number(e.target.value))}
+                  min={0}
+                  max={1}
+                  step={0.1}
+                  onChange={handleVolumeChange}
                 />
               </div>
               <div className="flex mt-10 justify-between items-center">
-                <button onClick={prevSong}><CaretLeft size={21} weight="fill" /></button>
-                <button onClick={playPause}>
-                  {isPlaying ? (
-                    <Pause size={21} weight="fill" />
-                  ) : (
-                    <PlayPause size={21} weight="fill" />
-                  )}
-                </button>
-                <button onClick={nextSong}><CaretRight size={21} weight="fill" /></button>
+              <button onClick={handlePrevious}><CaretLeft size={21}/></button>
+              <button onClick={togglePlayPause}>
+            {isPlaying ? <Pause /> : <PlayPause />} {/* Utilização dos ícones de Play e Pause */}
+          </button>
+        <button onClick={handleNext}><CaretRight size={21}/></button>
               </div>
             </div>
 
