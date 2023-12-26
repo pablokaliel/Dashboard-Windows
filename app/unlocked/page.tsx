@@ -130,9 +130,30 @@ export default function Page() {
     "/myloveall.mp3",
     // Adicione mais músicas conforme necessário
   ];
+  useEffect(() => {
+    if (!isPlaying) {
+      playPause();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  const audioRef = useRef(new Audio());
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+
+
+  const playPause = () => {
+    const audio = audioRef.current;
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch((error) => {
+        console.error('Error starting playback:', error);
+      });
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   const nextSong = () => {
     const newIndex = currentSongIndex + 1;
     if (newIndex >= musicas.length) {
@@ -158,36 +179,21 @@ export default function Page() {
         console.error('Error starting playback:', error);
       });
     }
-  }, [currentSongIndex]);
-
-  const audioRef = useRef(new Audio(musicas[currentSongIndex]));
-
-  const playPause = () => {
-    const audio = audioRef.current;
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play().catch((error) => {
-        console.error('Erro ao iniciar a reprodução:', error);
-      });
-    }
-    setIsPlaying(!isPlaying);
-  };
+  }, [currentSongIndex, isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
-  
+
     const handleSongEnd = () => {
       nextSong(); // Simply move to the next song when the current one ends
     };
-  
+
     audio.addEventListener('ended', handleSongEnd);
-  
+
     return () => {
       audio.removeEventListener('ended', handleSongEnd);
     };
-  }, [currentSongIndex, musicas]);
-  
+  }, [currentSongIndex]);
   
  
 
@@ -383,18 +389,6 @@ export default function Page() {
 
   const [showSpeakerModal, setShowSpeakerModal] = useState(false);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current
-        .play()
-        .then(() => {
-          // A reprodução começou com sucesso
-        })
-        .catch((error) => {
-          console.error("Erro ao iniciar a reprodução:", error);
-        });
-    }
-  }, []);
 
   // Função para alternar a exibição do modal do alto-falante
   const toggleSpeakerModal = () => {
@@ -507,12 +501,7 @@ export default function Page() {
               <span className="text-sm mt-2">Chrome</span>
             </button>
           </div>
-          <audio loop controls autoPlay preload="auto" style={{ position: "absolute", left: "-9999px", opacity: 0 }}>
-  {musicas.map((musicSrc, index) => (
-    <source key={index} src={musicSrc} type="audio/mpeg" />
-  ))}
-  Seu navegador não suporta o elemento de áudio.
-</audio>
+       
         </div>
 
         <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
