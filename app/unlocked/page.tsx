@@ -507,17 +507,12 @@ export default function Page() {
               <span className="text-sm mt-2">Chrome</span>
             </button>
           </div>
-          <audio
-            ref={audioRef}
-            loop
-            controls
-            autoPlay={true}
-            preload="auto"
-            style={{ position: "absolute", left: "-9999px", opacity: 0 }}
-          >
-            <source src="/choraviola.mp3" type="audio/mpeg" />
-            Seu navegador não suporta o elemento de áudio.
-          </audio>
+          <audio loop controls autoPlay preload="auto" style={{ position: "absolute", left: "-9999px", opacity: 0 }}>
+  {musicas.map((musicSrc, index) => (
+    <source key={index} src={musicSrc} type="audio/mpeg" />
+  ))}
+  Seu navegador não suporta o elemento de áudio.
+</audio>
         </div>
 
         <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
