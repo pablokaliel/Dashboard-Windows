@@ -65,9 +65,7 @@ export default function Home() {
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = '0ec51c3697240d124db14a663d03e135';
     try {
-      let res = await axios.get(
-        "https://api.openweathermap.org/data/2.5/weather",
-        {
+      let res = await axios.get( "https://api.openweathermap.org/data/2.5/weather", {
           params: {
             lat: lat,
             lon: lon,
@@ -117,7 +115,7 @@ export default function Home() {
 
           {locationAccess ? (
             <div className="mb-24 flex gap-3 p-2 rounded-md bg-black/70">
-              <Image src={suun} alt="sol" />
+              <Image src={suun} alt="clima" />
               {weather && weather.main ? (
                  <span>{weather.main.temp.toFixed(1)}° Celsius</span>
               ) : (
@@ -130,15 +128,15 @@ export default function Home() {
 
           <div className="flex justify-end mr-4 gap-4 w-full">
             <div className="hover:scale-125 transition-all">
-              <Image src={wifi} alt="" />
+              <Image src={wifi} alt="wifi" />
             </div>
 
             <div className="hover:scale-125 transition-all">
-              <Image src={speaker} alt="" />
+              <Image src={speaker} alt="speaker" />
             </div>
 
             <div className="hover:scale-125 transition-all">
-              <Image src={battery} alt="" />
+              <Image src={battery} alt="battery" />
             </div>
           </div>
         </div>
@@ -149,7 +147,7 @@ export default function Home() {
               priority
               className="rounded-full border"
               src="https://github.com/pablokaliel.png"
-              alt="s"
+              alt="foto de perfil do usuário"
               width={150}
               height={150}
             />
@@ -170,15 +168,15 @@ export default function Home() {
           </div>
           <div className="flex mb-0 justify-end mr-4 gap-4 w-full">
             <div className="hover:scale-125 transition-all">
-              <Image src={wifi} alt="" />
+              <Image src={wifi} alt="wifi" />
             </div>
 
             <div className="hover:scale-125 transition-all">
-              <Image src={speaker} alt="" />
+              <Image src={speaker} alt="speaker" />
             </div>
 
             <div className="hover:scale-125 transition-all">
-              <Image src={battery} alt="" />
+              <Image src={battery} alt="batery " />
             </div>
           </div>
         </div>

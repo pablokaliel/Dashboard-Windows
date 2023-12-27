@@ -1,49 +1,45 @@
 "use client";
 
-import Image from "next/image";
-import microsoft from "../../public/icons/Microsoft edge.svg";
-import windows from "../../public/icons/Windows.svg";
-import search from "../../public/icons/Search.svg";
-import explorer from "../../public/icons/file Explorer.svg";
-import chat from "../../public/icons/Chat.svg";
-import maniger from "../../public/icons/Desktop maniger.svg";
-import suun from "../../public/icons/Group 2.svg";
-import wifi from "../../public/icons/WiFi.svg";
-import speaker from "../../public/icons/Speaker.svg";
-import battery from "../../public/icons/Battery.svg";
-import overflow from "../../public/icons/Overflow.svg";
 import { useEffect, useState } from "react";
-
-import github from "../../public/icons/tasks/github.svg";
-import lixeira from "../../public/icons/tasks/Icon.png";
-import folder from "../../public/icons/tasks/Icon.svg";
-import notepad from "../../public/icons/tasks/Icon 2.svg";
-import paint from "../../public/icons/tasks/Icon 3.svg";
-import calculator from "../../public/icons/tasks/Icon 4.svg";
-import spotify from "../../public/icons/tasks/Icon 5.svg";
-import settings from "../../public/icons/tasks/Icon 6.svg";
-import mail from "../../public/icons/tasks/Icon 7.svg";
-import photos from "../../public/icons/tasks/Icon 8.svg";
-import xbox from "../../public/icons/tasks/Icon 9.svg";
-import pdf from "../../public/icons/tasks/Icon 10.svg";
-import word from "../../public/icons/tasks/Icon 11.svg";
-import excel from "../../public/icons/tasks/Icon 12.svg";
-import store from "../../public/icons/tasks/Icon 13.svg";
-import calendary from "../../public/icons/tasks/Icon 14.svg";
-import camera from "../../public/icons/tasks/Icon 15.svg";
-import config from "../../public/icons/tasks/Icon 18.svg";
-import pencil from "../../public/icons/tasks/Icon 17.svg";
-import steam from "../../public/icons/tasks/steam.svg";
-import chrome from "../../public/icons/tasks/chrome.svg";
-import acessibility from "../../public/icons/tasks/acessibility.png";
-import discord from "../../public/icons/tasks/discord.svg";
-
 import { format } from "date-fns";
-import axios from "axios";
-import { AirplaneInFlight, BatteryPlus, Bluetooth, CaretLeft, CaretRight, PlayPause, Pause, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
-import MusicPlayer from "../components/ReactPlayer";
-import WindowsComponent from "../components/WindowsComponent";
-import Link from "next/link";
+import notepad from "../../../public/icons/tasks/Icon 2.svg";
+import spotify from "../../../public/icons/tasks/Icon 5.svg";
+import folder from "../../../public/icons/tasks/Icon.svg";
+import discord from "../../../public/icons/tasks/discord.svg";
+import suun from "../../../public/icons/Group 2.svg";
+import mail from "../../../public/icons/tasks/Icon 7.svg";
+import speaker from "../../../public/icons/Speaker.svg";
+import battery from "../../../public/icons/Battery.svg";
+import config from "../../../public/icons/tasks/Icon 18.svg";
+import pencil from "../../../public/icons/tasks/Icon 17.svg";
+
+import microsoft from "../../../public/icons/Microsoft edge.svg";
+import windows from "../../../public/icons/Windows.svg";
+import search from "../../../public/icons/Search.svg";
+import explorer from "../../../public/icons/file Explorer.svg";
+import chat from "../../../public/icons/Chat.svg";
+import maniger from "../../../public/icons/Desktop maniger.svg";
+
+import wifi from "../../../public/icons/WiFi.svg";
+import overflow from "../../../public/icons/Overflow.svg";
+
+import paint from "../../../public/icons/tasks/Icon 3.svg";
+import calculator from "../../../public/icons/tasks/Icon 4.svg";
+
+import settings from "../../../public/icons/tasks/Icon 6.svg";
+
+import photos from "../../../public/icons/tasks/Icon 8.svg";
+import xbox from "../../../public/icons/tasks/Icon 9.svg";
+import pdf from "../../../public/icons/tasks/Icon 10.svg";
+import word from "../../../public/icons/tasks/Icon 11.svg";
+import excel from "../../../public/icons/tasks/Icon 12.svg";
+import store from "../../../public/icons/tasks/Icon 13.svg";
+import calendary from "../../../public/icons/tasks/Icon 14.svg";
+import camera from "../../../public/icons/tasks/Icon 15.svg";
+
+import steam from "../../../public/icons/tasks/steam.svg";
+import chrome from "../../../public/icons/tasks/chrome.svg";
+import acessibility from "../../../public/icons/tasks/acessibility.png";
 
 type ModalContent = {
   [key: string]: JSX.Element | undefined;
@@ -55,50 +51,68 @@ type Button = {
   name: string;
 };
 
-const buttonsModal = {
-  windows: [
-    { src: folder, alt: "folder", name: "Folder" },
-    { src: notepad, alt: "bloco de notas", name: "Notepad" },
-    { src: paint, alt: "paint", name: "Paint" },
-    { src: calculator, alt: "calculadora", name: "Calculator" },
-    { src: spotify, alt: "spotify", name: "Spotify" },
-    { src: settings, alt: "configuracao", name: "Settings" },
-    { src: mail, alt: "email", name: "Mail" },
-    { src: photos, alt: "fotos", name: "Photo" },
-    { src: xbox, alt: "xbox", name: "Xbox" },
-    { src: pdf, alt: "pdf", name: "PDF" },
-    { src: word, alt: "word", name: "Word" },
-    { src: excel, alt: "excel", name: "Excel" },
-    { src: store, alt: "store", name: "Microsoft Store" },
-    { src: calendary, alt: "calendario", name: "Calendar" },
-    { src: camera, alt: "camera", name: "Camera" },
-  ],
-  search: [
-    { src: folder, alt: "folder", name: "Folder" },
-    { src: notepad, alt: "bloco de notas", name: "Notepad" },
-    { src: paint, alt: "paint", name: "Paint" },
-    { src: calculator, alt: "calculadora", name: "Calculator" },
-    { src: spotify, alt: "spotify", name: "Spotify" },
-    { src: settings, alt: "configuracao", name: "Settings" },
-    { src: mail, alt: "email", name: "Mail" },
-    { src: photos, alt: "fotos", name: "Photo" },
-    { src: xbox, alt: "xbox", name: "Xbox" },
-    { src: pdf, alt: "pdf", name: "logo_ideias" },
-    { src: pdf, alt: "pdf", name: "PDF" },
-    { src: word, alt: "word", name: "Word" },
-    { src: excel, alt: "excel", name: "Excel" },
-    { src: excel, alt: "excel", name: "planilha_mensal" },
-    { src: store, alt: "store", name: "Microsoft Store" },
-    { src: calendary, alt: "calendario", name: "Calendar" },
-    { src: discord, alt: "camera", name: "Discord" },
-    { src: chrome, alt: "camera", name: "Chrome" },
-    { src: steam, alt: "camera", name: "Steam" },
-    { src: camera, alt: "camera", name: "Camera" },
-    { src: acessibility, alt: "camera", name: "Acessibilidade" },
-  ],
-};
+import Image from "next/image";
+import WindowsComponent from "@/app/components/WindowsComponent";
+import axios from "axios";
+import {
+  AirplaneInFlight,
+  BatteryPlus,
+  Bluetooth,
+  CaretLeft,
+  CaretRight,
+  Moon,
+  Pause,
+  PersonArmsSpread,
+  PlayPause,
+  WifiHigh,
+} from "@phosphor-icons/react";
+import { SideSpotify } from "@/app/components/SideSpotify";
+import { BottomSpotify } from "@/app/components/BottomSpotify";
+import { MainSpotify } from "@/app/components/MainSpotify";
 
 export default function Page() {
+  const buttonsModal = {
+    windows: [
+      { src: folder, alt: "folder", name: "Folder" },
+      { src: notepad, alt: "bloco de notas", name: "Notepad" },
+      { src: paint, alt: "paint", name: "Paint" },
+      { src: calculator, alt: "calculadora", name: "Calculator" },
+      { src: spotify, alt: "spotify", name: "Spotify" },
+      { src: settings, alt: "configuracao", name: "Settings" },
+      { src: mail, alt: "email", name: "Mail" },
+      { src: photos, alt: "fotos", name: "Photo" },
+      { src: xbox, alt: "xbox", name: "Xbox" },
+      { src: pdf, alt: "pdf", name: "PDF" },
+      { src: word, alt: "word", name: "Word" },
+      { src: excel, alt: "excel", name: "Excel" },
+      { src: store, alt: "store", name: "Microsoft Store" },
+      { src: calendary, alt: "calendario", name: "Calendar" },
+      { src: camera, alt: "camera", name: "Camera" },
+    ],
+    search: [
+      { src: folder, alt: "folder", name: "Folder" },
+      { src: notepad, alt: "bloco de notas", name: "Notepad" },
+      { src: paint, alt: "paint", name: "Paint" },
+      { src: calculator, alt: "calculadora", name: "Calculator" },
+      { src: spotify, alt: "spotify", name: "Spotify" },
+      { src: settings, alt: "configuracao", name: "Settings" },
+      { src: mail, alt: "email", name: "Mail" },
+      { src: photos, alt: "fotos", name: "Photo" },
+      { src: xbox, alt: "xbox", name: "Xbox" },
+      { src: pdf, alt: "pdf", name: "logo_ideias" },
+      { src: pdf, alt: "pdf", name: "PDF" },
+      { src: word, alt: "word", name: "Word" },
+      { src: excel, alt: "excel", name: "Excel" },
+      { src: excel, alt: "excel", name: "planilha_mensal" },
+      { src: store, alt: "store", name: "Microsoft Store" },
+      { src: calendary, alt: "calendario", name: "Calendar" },
+      { src: discord, alt: "camera", name: "Discord" },
+      { src: chrome, alt: "camera", name: "Chrome" },
+      { src: steam, alt: "camera", name: "Steam" },
+      { src: camera, alt: "camera", name: "Camera" },
+      { src: acessibility, alt: "camera", name: "Acessibilidade" },
+    ],
+  };
   const [showSeconds, setShowSeconds] = useState(false);
   const [, setTimeFormat] = useState("HH:mm");
   const [time, setTime] = useState("");
@@ -106,10 +120,7 @@ export default function Page() {
   const [weather, setWeather] = useState<any>(null);
   const [, setLocationAccess] = useState(false);
 
-  const musicas = [
-    "/choraviola.mp3",
-    "/myloveall.mp3",
-  ];
+  const musicas = ["/choraviola.mp3", "/myloveall.mp3"];
 
   const initialRecommendedWindows = [
     { src: notepad, title: "NotePad", subtitle: "2h atrás" },
@@ -154,9 +165,9 @@ export default function Page() {
   const modalContents: ModalContent = {
     windows: (
       <WindowsComponent
-      filteredButtons={filteredButtons}
-      recommendedWindows={recommendedWindows}
-    />
+        filteredButtons={filteredButtons}
+        recommendedWindows={recommendedWindows}
+      />
     ),
     explorer: (
       <div>
@@ -310,7 +321,9 @@ export default function Page() {
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
     try {
-      let res = await axios.get( "https://api.openweathermap.org/data/2.5/weather", {
+      let res = await axios.get(
+        "https://api.openweathermap.org/data/2.5/weather",
+        {
           params: {
             lat: lat,
             lon: lon,
@@ -328,82 +341,14 @@ export default function Page() {
 
   return (
     <main className="min-h-screen w-full">
-      <MusicPlayer
-        handleNext={handleNext}
-        handlePrevious={handlePrevious}
-        handleVolumeChange={handleVolumeChange}
-        volume={volume}
-        currentMusicIndex={currentMusicIndex}
-        musicas={musicas}
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        togglePlayPause={togglePlayPause}
-      />
-
       <div className="flex flex-col w-full h-screen ">
-        <div className="flex h-full justify-between">
-          <div className=" grid grid-cols-2 gap-2 h-fit">
-            <button className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
-              <div>
-                <Image src={notepad} alt="notePad" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">NotePad</span>
-            </button>
-
-            <button className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
-              <div>
-                <Image src={folder} alt="folder" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">Meus projetos</span>
-            </button>
-
-            <Link href={"/unlocked/spotify"} className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
-              <div>
-                <Image src={spotify} alt="spotify" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">Spotify</span>
-            </Link>
-
-            <button className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
-              <div>
-                <Image src={github} alt="github" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">GitHub</span>
-            </button>
-          </div>
-
-          <div className=" h-full flex flex-col ">
-            <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 ">
-              <div>
-                <Image src={lixeira} alt="lixeira" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">Lixeira</span>
-            </button>
-
-            <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
-              <div>
-                <Image src={steam} alt="steam" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">Steam</span>
-            </button>
-
-            <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
-              <div>
-                <Image src={discord} alt="discord" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">Discord</span>
-            </button>
-
-            <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
-              <div>
-                <Image src={chrome} alt="chrome" width={30} height={30} />
-              </div>
-              <span className="text-sm mt-2">Chrome</span>
-            </button>
-          </div>
+        <div className="flex overflow-scroll h-full flex-1">
+          <SideSpotify />
+          <MainSpotify />
         </div>
+        <BottomSpotify />
 
-        <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
+        <footer className="flex  fixed bottom-0 justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
           <div className="ml-4 items-center h-[50px] flex gap-3">
             <Image src={suun} alt="clima" />
             <div>
