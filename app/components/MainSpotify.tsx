@@ -129,6 +129,7 @@ export function MainSpotify() {
         {data.slice(0, numberList).map(({ id, image, title, description }) => {
           return (
             <a
+            key={id}
               href=""
               className="bg-white/5 p-2  rounded hover:bg-white/10 relative shrink-0 flex flex-col group gap-2 max-md:flex max-md:items-center hover:scale-105 transition"
             >
