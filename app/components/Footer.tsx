@@ -66,8 +66,6 @@ function FooterComponent() {
         name: string;
       };
 
-
-      
       const buttonsModal = {
         windows: [
           { src: folder, alt: "folder", name: "Folder" },
@@ -337,7 +335,7 @@ function FooterComponent() {
       }
     };
   return (
-    <div>
+    <div className="fixed bottom-0 w-full">
       <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
         <div className="ml-4 items-center h-[50px] flex gap-3">
           <Image src={suun} alt="clima" />

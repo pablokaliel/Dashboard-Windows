@@ -6,6 +6,7 @@ import arrowdown from "./../../public/icons/spotify/arrow-down.svg";
 
 import music from "./../../public/icons/spotify/RectangleOne.png";
 import RectangleTwo from "./../../public/icons/spotify/RectangleTwo.png";
+import { ChangeEvent } from "react";
 
 const data = [
   {
@@ -77,6 +78,8 @@ const dataTwo = [
     image: music,
   },
 ];
+
+
 
 export function MainSpotify() {
   const numberList = data.length;

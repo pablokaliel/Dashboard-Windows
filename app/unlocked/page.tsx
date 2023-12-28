@@ -2,36 +2,27 @@
 
 import Image from "next/image";
 
-import suun from "../../public/icons/Group 2.svg";
-
-import { useEffect, useState } from "react";
-
 import github from "../../public/icons/tasks/github.svg";
 import lixeira from "../../public/icons/tasks/Icon.png";
 import folder from "../../public/icons/tasks/Icon.svg";
 import notepad from "../../public/icons/tasks/Icon 2.svg";
 import spotify from "../../public/icons/tasks/Icon 5.svg";
 
-
 import steam from "../../public/icons/tasks/steam.svg";
 import chrome from "../../public/icons/tasks/chrome.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import { format } from "date-fns";
-import axios from "axios";
-
-import WindowsComponent from "../components/WindowsComponent";
 import Link from "next/link";
-import FooterComponent from "../components/Footer";
-
-
 
 export default function Page() {
-
-
   return (
     <main className="min-h-screen w-full">
-      <video autoPlay muted loop className="w-full pointer-events-none h-full object-cover absolute inset-0">
+      <video
+        autoPlay
+        muted
+        loop
+        className="w-full pointer-events-none h-full object-cover absolute inset-0"
+      >
         <source src="/background.mp4" type="video/mp4" />
         Seu navegador não suporta vídeos em HTML5.
       </video>
@@ -100,11 +91,7 @@ export default function Page() {
             </button>
           </div>
         </div>
-
-   
       </div>
-
-   
     </main>
   );
 }
