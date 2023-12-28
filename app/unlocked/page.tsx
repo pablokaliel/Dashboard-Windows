@@ -40,7 +40,16 @@ import discord from "../../public/icons/tasks/discord.svg";
 
 import { format } from "date-fns";
 import axios from "axios";
-import { AirplaneInFlight, BatteryPlus, Bluetooth, CaretLeft, CaretRight, PlayPause, Pause, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
+import {
+  AirplaneInFlight,
+  BatteryPlus,
+  Bluetooth,
+  CaretLeft,
+  CaretRight,
+  Moon,
+  PersonArmsSpread,
+  WifiHigh,
+} from "@phosphor-icons/react";
 import MusicPlayer from "../components/ReactPlayer";
 import WindowsComponent from "../components/WindowsComponent";
 import Link from "next/link";
@@ -106,10 +115,7 @@ export default function Page() {
   const [weather, setWeather] = useState<any>(null);
   const [, setLocationAccess] = useState(false);
 
-  const musicas = [
-    "/choraviola.mp3",
-    "/myloveall.mp3",
-  ];
+  const musicas = ["/choraviola.mp3", "/myloveall.mp3"];
 
   const initialRecommendedWindows = [
     { src: notepad, title: "NotePad", subtitle: "2h atrás" },
@@ -154,9 +160,9 @@ export default function Page() {
   const modalContents: ModalContent = {
     windows: (
       <WindowsComponent
-      filteredButtons={filteredButtons}
-      recommendedWindows={recommendedWindows}
-    />
+        filteredButtons={filteredButtons}
+        recommendedWindows={recommendedWindows}
+      />
     ),
     explorer: (
       <div>
@@ -310,7 +316,9 @@ export default function Page() {
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
     try {
-      let res = await axios.get( "https://api.openweathermap.org/data/2.5/weather", {
+      let res = await axios.get(
+        "https://api.openweathermap.org/data/2.5/weather",
+        {
           params: {
             lat: lat,
             lon: lon,
@@ -328,18 +336,6 @@ export default function Page() {
 
   return (
     <main className="min-h-screen w-full">
-      <MusicPlayer
-        handleNext={handleNext}
-        handlePrevious={handlePrevious}
-        handleVolumeChange={handleVolumeChange}
-        volume={volume}
-        currentMusicIndex={currentMusicIndex}
-        musicas={musicas}
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        togglePlayPause={togglePlayPause}
-      />
-
       <div className="flex flex-col w-full h-screen ">
         <div className="flex h-full justify-between">
           <div className=" grid grid-cols-2 gap-2 h-fit">
@@ -357,7 +353,10 @@ export default function Page() {
               <span className="text-sm mt-2">Meus projetos</span>
             </button>
 
-            <Link href={"/unlocked/spotify"} className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
+            <Link
+              href={"/unlocked/spotify"}
+              className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200"
+            >
               <div>
                 <Image src={spotify} alt="spotify" width={30} height={30} />
               </div>
@@ -563,15 +562,26 @@ export default function Page() {
                   onChange={handleVolumeChange}
                 />
               </div>
-              <div className="flex mt-10 justify-between items-center">
+              <div></div>
+              <div className="flex mt-10 gap-5 justify-between items-center">
                 <button onClick={handlePrevious}>
-                  <CaretLeft size={21} />
+                  <CaretLeft size={25} />
                 </button>
-                <button onClick={togglePlayPause}>
-                  {isPlaying ? <Pause /> : <PlayPause />}{" "}
-                </button>
+
+                <MusicPlayer
+                  handleNext={handleNext}
+                  handlePrevious={handlePrevious}
+                  handleVolumeChange={handleVolumeChange}
+                  volume={volume}
+                  currentMusicIndex={currentMusicIndex}
+                  musicas={musicas}
+                  isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
+                  togglePlayPause={togglePlayPause}
+                />
+
                 <button onClick={handleNext}>
-                  <CaretRight size={21} />
+                  <CaretRight size={25} />
                 </button>
               </div>
             </div>

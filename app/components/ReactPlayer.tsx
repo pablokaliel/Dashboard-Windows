@@ -39,7 +39,7 @@ export default function MusicPlayer({
   };
 
   return (
-    <div className="hidden">
+    <div className="w-full">
       <DynamicReactPlayer
         url={musicas[currentMusicIndex]}
         controls
@@ -50,21 +50,7 @@ export default function MusicPlayer({
         onEnded={handleEnded}
         onPlay={handlePlay}
       />
-      <div>
-        <button onClick={handlePrevious}>Anterior</button>
-        <button onClick={togglePlayPause}>
-          {isPlaying ? "Pause" : "Play"}
-        </button>
-        <button onClick={handleNext}>Próxima</button>
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.1}
-          value={volume}
-          onChange={handleVolumeChange}
-        />
-      </div>
+      
     </div>
   );
 }
