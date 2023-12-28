@@ -336,9 +336,13 @@ export default function Page() {
 
   return (
     <main className="min-h-screen w-full">
-      <div className="flex flex-col w-full h-screen ">
+      <video autoPlay muted loop className="w-full h-full object-cover absolute inset-0">
+        <source src="/background.mp4" type="video/mp4" />
+        Seu navegador não suporta vídeos em HTML5.
+      </video>
+      <div className="flex  flex-col w-full h-screen ">
         <div className="flex h-full justify-between">
-          <div className=" grid grid-cols-2 gap-2 h-fit">
+          <div className=" z-20 grid grid-cols-2 gap-2 h-fit">
             <button className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
               <div>
                 <Image src={notepad} alt="notePad" width={30} height={30} />
@@ -371,7 +375,7 @@ export default function Page() {
             </button>
           </div>
 
-          <div className=" h-full flex flex-col ">
+          <div className=" z-20 h-full flex flex-col ">
             <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 ">
               <div>
                 <Image src={lixeira} alt="lixeira" width={30} height={30} />
