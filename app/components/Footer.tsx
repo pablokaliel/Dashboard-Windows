@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import wifi from "../../public/icons/WiFi.svg";
@@ -32,19 +32,9 @@ import acessibility from "../../public/icons/tasks/acessibility.png";
 
 import suun from "../../public/icons/Group 2.svg";
 
-
 import { format } from "date-fns";
 
-import {
-  AirplaneInFlight,
-  BatteryPlus,
-  Bluetooth,
-  CaretLeft,
-  CaretRight,
-  Moon,
-  PersonArmsSpread,
-  WifiHigh,
-} from "@phosphor-icons/react";
+import { AirplaneInFlight, BatteryPlus, Bluetooth, CaretLeft, CaretRight, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 import MusicPlayer from "./ReactPlayer";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -55,287 +45,274 @@ import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
 import WindowsComponent from "./WindowsComponent";
+import { useMusic } from "../context/Context";
+
 function FooterComponent() {
-    type ModalContent = {
-        [key: string]: JSX.Element | undefined;
-      };
-      
-      type Button = {
-        src: string;
-        alt: string;
-        name: string;
-      };
+  type ModalContent = {
+    [key: string]: JSX.Element | undefined;
+  };
 
-      const buttonsModal = {
-        windows: [
-          { src: folder, alt: "folder", name: "Folder" },
-          { src: notepad, alt: "bloco de notas", name: "Notepad" },
-          { src: paint, alt: "paint", name: "Paint" },
-          { src: calculator, alt: "calculadora", name: "Calculator" },
-          { src: spotify, alt: "spotify", name: "Spotify" },
-          { src: settings, alt: "configuracao", name: "Settings" },
-          { src: mail, alt: "email", name: "Mail" },
-          { src: photos, alt: "fotos", name: "Photo" },
-          { src: xbox, alt: "xbox", name: "Xbox" },
-          { src: pdf, alt: "pdf", name: "PDF" },
-          { src: word, alt: "word", name: "Word" },
-          { src: excel, alt: "excel", name: "Excel" },
-          { src: store, alt: "store", name: "Microsoft Store" },
-          { src: calendary, alt: "calendario", name: "Calendar" },
-          { src: camera, alt: "camera", name: "Camera" },
-        ],
-        search: [
-          { src: folder, alt: "folder", name: "Folder" },
-          { src: notepad, alt: "bloco de notas", name: "Notepad" },
-          { src: paint, alt: "paint", name: "Paint" },
-          { src: calculator, alt: "calculadora", name: "Calculator" },
-          { src: spotify, alt: "spotify", name: "Spotify" },
-          { src: settings, alt: "configuracao", name: "Settings" },
-          { src: mail, alt: "email", name: "Mail" },
-          { src: photos, alt: "fotos", name: "Photo" },
-          { src: xbox, alt: "xbox", name: "Xbox" },
-          { src: pdf, alt: "pdf", name: "logo_ideias" },
-          { src: pdf, alt: "pdf", name: "PDF" },
-          { src: word, alt: "word", name: "Word" },
-          { src: excel, alt: "excel", name: "Excel" },
-          { src: excel, alt: "excel", name: "planilha_mensal" },
-          { src: store, alt: "store", name: "Microsoft Store" },
-          { src: calendary, alt: "calendario", name: "Calendar" },
-          { src: discord, alt: "camera", name: "Discord" },
-          { src: chrome, alt: "camera", name: "Chrome" },
-          { src: steam, alt: "camera", name: "Steam" },
-          { src: camera, alt: "camera", name: "Camera" },
-          { src: acessibility, alt: "camera", name: "Acessibilidade" },
-        ],
-      };
+  type Button = {
+    src: string;
+    alt: string;
+    name: string;
+  };
 
-    const [showSeconds, setShowSeconds] = useState(false);
-    const [, setTimeFormat] = useState("HH:mm");
-    const [time, setTime] = useState("");
-    const [date, setDate] = useState("");
-    const [weather, setWeather] = useState<any>(null);
-    const [, setLocationAccess] = useState(false);
-  
-    const musicas = ["/choraviola.mp3", "/myloveall.mp3"];
-  
-    const initialRecommendedWindows = [
-      { src: notepad, title: "NotePad", subtitle: "2h atrás" },
-      { src: spotify, title: "Spotify", subtitle: "17m atrás" },
-      { src: folder, title: "Meus projetos", subtitle: "Ontem às 13h15" },
-      { src: discord, title: "Discord", subtitle: "Ontem às 16h20" },
-      { src: suun, title: "Clima", subtitle: "5h atrás" },
-      { src: mail, title: "Email", subtitle: "12h atrás" },
-    ];
-  
-    const [recommendedWindows] = useState(initialRecommendedWindows);
-  
-    const [currentMusicIndex, setCurrentMusicIndex] = useState(0);
-    const [volume, setVolume] = useState(0.5);
-    const [isPlaying, setIsPlaying] = useState(true);
-  
-    const handleNext = () => {
-      setCurrentMusicIndex((prevIndex) => (prevIndex + 1) % musicas.length);
-    };
-  
-    const handlePrevious = () => {
-      setCurrentMusicIndex((prevIndex) =>
-        prevIndex === 0 ? musicas.length - 1 : prevIndex - 1
-      );
-    };
-  
-    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setVolume(parseFloat(e.target.value));
-    };
-  
-    const togglePlayPause = () => {
-      setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-    };
-  
-    useEffect(() => {
-      setIsPlaying(true);
-    }, []);
-  
-    const [searchText, setSearchText] = useState<string>("");
-    const [filteredButtons, setFilteredButtons] = useState<Button[]>([]);
-  
-    const modalContents: ModalContent = {
-      windows: (
-        <WindowsComponent
-          filteredButtons={filteredButtons}
-          recommendedWindows={recommendedWindows}
-        />
-      ),
-      explorer: (
-        <div>
-          <h2>Conteúdo específico para Explorer</h2>
-          <p>Aqui está o conteúdo para o Explorer...</p>
+  const buttonsModal = {
+    windows: [
+      { src: folder, alt: "folder", name: "Folder" },
+      { src: notepad, alt: "bloco de notas", name: "Notepad" },
+      { src: paint, alt: "paint", name: "Paint" },
+      { src: calculator, alt: "calculadora", name: "Calculator" },
+      { src: spotify, alt: "spotify", name: "Spotify" },
+      { src: settings, alt: "configuracao", name: "Settings" },
+      { src: mail, alt: "email", name: "Mail" },
+      { src: photos, alt: "fotos", name: "Photo" },
+      { src: xbox, alt: "xbox", name: "Xbox" },
+      { src: pdf, alt: "pdf", name: "PDF" },
+      { src: word, alt: "word", name: "Word" },
+      { src: excel, alt: "excel", name: "Excel" },
+      { src: store, alt: "store", name: "Microsoft Store" },
+      { src: calendary, alt: "calendario", name: "Calendar" },
+      { src: camera, alt: "camera", name: "Camera" },
+    ],
+    search: [
+      { src: folder, alt: "folder", name: "Folder" },
+      { src: notepad, alt: "bloco de notas", name: "Notepad" },
+      { src: paint, alt: "paint", name: "Paint" },
+      { src: calculator, alt: "calculadora", name: "Calculator" },
+      { src: spotify, alt: "spotify", name: "Spotify" },
+      { src: settings, alt: "configuracao", name: "Settings" },
+      { src: mail, alt: "email", name: "Mail" },
+      { src: photos, alt: "fotos", name: "Photo" },
+      { src: xbox, alt: "xbox", name: "Xbox" },
+      { src: pdf, alt: "pdf", name: "logo_ideias" },
+      { src: pdf, alt: "pdf", name: "PDF" },
+      { src: word, alt: "word", name: "Word" },
+      { src: excel, alt: "excel", name: "Excel" },
+      { src: excel, alt: "excel", name: "planilha_mensal" },
+      { src: store, alt: "store", name: "Microsoft Store" },
+      { src: calendary, alt: "calendario", name: "Calendar" },
+      { src: discord, alt: "camera", name: "Discord" },
+      { src: chrome, alt: "camera", name: "Chrome" },
+      { src: steam, alt: "camera", name: "Steam" },
+      { src: camera, alt: "camera", name: "Camera" },
+      { src: acessibility, alt: "camera", name: "Acessibilidade" },
+    ],
+  };
+
+  const [showSeconds, setShowSeconds] = useState(false);
+  const [, setTimeFormat] = useState("HH:mm");
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [weather, setWeather] = useState<any>(null);
+  const [, setLocationAccess] = useState(false);
+
+  const {
+    handleNext,
+    handlePrevious,
+    handleVolumeChange,
+    togglePlayPause,
+    volume,
+    isPlaying,
+    currentMusicIndex,
+    musicas,
+    musicNames,
+    setIsPlaying,
+  } = useMusic();
+
+  const initialRecommendedWindows = [
+    { src: notepad, title: "NotePad", subtitle: "2h atrás" },
+    { src: spotify, title: "Spotify", subtitle: "17m atrás" },
+    { src: folder, title: "Meus projetos", subtitle: "Ontem às 13h15" },
+    { src: discord, title: "Discord", subtitle: "Ontem às 16h20" },
+    { src: suun, title: "Clima", subtitle: "5h atrás" },
+    { src: mail, title: "Email", subtitle: "12h atrás" },
+  ];
+
+  const [recommendedWindows] = useState(initialRecommendedWindows);
+
+  const [searchText, setSearchText] = useState<string>("");
+  const [filteredButtons, setFilteredButtons] = useState<Button[]>([]);
+
+  const modalContents: ModalContent = {
+    windows: (
+      <WindowsComponent
+        filteredButtons={filteredButtons}
+        recommendedWindows={recommendedWindows}
+      />
+    ),
+    explorer: (
+      <div>
+        <h2>Conteúdo específico para Explorer</h2>
+        <p>Aqui está o conteúdo para o Explorer...</p>
+      </div>
+    ),
+    search: (
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between">
+          <h2 className="text-[17px] font-bold">Pinned</h2>
         </div>
-      ),
-      search: (
-        <div className="flex flex-col gap-4">
-          <div className="flex justify-between">
-            <h2 className="text-[17px] font-bold">Pinned</h2>
-          </div>
-          <span className="text-sm font-thin">results</span>
-          <div className=" flex flex-col gap-3 max-h-[370px] overflow-scroll ">
-            <div className="flex flex-col gap-3 max-h-[370px] overflow-scroll">
-              {filteredButtons.length > 0 ? (
-                <div>
-                  {filteredButtons.map((button: Button, index: number) => (
-                    <div key={index}>
-                      {index === 0 ||
-                      filteredButtons[index - 1].name.charAt(0) !==
-                        button.name.charAt(0) ? (
-                        <h2 className="text-[17px] py-5 px-2 font-bold">
-                          {button.name.charAt(0)}
-                        </h2>
-                      ) : null}
-                      <button className="flex p-2 items-center gap-6 justify-start hover:bg-black/20">
-                        <Image
-                          src={button.src}
-                          alt={button.alt}
-                          height={30}
-                          width={30}
-                        />
-                        <p className="text-sm mt-2 font-normal">{button.name}</p>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center text-red-500">Não encontrado</p>
-              )}
-            </div>
+        <span className="text-sm font-thin">results</span>
+        <div className=" flex flex-col gap-3 max-h-[370px] overflow-scroll ">
+          <div className="flex flex-col gap-3 max-h-[370px] overflow-scroll">
+            {filteredButtons.length > 0 ? (
+              <div>
+                {filteredButtons.map((button: Button, index: number) => (
+                  <div key={index}>
+                    {index === 0 ||
+                    filteredButtons[index - 1].name.charAt(0) !==
+                      button.name.charAt(0) ? (
+                      <h2 className="text-[17px] py-5 px-2 font-bold">
+                        {button.name.charAt(0)}
+                      </h2>
+                    ) : null}
+                    <button className="flex p-2 items-center gap-6 justify-start hover:bg-black/20">
+                      <Image
+                        src={button.src}
+                        alt={button.alt}
+                        height={30}
+                        width={30}
+                      />
+                      <p className="text-sm mt-2 font-normal">{button.name}</p>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-red-500">Não encontrado</p>
+            )}
           </div>
         </div>
-      ),
-      desktopmaginer: (
-        <div>
-          <h2>Conteúdo específico para Desktop Magner</h2>
-          <p>Aqui está o conteúdo para o Desktop Magner...</p>
-        </div>
-      ),
-      chat: (
-        <div>
-          <h2>Conteúdo específico para Chat</h2>
-          <p>Aqui está o conteúdo para o Chat...</p>
-        </div>
-      ),
-      microsoft: (
-        <div>
-          <h2>Conteúdo específico para Microsoft</h2>
-          <p>Aqui está o conteúdo para o Microsoft...</p>
-        </div>
-      ),
-    };
-  
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-      setSearchText(e.target.value);
-  
-      const filtered = buttonsModal.search.filter((button) =>
-        button.name.toLowerCase().includes(e.target.value.toLowerCase())
+      </div>
+    ),
+    desktopmaginer: (
+      <div>
+        <h2>Conteúdo específico para Desktop Magner</h2>
+        <p>Aqui está o conteúdo para o Desktop Magner...</p>
+      </div>
+    ),
+    chat: (
+      <div>
+        <h2>Conteúdo específico para Chat</h2>
+        <p>Aqui está o conteúdo para o Chat...</p>
+      </div>
+    ),
+    microsoft: (
+      <div>
+        <h2>Conteúdo específico para Microsoft</h2>
+        <p>Aqui está o conteúdo para o Microsoft...</p>
+      </div>
+    ),
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchText(e.target.value);
+
+    const filtered = buttonsModal.search.filter((button) =>
+      button.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+
+    setFilteredButtons(filtered);
+  };
+
+  const [modalContent, setModalContent] = useState<string>("");
+
+  useEffect(() => {
+    const category = modalContent === "search" ? "search" : "windows";
+    const filtered = buttonsModal[category].filter((button) =>
+      button.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    if (modalContent === "search") {
+      const sortedFilteredButtons = filtered.sort((a, b) =>
+        a.name.localeCompare(b.name)
       );
-  
+      setFilteredButtons(sortedFilteredButtons);
+    } else {
       setFilteredButtons(filtered);
-    };
-  
-    const [modalContent, setModalContent] = useState<string>("");
-  
-    useEffect(() => {
-      const category = modalContent === "search" ? "search" : "windows";
-      const filtered = buttonsModal[category].filter((button) =>
-        button.name.toLowerCase().includes(searchText.toLowerCase())
-      );
-  
-      if (modalContent === "search") {
-        const sortedFilteredButtons = filtered.sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
-        setFilteredButtons(sortedFilteredButtons);
-      } else {
-        setFilteredButtons(filtered);
+    }
+  }, [searchText, modalContent]);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal((prevShowModal) => !prevShowModal);
+  };
+
+  const toggleModalWithContent = (content: string) => {
+    setModalContent(content);
+    toggleModal();
+  };
+
+  useEffect(() => {
+    const clockInterval = setInterval(() => {
+      const currentDate = new Date();
+      setTime(format(currentDate, showSeconds ? "HH:mm:ss" : "HH:mm"));
+      setDate(format(currentDate, "dd/MM/yyyy"));
+    }, 1000);
+    return () => clearInterval(clockInterval);
+  }, [showSeconds]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocationAccess(true);
+        getWeather(position.coords.latitude, position.coords.longitude);
+      },
+      (error) => {
+        console.error("Error getting location:", error);
+        setLocationAccess(false);
       }
-    }, [searchText, modalContent]);
-  
-    const [showModal, setShowModal] = useState(false);
-  
-    const toggleModal = () => {
-      setShowModal((prevShowModal) => !prevShowModal);
-    };
-  
-    const toggleModalWithContent = (content: string) => {
-      setModalContent(content);
-      toggleModal();
-    };
-  
-    useEffect(() => {
-      const clockInterval = setInterval(() => {
-        const currentDate = new Date();
-        setTime(format(currentDate, showSeconds ? "HH:mm:ss" : "HH:mm"));
-        setDate(format(currentDate, "dd/MM/yyyy"));
-      }, 1000);
-      return () => clearInterval(clockInterval);
-    }, [showSeconds]);
-  
-    useEffect(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocationAccess(true);
-          getWeather(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-          setLocationAccess(false);
-        }
-      );
-    }, []);
-  
-    const toggleSeconds = () => {
-      setShowSeconds(!showSeconds);
-      setTimeFormat(showSeconds ? "HH:mm" : "HH:mm:ss");
-    };
-  
-    useEffect(() => {
-      const handleEscKey = (event: KeyboardEvent) => {
-        if (event.keyCode === 27 && showModal) {
-          toggleModal();
-        }
-      };
-  
-      document.addEventListener("keydown", handleEscKey, false);
-      return () => {
-        document.removeEventListener("keydown", handleEscKey, false);
-      };
-    }, [showModal]);
-  
-    const [showSpeakerModal, setShowSpeakerModal] = useState(false);
-  
-    const toggleSpeakerModal = () => {
-      setShowSpeakerModal((prevShowSpeakerModal) => !prevShowSpeakerModal);
-    };
-  
-    const getWeather = async (lat: number, lon: number) => {
-      const apiKey = "0ec51c3697240d124db14a663d03e135";
-      try {
-        let res = await axios.get(
-          "https://api.openweathermap.org/data/2.5/weather",
-          {
-            params: {
-              lat: lat,
-              lon: lon,
-              appid: apiKey,
-              lang: "pt",
-              units: "metric",
-            },
-          }
-        );
-        setWeather(res.data);
-      } catch (error) {
-        console.error("Error fetching weather data: ", error);
+    );
+  }, []);
+
+  const toggleSeconds = () => {
+    setShowSeconds(!showSeconds);
+    setTimeFormat(showSeconds ? "HH:mm" : "HH:mm:ss");
+  };
+
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.keyCode === 27 && showModal) {
+        toggleModal();
       }
     };
+
+    document.addEventListener("keydown", handleEscKey, false);
+    return () => {
+      document.removeEventListener("keydown", handleEscKey, false);
+    };
+  }, [showModal]);
+
+  const [showSpeakerModal, setShowSpeakerModal] = useState(false);
+
+  const toggleSpeakerModal = () => {
+    setShowSpeakerModal((prevShowSpeakerModal) => !prevShowSpeakerModal);
+  };
+
+  const getWeather = async (lat: number, lon: number) => {
+    const apiKey = "0ec51c3697240d124db14a663d03e135";
+    try {
+      let res = await axios.get(
+        "https://api.openweathermap.org/data/2.5/weather",
+        {
+          params: {
+            lat: lat,
+            lon: lon,
+            appid: apiKey,
+            lang: "pt",
+            units: "metric",
+          },
+        }
+      );
+      setWeather(res.data);
+    } catch (error) {
+      console.error("Error fetching weather data: ", error);
+    }
+  };
   return (
-    <div className="fixed bottom-0 w-full">
+    <div className="fixed z-20 bottom-0 w-full">
       <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
         <div className="ml-4 items-center h-[50px] flex gap-3">
           <Image src={suun} alt="clima" />
@@ -512,10 +489,14 @@ function FooterComponent() {
                   setIsPlaying={setIsPlaying}
                   togglePlayPause={togglePlayPause}
                 />
-
                 <button onClick={handleNext}>
                   <CaretRight size={25} />
                 </button>
+              </div>
+              <div className="text-center mt-2">
+                <p className="text-sm truncate w-full">
+                  {musicNames[currentMusicIndex]}
+                </p>
               </div>
             </div>
 

@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export function SideSpotify() {
   return (
-    <aside className="w-72 h-screen bg-zinc-950 p-6 max-md:hidden">
+    <aside className="w-72 h-screen z-10 bg-zinc-950 p-6 max-md:hidden">
       <div className="flex items-center gap-2">
         <Link className="" href={"/unlocked"}><div className=" w-3 h-3 bg-red-500 rounded-full" /></Link>
         <div className=" w-3 h-3 bg-yellow-500 rounded-full" />

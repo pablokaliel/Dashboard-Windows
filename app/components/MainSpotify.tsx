@@ -6,7 +6,6 @@ import arrowdown from "./../../public/icons/spotify/arrow-down.svg";
 
 import music from "./../../public/icons/spotify/RectangleOne.png";
 import RectangleTwo from "./../../public/icons/spotify/RectangleTwo.png";
-import { ChangeEvent } from "react";
 
 const data = [
   {
@@ -79,8 +78,6 @@ const dataTwo = [
   },
 ];
 
-
-
 export function MainSpotify() {
   const numberList = data.length;
   return (
@@ -132,7 +129,7 @@ export function MainSpotify() {
         {data.slice(0, numberList).map(({ id, image, title, description }) => {
           return (
             <a
-            key={id}
+              key={id}
               href=""
               className="bg-white/5 p-2  rounded hover:bg-white/10 relative shrink-0 flex flex-col group gap-2 max-md:flex max-md:items-center hover:scale-105 transition"
             >
