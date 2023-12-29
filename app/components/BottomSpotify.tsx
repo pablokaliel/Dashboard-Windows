@@ -76,7 +76,6 @@ export function BottomSpotify({
             <Image src={randoom} alt="" />
           </button>
         </div>
-        <div className="flex items-center gap-2">minutos da musica</div>
       </div>
       <div className="flex gap-2 max-md:hidden">
         <button>
