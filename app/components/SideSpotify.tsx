@@ -3,16 +3,12 @@ import Image from "next/image";
 import homeIcon from "./../../public/icons/spotify/home.svg";
 import libraryIcon from "./../../public/icons/spotify/library.svg";
 import searchIcon from "./../../public/icons/spotify/search.svg";
-import Link from "next/link";
+
 
 export function SideSpotify() {
   return (
-    <aside className="w-72 h-screen z-10 bg-zinc-950 p-6 max-md:hidden">
-      <div className="flex items-center gap-2">
-        <Link className="" href={"/unlocked"}><div className=" w-3 h-3 bg-red-500 rounded-full" /></Link>
-        <div className=" w-3 h-3 bg-yellow-500 rounded-full" />
-        <div className=" w-3 h-3 bg-green-500 rounded-full" />
-      </div>
+    <aside className="w-72 h-screen  bg-zinc-950 p-6 max-md:hidden">
+
       <nav className="space-y-5 mt-10">
         <a
           href=""
