@@ -7,7 +7,7 @@ const openSans = Bodoni_Moda({ subsets: ["latin"], weight: ["400"] });
 export default function Page() {
   return (
     <main className="flex px-2 flex-col overflow-scroll h-full bg-[#3a3a3a]">
-      <div  className={openSans.className}>
+      <div className={openSans.className}>
         <p className="outline-none" contentEditable>
           👨‍💻 Olá, seja bem-vindo(a)!👋🏻
           <br />
@@ -36,7 +36,7 @@ export default function Page() {
           </span>
           <br />
           <span>- SSD: KingSpec 512GB</span>
-          <br/>
+          <br />
           <span>- HD: 300GB</span>
           <br />
           <br />

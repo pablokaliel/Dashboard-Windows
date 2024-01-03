@@ -25,19 +25,33 @@ export default function Page() {
   return (
     <main className="min-h-screen w-full">
       <div className="flex flex-col w-full h-screen ">
-      <div className="flex w-full  bg-[#272727] fixed top-0  justify-between items-center gap-2">
-        <div className="px-3 flex gap-2">
-          <Image src={spotify} alt="" height={20} width={20}/>
-          <span>Spotify Music</span>
+        <div className="flex w-full  bg-[#272727] fixed top-0  justify-between items-center gap-2">
+          <div className="px-3 flex gap-2">
+            <Image src={spotify} alt="" height={20} width={20} />
+            <span>Spotify Music</span>
+          </div>
+          <div className="flex gap-4">
+            <Link
+              className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2"
+              href={"/unlocked"}
+            >
+              <Minus size={18} />
+            </Link>
+            <Link
+              className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2"
+              href={"/unlocked"}
+            >
+              {" "}
+              <Rectangle size={18} />
+            </Link>
+            <Link
+              className="cursor-pointer hover:bg-red-500 w-full h-full p-2"
+              href={"/unlocked"}
+            >
+              <X size={18} />
+            </Link>
+          </div>
         </div>
-        <div className="flex gap-4">
-
-        <Link className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2" href={"/unlocked"}><Minus size={18} /></Link>
-        <Link className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2" href={"/unlocked"}> <Rectangle size={18} /></Link>
-        <Link className="cursor-pointer hover:bg-red-500 w-full h-full p-2" href={"/unlocked"}><X size={18} /></Link>
-        </div>
-
-      </div>
         <div className="flex pt-2 overflow-scroll h-full flex-1">
           <SideSpotify />
           <MainSpotify />

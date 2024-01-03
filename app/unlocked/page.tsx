@@ -29,7 +29,7 @@ export default function Page() {
       <div className="flex  flex-col w-full h-screen ">
         <div className="flex h-full justify-between">
           <div className=" z-20 grid grid-cols-2 gap-2 h-fit">
-          <Link
+            <Link
               href={"/unlocked/aboutMe"}
               className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200"
             >

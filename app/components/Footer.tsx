@@ -34,7 +34,7 @@ import suun from "../../public/icons/Group 2.svg";
 
 import { format } from "date-fns";
 
-import { AirplaneInFlight, BatteryPlus, Bluetooth, CaretLeft, CaretRight, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
+import {AirplaneInFlight,BatteryPlus,Bluetooth,CaretLeft,CaretRight,Moon,PersonArmsSpread,WifiHigh } from "@phosphor-icons/react";
 import MusicPlayer from "./ReactPlayer";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -294,9 +294,7 @@ function FooterComponent() {
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
     try {
-      let res = await axios.get(
-        "https://api.openweathermap.org/data/2.5/weather",
-        {
+      let res = await axios.get( "https://api.openweathermap.org/data/2.5/weather", {
           params: {
             lat: lat,
             lon: lon,

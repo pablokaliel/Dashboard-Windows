@@ -24,7 +24,6 @@ interface BottomSpotifyProps {
   togglePlayPause: () => void;
   volume: number;
   isPlaying: boolean;
-
   musicNames: string[];
   musicas: string[];
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
@@ -55,6 +54,7 @@ export function BottomSpotify({
           <Image src={imagem} alt="favorite" />
         </button>
       </div>
+
       <div className="flex items-center flex-col">
         <div className="flex items-center gap-3">
           <button>
@@ -77,6 +77,7 @@ export function BottomSpotify({
           </button>
         </div>
       </div>
+
       <div className="flex gap-2 max-md:hidden">
         <button>
           <Image height={24} width={24} src={mic} alt="" />

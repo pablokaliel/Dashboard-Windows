@@ -8,11 +8,12 @@ export default function Page() {
   return (
     <main className="flex px-2 flex-col overflow-scroll h-full bg-[#3a3a3a] relative">
       <div className={openSans.className}>
-      <p className="outline-none" contentEditable>
+        <p className="outline-none" contentEditable>
           👨‍💻 Olá, seja bem-vindo(a)!👋🏻
           <br />
           <br />
-          Neste bloco de notas você encontrará um pequeno resumo sobre minha pessoa no mundo da tecnologia.
+          Neste bloco de notas você encontrará um pequeno resumo sobre minha
+          pessoa no mundo da tecnologia.
           <br />
           <br />
           Me chamo Pablo Kaliel, e aos meus 22 anos, mergulhei no mundo da
@@ -44,4 +45,3 @@ export default function Page() {
     </main>
   );
 }
-

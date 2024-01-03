@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface MusicContextProps {
   handleNext: () => void;
@@ -13,6 +13,7 @@ interface MusicContextProps {
   musicas: string[];
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   musicNames: string[];
+  playMusic: (index: number) => void;
 }
 
 const MusicContext = createContext<MusicContextProps | undefined>(undefined);
@@ -20,40 +21,74 @@ const MusicContext = createContext<MusicContextProps | undefined>(undefined);
 export const useMusic = () => {
   const context = useContext(MusicContext);
   if (!context) {
-    throw new Error('useMusic must be used within a MusicProvider');
+    throw new Error("useMusic must be used within a MusicProvider");
   }
   return context;
 };
 
 export function MusicProvider({ children }: { children: React.ReactNode }) {
-    const [currentMusicIndex, setCurrentMusicIndex] = useState(0);
-    const [volume, setVolume] = useState(0.5);
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [musicNames] = useState(["Clocks Instrumental-João Torres", "My Love All-Mitski", "Chora Viola-Jorge e Matheus","Clocks-ColdPlay","Outra Vida-João Torres","Paradise-João Torres","Rap do Chopper-7MZ","Rap do Luffy-7MZ","Rap do Law-7MZ","Rap do Crocodile-7MZ","Rap do Usopp-7MZ","The Scientist-João Torres","Those Eyes-João Torres"]);
+  const [currentMusicIndex, setCurrentMusicIndex] = useState(0);
+  const [volume, setVolume] = useState(0.5);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [musicNames] = useState([
+    "Clocks Instrumental-João Torres",
+    "My Love All-Mitski",
+    "Chora Viola-Jorge e Matheus",
+    "Clocks-ColdPlay",
+    "Outra Vida-João Torres",
+    "Paradise-João Torres",
+    "The Scientist-João Torres",
+    "Those Eyes-João Torres",
+    "Leão-João Torres",
+    "Rap do Chopper-7MZ",
+    "Rap do Luffy-7MZ",
+    "Rap do Law-7MZ",
+    "Rap do Crocodile-7MZ",
+    "Rap do Usopp-7MZ",
+  ]);
 
-    const musicas = ["/Clocks-instrumental.mp3", "/myloveall.mp3", "/choraviola.mp3","/Clocks.mp3","/OutraVida.mp3","/Paradise.mp3","/RapChopper.mp3","/RapLuffy.mp3","/RapLaw.mp3","/RapCrocodile.mp3","/RapUsopp.mp3","/TheScientist.mp3","/ThoseEyes.mp3"];
-  
-    const handleNext = () => {
-      setCurrentMusicIndex((prevIndex) => (prevIndex + 1) % musicas.length);
-    };
-  
-    const handlePrevious = () => {
-      setCurrentMusicIndex((prevIndex) =>
-        prevIndex === 0 ? musicas.length - 1 : prevIndex - 1
-      );
-    };
-  
-    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setVolume(parseFloat(e.target.value));
-    };
-  
-    const togglePlayPause = () => {
-      setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-    };
-  
-    useEffect(() => {
-      setIsPlaying(true);
-    }, []);
+  const musicas = [
+    "/Clocks-instrumental.mp3",
+    "/myloveall.mp3",
+    "/choraviola.mp3",
+    "/Clocks.mp3",
+    "/OutraVida.mp3",
+    "/Paradise.mp3",
+    "/TheScientist.mp3",
+    "/ThoseEyes.mp3",
+    "/leao.mp3",
+    "/RapChopper.mp3",
+    "/RapLuffy.mp3",
+    "/RapLaw.mp3",
+    "/RapCrocodile.mp3",
+    "/RapUsopp.mp3",
+  ];
+  const playMusic = (index: number) => {
+    setCurrentMusicIndex(index);
+    setIsPlaying(true);
+  };
+
+  const handleNext = () => {
+    setCurrentMusicIndex((prevIndex) => (prevIndex + 1) % musicas.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentMusicIndex((prevIndex) =>
+      prevIndex === 0 ? musicas.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVolume(parseFloat(e.target.value));
+  };
+
+  const togglePlayPause = () => {
+    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  };
+
+  useEffect(() => {
+    setIsPlaying(true);
+  }, []);
 
   const contextValue: MusicContextProps = {
     handleNext,
@@ -65,7 +100,8 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     musicas,
     currentMusicIndex,
     setIsPlaying,
-    musicNames
+    musicNames,
+    playMusic,
   };
 
   return (

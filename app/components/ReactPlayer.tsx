@@ -21,15 +21,13 @@ export interface MusicPlayerProps {
 
 export default function MusicPlayer({
   handleNext,
-  handlePrevious,
-  handleVolumeChange,
   volume,
   currentMusicIndex,
   musicas,
   isPlaying,
-  togglePlayPause,
   setIsPlaying,
 }: MusicPlayerProps) {
+
   const handleEnded = () => {
     handleNext();
   };
@@ -50,7 +48,6 @@ export default function MusicPlayer({
         onEnded={handleEnded}
         onPlay={handlePlay}
       />
-      
     </div>
   );
 }

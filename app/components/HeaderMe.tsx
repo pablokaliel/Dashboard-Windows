@@ -1,5 +1,3 @@
-import { Funnel, MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
-
 function LeftMe() {
   return (
     <div className="w-[250px]  flex justify-between text-xs">

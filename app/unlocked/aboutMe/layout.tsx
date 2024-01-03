@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Minus, Rectangle, X } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import notepad from "../../../public/icons/tasks/Icon 2.svg";
@@ -24,7 +24,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     setExpanded(!expanded);
   };
 
-  const divClass = expanded ? 'w-full z-40 h-full overflow-hidden' : 'z-40 min-h-[450px] max-w-[590px] max-h-[450px]';
+  const divClass = expanded
+    ? "w-full z-40 h-full overflow-hidden"
+    : "z-40 min-h-[450px] max-w-[590px] max-h-[450px]";
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
@@ -109,7 +111,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex bg-[#272727] w-full justify-between items-end gap-2">
           <div className="px-3 flex gap-2">
             <Image src={notepad} alt="" height={20} width={20} />
-            <NavLinks/>
+            <NavLinks />
           </div>
           <div className="flex gap-4">
             <Link
