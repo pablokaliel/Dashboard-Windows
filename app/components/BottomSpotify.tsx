@@ -60,7 +60,7 @@ export function BottomSpotify({
           <button>
             <Image src={infinity} alt="" />
           </button>
-          <button onCanPlay={handlePrevious}>
+          <button onClick={handlePrevious}>
             <Image src={prox} alt="" />
           </button>
           <button

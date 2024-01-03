@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <main className="flex px-2 flex-col h-full bg-[#3a3a3a]">
       <div className={openSans.className}>
-        <p>
+      <p className="outline-none" contentEditable>
         👨‍💻 Olá, seja bem-vindo(a)!👋🏻
           <br />
           <br />

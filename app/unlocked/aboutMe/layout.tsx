@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     setExpanded(!expanded);
   };
 
-  const divClass = expanded ? 'w-full z-40 h-full overflow-hidden' : 'z-40 h-[450px] max-w-[590px] max-h-[450px]';
+  const divClass = expanded ? 'w-full z-40 h-full overflow-hidden' : 'z-40 min-h-[450px] max-w-[590px] max-h-[450px]';
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
@@ -113,19 +113,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="flex gap-4">
             <Link
-              className="cursor-pointer hover:bg-[#000]/10 w-full h-full p-2"
+              className="cursor-pointer hover:bg-[white]/20 w-full h-full p-2"
               href={"/unlocked"}
             >
               <Minus size={18} />
             </Link>
             <button
-              className="cursor-pointer hover:bg-[#000]/10 w-full h-full p-2"
+              className="cursor-pointer hover:bg-[white]/20 w-full h-full p-2"
               onClick={handleExpand}
             >
               <Rectangle size={18} />
             </button>
             <Link
-              className="cursor-pointer hover:bg-[#000]/10 w-full h-full p-2"
+              className="cursor-pointer hover:bg-red-500 w-full h-full p-2"
               href={"/unlocked"}
             >
               <X size={18} />

@@ -32,9 +32,9 @@ export default function Page() {
         </div>
         <div className="flex gap-4">
 
-        <Link className="cursor-pointer hover:bg-[#000]/10 w-full h-full p-2" href={"/unlocked"}><Minus size={18} /></Link>
-        <Link className="cursor-pointer hover:bg-[#000]/10 w-full h-full p-2" href={"/unlocked"}> <Rectangle size={18} /></Link>
-        <Link className="cursor-pointer hover:bg-[#000]/10 w-full h-full p-2" href={"/unlocked"}><X size={18} /></Link>
+        <Link className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2" href={"/unlocked"}><Minus size={18} /></Link>
+        <Link className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2" href={"/unlocked"}> <Rectangle size={18} /></Link>
+        <Link className="cursor-pointer hover:bg-red-500 w-full h-full p-2" href={"/unlocked"}><X size={18} /></Link>
         </div>
 
       </div>
@@ -43,7 +43,7 @@ export default function Page() {
           <MainSpotify />
         </div>
         <BottomSpotify
-        musicNames={musicNames}
+          musicNames={musicNames}
           handleNext={handleNext}
           handlePrevious={handlePrevious}
           handleVolumeChange={handleVolumeChange}

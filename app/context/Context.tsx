@@ -29,9 +29,9 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     const [currentMusicIndex, setCurrentMusicIndex] = useState(0);
     const [volume, setVolume] = useState(0.5);
     const [isPlaying, setIsPlaying] = useState(true);
-    const [musicNames] = useState(["Chora Viola", "My Love All"]);
+    const [musicNames] = useState(["Clocks Instrumental-João Torres", "My Love All-Mitski", "Chora Viola-Jorge e Matheus","Clocks-ColdPlay","Outra Vida-João Torres","Paradise-João Torres","Rap do Chopper-7MZ","Rap do Luffy-7MZ","Rap do Law-7MZ","Rap do Crocodile-7MZ","Rap do Usopp-7MZ","The Scientist-João Torres","Those Eyes-João Torres"]);
 
-    const musicas = ["/choraviola.mp3", "/myloveall.mp3"];
+    const musicas = ["/Clocks-instrumental.mp3", "/myloveall.mp3", "/choraviola.mp3","/Clocks.mp3","/OutraVida.mp3","/Paradise.mp3","/RapChopper.mp3","/RapLuffy.mp3","/RapLaw.mp3","/RapCrocodile.mp3","/RapUsopp.mp3","/TheScientist.mp3","/ThoseEyes.mp3"];
   
     const handleNext = () => {
       setCurrentMusicIndex((prevIndex) => (prevIndex + 1) % musicas.length);
