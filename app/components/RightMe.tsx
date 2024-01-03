@@ -1,5 +1,3 @@
-import { File, FolderOpen } from "@phosphor-icons/react/dist/ssr";
-
 function RightMe() {
   return (
     <div className="w-full flex px-1 border-t border-white border-opacity-20">

@@ -15,9 +15,7 @@ export default function Page() {
           Neste bloco de notas você encontrará locais onde você pode saber mais sobre mim, sobre meus projetos e meios para se comunicar comigo:
           <br />
           <br />
-
           ##Redes Sociais:
-
           <br/>
           <br/>
           <a target="_blank" href="https://github.com/pablokaliel">- GitHub: pablokaliel</a>

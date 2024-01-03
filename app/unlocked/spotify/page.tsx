@@ -25,7 +25,7 @@ export default function Page() {
   return (
     <main className="min-h-screen w-full">
       <div className="flex flex-col w-full h-screen ">
-      <div className="flex w-full  bg-[#444444] fixed top-0  justify-between items-center gap-2">
+      <div className="flex w-full  bg-[#272727] fixed top-0  justify-between items-center gap-2">
         <div className="px-3 flex gap-2">
           <Image src={spotify} alt="" height={20} width={20}/>
           <span>Spotify Music</span>

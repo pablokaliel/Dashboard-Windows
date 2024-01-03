@@ -2,12 +2,12 @@ import { Funnel, MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
 
 function LeftMe() {
   return (
-    <div className="w-[250px]  flex justify-between p-2 text-xs">
-      <button>File</button>
-      <button>Edit</button>
-      <button>Format</button>
-      <button>View</button>
-      <button>Help</button>
+    <div className="w-[250px]  flex justify-between text-xs">
+      <button className="hover:bg-white/20 px-2 py-1">File</button>
+      <button className="hover:bg-white/20 px-2 py-1">Edit</button>
+      <button className="hover:bg-white/20 px-2 py-1">Format</button>
+      <button className="hover:bg-white/20 px-2 py-1">View</button>
+      <button className="hover:bg-white/20 px-2 py-1">Help</button>
     </div>
   );
 }
