@@ -15,14 +15,51 @@ import steam from "../../../public/icons/tasks/steam.svg";
 import chrome from "../../../public/icons/tasks/chrome.svg";
 import discord from "../../../public/icons/tasks/discord.svg";
 import NavLinks from "@/app/components/NavLinks";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [expanded, setExpanded] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const divRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => {
     setExpanded(!expanded);
   };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    setDragging(true);
+    const offsetX = e.clientX - position.x;
+    const offsetY = e.clientY - position.y;
+    setPosition({ x: offsetX, y: offsetY });
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (dragging && divRef.current) {
+      const newX = e.clientX - position.x;
+      const newY = e.clientY - position.y;
+      divRef.current.style.transform = `translate(${newX}px, ${newY}px)`;
+      setPosition({ x: newX, y: newY });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+  };
+
+  useEffect(() => {
+    if (dragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    } else {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    }
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [dragging]);
 
   const divClass = expanded
     ? "w-full z-40 h-full overflow-hidden"
@@ -107,7 +144,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </div>
 
-      <div className={divClass}>
+      <div
+        ref={divRef}
+        className={divClass}
+        style={{ cursor: dragging ? 'grabbing' : 'grab' }}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      >
         <div className="flex bg-[#272727] w-full justify-between items-end gap-2">
           <div className="px-3 flex gap-2">
             <Image src={notepad} alt="" height={20} width={20} />

@@ -14,7 +14,7 @@ export function MainSpotify() {
   const sevenMZMusicNames = musicNames.filter((name) => name.includes("7MZ"));
 
   return (
-    <main className="flex-1 p-6 h-screen bg-black/90 ">
+    <main className="flex-1  overflow-scroll p-6 h-screen bg-black/90 ">
       <div className="w-full flex justify-between ">
         <div className="flex gap-6 ">
           <button className="p-1.5 hover:bg-black/20 rounded-full bg-black/40 flex items-center justify-center">
