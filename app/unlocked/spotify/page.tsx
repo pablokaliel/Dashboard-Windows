@@ -8,7 +8,7 @@ import { useMusic } from "@/app/context/Context";
 import Image from "next/image";
 import { Minus, Rectangle, X } from "@phosphor-icons/react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import github from "../../../public/icons/tasks/github.svg";
 import lixeira from "../../../public/icons/tasks/Icon.png";
@@ -33,52 +33,12 @@ export default function Page() {
   } = useMusic();
 
   const [expanded, setExpanded] = useState(false);
-  const [dragging, setDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const barRef = useRef<HTMLDivElement>(null);
-  const draggableDivRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => {
     setExpanded(!expanded);
   };
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === barRef.current) {
-      setDragging(true);
-      const offsetX = e.clientX - position.x;
-      const offsetY = e.clientY - position.y;
-      setPosition({ x: offsetX, y: offsetY });
-    }
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (dragging && draggableDivRef.current) {
-      const newX = e.clientX - position.x;
-      const newY = e.clientY - position.y;
-      draggableDivRef.current.style.transform = `translate(${newX}px, ${newY}px)`;
-      setPosition({ x: newX, y: newY });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setDragging(false);
-  };
-
-  useEffect(() => {
-    if (dragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    } else {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    }
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [dragging]);
-
-  const divClass = expanded ? 'w-fill left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-10 h-screen flex flex-col overflow-scroll' : 'z-30 flex flex-col overflow-scroll h-[650px] max-w-[900px] max-h-[650px]';
+  const divClass = expanded ? 'w-full z-10 h-screen flex flex-col overflow-scroll' : 'z-30 flex flex-col overflow-scroll h-[650px] max-w-[900px] max-h-[650px]';
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center ">
@@ -159,12 +119,9 @@ export default function Page() {
         </div>
       </div>
       <div
-        className={divClass} ref={draggableDivRef}
+        className={divClass}
       >
         <div
-          ref={barRef}
-          onMouseDown={handleMouseDown}
-          style={{ cursor: dragging ? "grabbing" : "grab" }} 
         className="flex w-full  bg-[#272727]  justify-between items-center gap-2">
           <div className="px-3 flex gap-2">
             <Image src={spotify} alt="" height={20} width={20} />
