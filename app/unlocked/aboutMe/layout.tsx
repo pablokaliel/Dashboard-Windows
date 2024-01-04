@@ -21,24 +21,29 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [expanded, setExpanded] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const divRef = useRef<HTMLDivElement>(null);
+
+
+  const barRef = useRef<HTMLDivElement>(null);
+  const draggableDivRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => {
     setExpanded(!expanded);
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    setDragging(true);
-    const offsetX = e.clientX - position.x;
-    const offsetY = e.clientY - position.y;
-    setPosition({ x: offsetX, y: offsetY });
+    if (e.target === barRef.current) {
+      setDragging(true);
+      const offsetX = e.clientX - position.x;
+      const offsetY = e.clientY - position.y;
+      setPosition({ x: offsetX, y: offsetY });
+    }
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (dragging && divRef.current) {
+    if (dragging && draggableDivRef.current) {
       const newX = e.clientX - position.x;
       const newY = e.clientY - position.y;
-      divRef.current.style.transform = `translate(${newX}px, ${newY}px)`;
+      draggableDivRef.current.style.transform = `translate(${newX}px, ${newY}px)`;
       setPosition({ x: newX, y: newY });
     }
   };
@@ -49,20 +54,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (dragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
     } else {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
     }
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
     };
   }, [dragging]);
 
   const divClass = expanded
-    ? "w-full z-40 h-full overflow-hidden"
+    ? "w-full z-40 h-full overflow-hidden left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
     : "z-40 min-h-[450px] max-w-[590px] max-h-[450px]";
 
   return (
@@ -144,14 +149,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </div>
 
-      <div
-        ref={divRef}
-        className={divClass}
-        style={{ cursor: dragging ? 'grabbing' : 'grab' }}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-      >
-        <div className="flex bg-[#272727] w-full justify-between items-end gap-2">
+      <div className={divClass} ref={draggableDivRef}>
+        <div
+          ref={barRef}
+          onMouseDown={handleMouseDown}
+          style={{ cursor: dragging ? "grabbing" : "grab" }}
+          className="flex bg-[#272727] w-full justify-between items-end gap-2"
+        >
           <div className="px-3 flex gap-2">
             <Image src={notepad} alt="" height={20} width={20} />
             <NavLinks />
