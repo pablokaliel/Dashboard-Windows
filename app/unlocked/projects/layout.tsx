@@ -1,54 +1,43 @@
 "use client";
-
-import { SideSpotify } from "@/app/components/SideSpotify";
-import { BottomSpotify } from "@/app/components/BottomSpotify";
-import { MainSpotify } from "@/app/components/MainSpotify";
-import spotify from "../../../public/icons/tasks/Icon 5.svg";
-import { useMusic } from "@/app/context/Context";
-import Image from "next/image";
-import { Minus, Rectangle, X } from "@phosphor-icons/react";
+import { Minus, Rectangle, X } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { useState } from "react";
+import notepad from "../../../public/icons/tasks/Icon 2.svg";
+import Image from "next/image";
+
 import word from "../../../public/icons/tasks/Icon 11.svg";
 
+import gmail from "../../../public/icons/tasks/gmail.svg";
 import github from "../../../public/icons/tasks/github.svg";
 import lixeira from "../../../public/icons/tasks/Icon.png";
 import folder from "../../../public/icons/tasks/Icon.svg";
-import notepad from "../../../public/icons/tasks/Icon 2.svg";
+import spotify from "../../../public/icons/tasks/Icon 5.svg";
 
 import steam from "../../../public/icons/tasks/steam.svg";
 import chrome from "../../../public/icons/tasks/chrome.svg";
-import gmail from "../../../public/icons/tasks/gmail.svg";
 import discord from "../../../public/icons/tasks/discord.svg";
 
-export default function Page() {
-  const {
-    handleNext,
-    handlePrevious,
-    handleVolumeChange,
-    togglePlayPause,
-    volume,
-    isPlaying,
-    musicNames,
-    musicas,
-    setIsPlaying,
-  } = useMusic();
+import { useState } from "react";
+import HeaderProjects from "@/app/components/HeaderProjects";
+import AsideProjects from "@/app/components/AsideProjects";
 
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpand = () => {
     setExpanded(!expanded);
   };
 
-  const divClass = expanded ? 'w-full z-10 h-screen flex flex-col overflow-scroll' : 'z-30 flex flex-col overflow-scroll h-[650px] max-w-[900px] max-h-[650px]';
+  const divClass = expanded
+    ? "w-full z-40 h-full overflow-hidden "
+    : "z-40 min-h-[450px] max-w-[750px] max-h-[500px] w-[750px] h-[500px]";
 
   return (
-    <main className="min-h-screen w-full flex flex-col items-center justify-center ">
-        <video
+    <div className="w-full h-screen flex flex-col items-center justify-center">
+      <video
         autoPlay
         muted
         loop
-        className="w-full pointer-events-none h-full object-cover absolute inset-0"
+        className="w-full pointer-events-none h-full object-cover absolute z-0 inset-0"
       >
         <source src="/background.mp4" type="video/mp4" />
         Seu navegador não suporta vídeos em HTML5.
@@ -95,7 +84,6 @@ export default function Page() {
               </div>
               <span className="text-sm mt-2">Meu PC</span>
             </Link>
-          
         </div>
 
         <div className=" z-0 h-full flex flex-col ">
@@ -134,27 +122,25 @@ export default function Page() {
           </a>
         </div>
       </div>
-      <div
-        className={divClass}
-      >
-        <div
-        className="flex w-full  bg-[#272727]  justify-between items-center gap-2">
-          <div className="px-3 flex gap-2">
-            <Image src={spotify} alt="" height={20} width={20} />
-            <span>Spotify Music</span>
+
+      <div className={divClass}>
+        <div className="flex bg-[#272727] w-full justify-between items-center gap-2"
+        >
+          <div className="px-3 items-center flex gap-2">
+            <Image src={folder} alt="" height={20} width={20} />
+            <span>Meus Projetos</span>
           </div>
           <div className="flex gap-4">
             <Link
-              className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2"
+              className="cursor-pointer hover:bg-[white]/20 w-full h-full p-2"
               href={"/unlocked"}
             >
               <Minus size={18} />
             </Link>
             <button
-              className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2"
+              className="cursor-pointer hover:bg-[white]/20 w-full h-full p-2"
               onClick={handleExpand}
             >
-              {" "}
               <Rectangle size={18} />
             </button>
             <Link
@@ -165,23 +151,14 @@ export default function Page() {
             </Link>
           </div>
         </div>
-        <div className="flex overflow-scroll h-full flex-1">
-          <SideSpotify />
-          <MainSpotify />
-        </div>
-        <BottomSpotify
-          musicNames={musicNames}
-          handleNext={handleNext}
-          handlePrevious={handlePrevious}
-          handleVolumeChange={handleVolumeChange}
-          togglePlayPause={togglePlayPause}
-          volume={volume}
-          isPlaying={isPlaying}
-          musicas={musicas}
-          setIsPlaying={setIsPlaying}
-          expanded={expanded} 
-        />
+        <div className="flex h-full">
+      <aside className="w-1/4 "><AsideProjects/></aside>
+      <main className="flex-1 flex flex-col">
+        <header className=""><HeaderProjects/></header>
+        <div className="flex-1 ">{children}</div>
+      </main>
+    </div>
       </div>
-    </main>
+    </div>
   );
 }

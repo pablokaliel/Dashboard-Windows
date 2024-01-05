@@ -4,10 +4,9 @@ import homeIcon from "./../../public/icons/spotify/home.svg";
 import libraryIcon from "./../../public/icons/spotify/library.svg";
 import searchIcon from "./../../public/icons/spotify/search.svg";
 
-
 export function SideSpotify() {
   return (
-    <aside className="w-72 h-screen  bg-zinc-950 p-6 max-md:hidden">
+    <aside className="w-1/4 h-screen  bg-zinc-950 p-6 max-md:hidden">
 
       <nav className="space-y-5 mt-10">
         <a

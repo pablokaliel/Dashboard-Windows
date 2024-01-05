@@ -6,6 +6,9 @@ import Image from "next/image";
 import LeftMe from "@/app/components/HeaderMe";
 import RightMe from "@/app/components/RightMe";
 
+import word from "../../../public/icons/tasks/Icon 11.svg";
+
+import gmail from "../../../public/icons/tasks/gmail.svg";
 import github from "../../../public/icons/tasks/github.svg";
 import lixeira from "../../../public/icons/tasks/Icon.png";
 import folder from "../../../public/icons/tasks/Icon.svg";
@@ -51,12 +54,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <span className="text-sm mt-2">NotePad</span>
           </Link>
 
-          <button className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
-            <div>
-              <Image src={folder} alt="folder" width={30} height={30} />
-            </div>
-            <span className="text-sm mt-2">Meus projetos</span>
-          </button>
+          <Link href={"/unlocked/projects"} className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
+              <div>
+                <Image src={folder} alt="folder" width={30} height={30} />
+              </div>
+              <span className="text-sm mt-2">Meus projetos</span>
+            </Link>
 
           <Link
             href={"/unlocked/spotify"}
@@ -68,12 +71,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <span className="text-sm mt-2">Spotify</span>
           </Link>
 
-          <button className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
+          <a target="_blank" href="https://github.com/pablokaliel" className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
             <div>
               <Image src={github} alt="github" width={30} height={30} />
             </div>
             <span className="text-sm mt-2">GitHub</span>
-          </button>
+          </a>
+          <Link href={"/unlocked/aboutMe/pc"} className="px-2 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 duration-200">
+              <div>
+                <Image src={word} alt="github" width={30} height={30} />
+              </div>
+              <span className="text-sm mt-2">Meu PC</span>
+            </Link>
         </div>
 
         <div className=" z-0 h-full flex flex-col ">
@@ -84,26 +93,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <span className="text-sm mt-2">Lixeira</span>
           </button>
 
-          <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
+          <a target="_blank" href="https://steam.com" className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
             <div>
               <Image src={steam} alt="steam" width={30} height={30} />
             </div>
             <span className="text-sm mt-2">Steam</span>
-          </button>
+          </a>
 
-          <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
+          <a target="_blank" href="https://discord.com" className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
             <div>
               <Image src={discord} alt="discord" width={30} height={30} />
             </div>
             <span className="text-sm mt-2">Discord</span>
-          </button>
+          </a>
 
-          <button className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
+          <a target="_blank" href="https://pablo-me.vercel.app" className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
             <div>
               <Image src={chrome} alt="chrome" width={30} height={30} />
             </div>
             <span className="text-sm mt-2">Chrome</span>
-          </button>
+          </a>
+          <a target="_blank" href="#" className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
+            <div>
+              <Image src={gmail} alt="chrome" width={30} height={30} />
+            </div>
+            <span className="text-sm mt-2">Gmail</span>
+          </a>
         </div>
       </div>
 

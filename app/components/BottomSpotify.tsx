@@ -27,6 +27,7 @@ interface BottomSpotifyProps {
   musicNames: string[];
   musicas: string[];
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+  expanded: boolean;
 }
 
 export function BottomSpotify({
@@ -35,6 +36,7 @@ export function BottomSpotify({
   handleVolumeChange,
   togglePlayPause,
   isPlaying,
+  expanded,
 }: BottomSpotifyProps) {
   const [imagem, setImagem] = useState(img1);
 
@@ -44,7 +46,7 @@ export function BottomSpotify({
   const { musicNames, currentMusicIndex } = useMusic();
 
   return (
-    <footer className="bg-zinc-800 border-zinc-700 px-6 pt-3 pb-20 flex items-center justify-between">
+    <footer className={`bg-zinc-800 border-zinc-700 px-6 pt-3 pb-${expanded ? '20' : '0'} flex items-center justify-between`}>
       <div className="flex items-center gap-3">
         <Image src={RectangleThree} alt="play now" />
         <div className="flex flex-col">
