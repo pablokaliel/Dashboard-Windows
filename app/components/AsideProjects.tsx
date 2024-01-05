@@ -25,8 +25,8 @@ function AsideProjects() {
   };
 
   return (
-    <div className="w-full relative h-full bg-[#272727]">
-      <div className="p-1 flex flex-col gap-6">
+    <div className="w-full text-sm relative h-full bg-[#272727]">
+      <div className="p-1 flex flex-col gap-2">
         <label
           htmlFor="search"
           className="bg-[#3d3d3d] p-1 outline-none flex gap-2 items-center"
@@ -52,21 +52,21 @@ function AsideProjects() {
           </button>
           {expanded && (
             <div className="flex gap-1 flex-col mb-3">
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav8} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-300">Dashboard</span>
                 </div>
                 <PushPin />
               </button>
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav8} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-300">#BoraCodar</span>
                 </div>
                 <PushPin />
               </button>
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav8} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-300">Landing</span>
@@ -90,35 +90,35 @@ function AsideProjects() {
           </button>
           {expandedMyPC && (
             <div className="flex gap-1 flex-col mb-3">
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav7} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Desktop</span>
                 </div>
                 <PushPin />
               </button>
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav8} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Documentos</span>
                 </div>
                 <PushPin />
               </button>
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav3} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Downloads</span>
                 </div>
                 <PushPin />
               </button>
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav4} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Fotos</span>
                 </div>
                 <PushPin />
               </button>
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav5} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Videos</span>
@@ -126,7 +126,7 @@ function AsideProjects() {
                 <PushPin />
               </button>
 
-              <button className="w-full pl-4 flex items-center justify-between">
+              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav6} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Musicas</span>
@@ -137,7 +137,7 @@ function AsideProjects() {
           )}
         </div>
 
-        <button className="w-full pl-4 flex items-center justify-between">
+        <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
           <div className="flex gap-2">
             <Image src={fav8} alt="" width={22} height={22} />
             <span className="text-sm text-gray-400">Cloud Drivers</span>

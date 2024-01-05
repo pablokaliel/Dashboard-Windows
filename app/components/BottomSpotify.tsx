@@ -10,7 +10,6 @@ import back from "./../../public/icons/spotify/back.svg";
 import randoom from "./../../public/icons/spotify/randoom.svg";
 import infinity from "./../../public/icons/spotify/infinity.svg";
 import mic from "./../../public/icons/spotify/mic.png";
-import maxmize from "./../../public/icons/spotify/maxmize.png";
 import pc from "./../../public/icons/spotify/pc.png";
 import queue from "./../../public/icons/spotify/queue.png";
 import RectangleThree from "./../../public/icons/spotify/RectangleThree.png";
@@ -38,6 +37,7 @@ export function BottomSpotify({
   isPlaying,
   expanded,
 }: BottomSpotifyProps) {
+
   const [imagem, setImagem] = useState(img1);
 
   function ToggleImage() {
@@ -100,10 +100,7 @@ export function BottomSpotify({
             step={0.1}
             onChange={handleVolumeChange}
           />
-        </div>
-        <button>
-          <Image height={24} width={24} src={maxmize} alt="" />
-        </button>
+        </div> 
       </div>
     </footer>
   );

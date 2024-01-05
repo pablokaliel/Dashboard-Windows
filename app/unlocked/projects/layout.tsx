@@ -28,8 +28,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
 
   const divClass = expanded
-    ? "w-full z-40 h-full overflow-hidden "
-    : "z-40 min-h-[450px] max-w-[750px] max-h-[500px] w-[750px] h-[500px]";
+    ? "w-full z-40 h-full relative overflow-hidden "
+    : "z-40 min-h-[450px] relative  max-w-[750px] max-h-[500px] w-[750px] h-[500px]";
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">
@@ -124,7 +124,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
 
       <div className={divClass}>
-        <div className="flex bg-[#272727] w-full justify-between items-center gap-2"
+        <div className="flex  top-0 bg-[#272727] w-full justify-between items-center gap-2"
         >
           <div className="px-3 items-center flex gap-2">
             <Image src={folder} alt="" height={20} width={20} />
