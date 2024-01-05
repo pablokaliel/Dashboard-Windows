@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import folder from "../../../public/icons/explorer/Folder.svg";
+import folder from "../../../../public/icons/explorer/Folder.svg";
 
 interface Repo {
   name: string;
@@ -58,7 +58,7 @@ export default function Page() {
         const data = await response.json();
 
         const projects = data.filter((repo: { topics: string[] }) => {
-          return repo.topics && repo.topics.includes("react");
+          return repo.topics && repo.topics.includes("landingpage");
         });
 
         const reposWithImages: Repo[] = [];
@@ -72,9 +72,8 @@ export default function Page() {
         console.error("Error fetching repositories:", error);
       }
     }
-    setTimeout(() => {
-      getUserInfo();
-    }, 3000);
+    // Evite usar setTimeout dentro do useEffect, pode causar problemas de sincronização
+    getUserInfo();
   }, []);
 
   function formatDate(dateString: string) {
@@ -87,8 +86,9 @@ export default function Page() {
       month < 10 ? "0" + month : month
     }/${year}`;
   }
+
   return (
-    <main className="flex px-2 flex-col   h-full bg-[#272727] relative">
+    <main className="flex px-2 flex-col h-full bg-[#272727] relative">
       <div className="max-h-[460px] overflow-y-scroll">
         {loading ? (
           <p>Carregando...</p>

@@ -12,6 +12,7 @@ import fav7 from "../../public/icons/explorer/Special Folders 7.svg";
 import fav8 from "../../public/icons/explorer/Folder.svg";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 function AsideProjects() {
   const [expanded, setExpanded] = useState(false);
@@ -53,26 +54,33 @@ function AsideProjects() {
           {expanded && (
             <div className="flex gap-1 flex-col mb-3">
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
-                <div className="flex gap-2">
+                <Link href={"/unlocked/projects"} className="flex gap-2">
                   <Image src={fav8} alt="" width={22} height={22} />
-                  <span className="text-sm text-gray-300">Dashboard</span>
-                </div>
+                  <span className="text-sm text-gray-300">Todos</span>
+                </Link>
                 <PushPin />
               </button>
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+                <Link href={"/unlocked/projects/dashboard"} className="flex gap-2">
+                  <Image src={fav8} alt="" width={22} height={22} />
+                  <span className="text-sm text-gray-300">Dashboard</span>
+                </Link>
+                <PushPin />
+              </button>
+              <Link  href={"/unlocked/projects/boracodar"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav8} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-300">#BoraCodar</span>
                 </div>
                 <PushPin />
-              </button>
-              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+              </Link>
+              <Link  href={"/unlocked/projects/landingpage"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav8} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-300">Landing</span>
                 </div>
                 <PushPin />
-              </button>
+              </Link>
             </div>
           )}
         </div>
