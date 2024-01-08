@@ -153,9 +153,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="flex h-full">
       <aside className="w-1/4 "><AsideProjects/></aside>
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex  flex-col">
         <header className=""><HeaderProjects/></header>
-        <div className="flex-1 ">{children}</div>
+        <div className="flex-1 overflow-y-scroll bg-[#272727]">{children}</div>
       </main>
     </div>
       </div>

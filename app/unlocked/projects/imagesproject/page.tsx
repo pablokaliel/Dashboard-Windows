@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import folder from "../../../../public/icons/explorer/Folder.svg";
-
 interface Repo {
   name: string;
   description: string;
@@ -68,62 +66,43 @@ export default function Page() {
     getUserInfo();
   }, []);
 
-  function formatDate(dateString: string) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return `${day < 10 ? "0" + day : day}/${
-      month < 10 ? "0" + month : month
-    }/${year}`;
-  }
-
   return (
-    <main className="flex px-2 flex-col h-full bg-[#272727] relative">
-      <div className="max-h-[460px] overflow-y-scroll">
+    <main className="flex px-2 flex-col h-full bg-[#272727]">
+      <div className=" ">
         {loading ? (
           <p>Carregando...</p>
         ) : (
-          <table className="min-w-full">
-            <thead>
-              <tr className="text-sm text-center">
-                <th className="text-left py-2">Nome</th>
-                <th className="text-left py-2">Linguagem</th>
-                <th className="text-left py-2">Data Criado</th>
-                <th className="text-left py-2">Tag</th>
-              </tr>
-            </thead>
-            <tbody>
-              {repos.map((repo, i) => (
-                <tr className="text-sm hover:bg-white/30" key={i}>
-                  <td className="py-2 flex gap-2">
-                    <Image src={folder} alt="" />
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+          <div>
+            <div className="grid grid-cols-5 place-content-center gap-2">
+              {repos.map((repo, index) => (
+                <>
+                  {repo.images.map((imageUrl, imageIndex) => (
+                    <div
+                      className="hover:bg-white/30 max-h-[200px] max-w-[200px] p-2"
+                      key={`${index}-${imageIndex}`}
                     >
-                      {repo.name}
-                    </a>
-                  </td>
-                  <td>{repo.language}</td>
-                  <td className="py-2">{formatDate(repo.created_at)}</td>
-                  <td
-                    style={{
-                      maxWidth: "200px",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
-                    className="py-2"
-                  >
-                    {repo.topics.join(", ")}
-                  </td>
-                </tr>
+                      <Image
+                        src={imageUrl}
+                        alt={`Imagem ${imageIndex + 1}`}
+                        width={200}
+                        height={200}
+                        objectFit="cover"
+                      />
+                      <div
+                        style={{
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        <span className="text-sm">{repo.name}</span>
+                      </div>
+                    </div>
+                  ))}
+                </>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
         )}
       </div>
     </main>

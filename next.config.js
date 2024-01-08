@@ -5,6 +5,6 @@ module.exports = nextConfig
 
 module.exports = {
     images: {
-      domains: ['github.com'],
+      domains: ['github.com', 'user-images.githubusercontent.com'],
     },
   };

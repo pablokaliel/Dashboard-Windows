@@ -22,9 +22,7 @@ export default function Page() {
 
   async function fetchReadmeImages(owner: string, repo: string) {
     try {
-      const readmeResponse = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/readme`
-      );
+      const readmeResponse = await fetch( `https://api.github.com/repos/${owner}/${repo}/readme` );
       if (!readmeResponse.ok) {
         throw new Error("Failed to fetch README.md");
       }
@@ -49,9 +47,7 @@ export default function Page() {
   useEffect(() => {
     async function getUserInfo() {
       try {
-        const response = await fetch(
-          "https://api.github.com/users/pablokaliel/repos"
-        );
+        const response = await fetch( "https://api.github.com/users/pablokaliel/repos" );
         if (!response.ok) {
           throw new Error("Failed to fetch repositories");
         }
@@ -88,8 +84,8 @@ export default function Page() {
     }/${year}`;
   }
   return (
-    <main className="flex px-2 flex-col   h-full bg-[#272727] relative">
-      <div className="max-h-[460px] overflow-y-scroll">
+    <main className="flex px-2 flex-col h-full bg-[#272727] relative">
+      <div className="h-full overflow-y-scroll">
         {loading ? (
           <p>Carregando...</p>
         ) : (

@@ -22,9 +22,7 @@ export default function Page() {
 
   async function fetchReadmeImages(owner: string, repo: string) {
     try {
-      const readmeResponse = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/readme`
-      );
+      const readmeResponse = await fetch( `https://api.github.com/repos/${owner}/${repo}/readme`);
       if (!readmeResponse.ok) {
         throw new Error("Failed to fetch README.md");
       }
@@ -34,9 +32,7 @@ export default function Page() {
       const imageUrls: string[] = [];
       let match;
 
-      while ((match = imageRegex.exec(readmeContent)) !== null) {
-        imageUrls.push(match[1]);
-      }
+      while ((match = imageRegex.exec(readmeContent)) !== null) { imageUrls.push(match[1]);}
       console.log("URLs das imagens encontradas:", imageUrls);
 
       return imageUrls;
@@ -49,9 +45,7 @@ export default function Page() {
   useEffect(() => {
     async function getUserInfo() {
       try {
-        const response = await fetch(
-          "https://api.github.com/users/pablokaliel/repos"
-        );
+        const response = await fetch( "https://api.github.com/users/pablokaliel/repos?per_page=100" );
         if (!response.ok) {
           throw new Error("Failed to fetch repositories");
         }
@@ -72,7 +66,6 @@ export default function Page() {
         console.error("Error fetching repositories:", error);
       }
     }
-    // Evite usar setTimeout dentro do useEffect, pode causar problemas de sincronização
     getUserInfo();
   }, []);
 

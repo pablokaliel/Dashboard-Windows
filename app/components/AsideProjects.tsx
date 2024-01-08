@@ -119,13 +119,13 @@ function AsideProjects() {
                 </div>
                 <PushPin />
               </button>
-              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+              <Link  href={"/unlocked/projects/imagesproject"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav4} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Fotos</span>
                 </div>
                 <PushPin />
-              </button>
+              </Link>
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav5} alt="" width={22} height={22} />
@@ -134,13 +134,13 @@ function AsideProjects() {
                 <PushPin />
               </button>
 
-              <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+              <Link href={"/unlocked/projects/musicproject"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <Image src={fav6} alt="" width={22} height={22} />
                   <span className="text-sm text-gray-400">Musicas</span>
                 </div>
                 <PushPin />
-              </button>
+              </Link>
             </div>
           )}
         </div>
