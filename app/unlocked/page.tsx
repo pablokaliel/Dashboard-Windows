@@ -81,7 +81,7 @@ export default function Page() {
             <span className="text-sm mt-2">Lixeira</span>
           </button>
 
-          <a target="_blank" href="https://steam.com" className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
+          <a target="_blank" href="https://store.steampowered.com" className="px-5 pt-5 w-auto flex flex-col items-center justify-center hover:bg-white/30 mt-2">
             <div>
               <Image src={steam} alt="steam" width={30} height={30} />
             </div>
