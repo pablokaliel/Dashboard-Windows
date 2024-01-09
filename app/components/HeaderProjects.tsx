@@ -1,15 +1,22 @@
 'use client'
-import { ArrowClockwise, ArrowLeft, ArrowRight, ArrowUp } from "@phosphor-icons/react/dist/ssr";
-import { useRouter } from 'next/router';
+import { ArrowClockwise, ArrowLeft, ArrowRight, ArrowUp, ArrowsDownUp, GridFour, Share } from "@phosphor-icons/react/dist/ssr";
 
 function HeaderProjects() {
 
     return ( 
-        <div className="p-1 flex gap-2 text-sm h-full w-full bg-[#272727]">
+        <div className="flex justify-between text-sm h-full w-full bg-[#272727]">
+
+        <div className="flex p-1 gap-2">
             <div className="hover:bg-white/30 p-2" ><ArrowLeft/></div>
             <div className="hover:bg-white/30 p-2" ><ArrowRight/></div>
-            <div className="hover:bg-white/30 p-2" ><ArrowUp/></div>
             <div className="hover:bg-white/30 p-2" ><ArrowClockwise/></div>
+            <div className="hover:bg-white/30 p-2" ><ArrowUp/></div>
+        </div>
+        <div className="flex p-1 gap-2">
+            <div className="hover:bg-white/30 p-2" ><GridFour/></div>
+            <div className="hover:bg-white/30 p-2" ><ArrowsDownUp/></div>
+            <div className="hover:bg-white/30 p-2" ><Share/></div>
+        </div>
         </div>
      );
 }

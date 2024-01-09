@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Repo {
   name: string;
@@ -66,14 +66,42 @@ export default function Page() {
     getUserInfo();
   }, []);
 
+  const [gridColumns, setGridColumns] = useState<'grid-cols-3' | 'grid-cols-5'>('grid-cols-3');
+  const gridContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function updateGridColumns() {
+      const container = gridContainerRef.current;
+      if (container) {
+        const containerWidth = container.offsetWidth;
+        console.log("Container Width:", containerWidth); // Add this line for debugging
+        const newGridColumns = containerWidth < 600 ? 'grid-cols-3' : 'grid-cols-5';
+        console.log("New Grid Columns:", newGridColumns); // Add this line for debugging
+        setGridColumns(newGridColumns);
+      }
+    }
+  
+    const resizeObserver = new ResizeObserver(updateGridColumns);
+    const container = gridContainerRef.current;
+    if (container) {
+      resizeObserver.observe(container);
+    }
+  
+    return () => {
+      if (container) {
+        resizeObserver.unobserve(container);
+      }
+    };
+  }, []);
+
   return (
     <main className="flex px-2 flex-col h-full bg-[#272727]">
-      <div className=" ">
+      <div ref={gridContainerRef} className="grid-container">
         {loading ? (
           <p>Carregando...</p>
         ) : (
           <div>
-            <div className="grid grid-cols-5 place-content-center gap-2">
+           <div className={`grid ${gridColumns} place-content-center gap-2`}>
               {repos.map((repo, index) => (
                 <>
                   {repo.images.map((imageUrl, imageIndex) => (
@@ -87,6 +115,7 @@ export default function Page() {
                         width={200}
                         height={200}
                         objectFit="cover"
+                        className="rounded min-h-[105px] max-h-[105px]"
                       />
                       <div
                         style={{
@@ -95,7 +124,7 @@ export default function Page() {
                           whiteSpace: "nowrap",
                         }}
                       >
-                        <span className="text-sm">{repo.name}</span>
+                        <span className="text-xs">{repo.name}</span>
                       </div>
                     </div>
                   ))}
