@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import wifi from "../../public/icons/WiFi.svg";
 import speaker from "../../public/icons/Speaker.svg";
 import battery from "../../public/icons/Battery.svg";
@@ -9,13 +10,10 @@ import microsoft from "../../public/icons/Microsoft edge.svg";
 import windows from "../../public/icons/Windows.svg";
 import search from "../../public/icons/Search.svg";
 import explorer from "../../public/icons/file Explorer.svg";
-import chat from "../../public/icons/Chat.svg";
-import maniger from "../../public/icons/Desktop maniger.svg";
 import config from "../../public/icons/tasks/Icon 18.svg";
 import steam from "../../public/icons/tasks/steam.svg";
 import chrome from "../../public/icons/tasks/chrome.svg";
 import pencil from "../../public/icons/tasks/Icon 17.svg";
-
 import paint from "../../public/icons/tasks/Icon 3.svg";
 import calculator from "../../public/icons/tasks/Icon 4.svg";
 import settings from "../../public/icons/tasks/Icon 6.svg";
@@ -29,23 +27,24 @@ import store from "../../public/icons/tasks/Icon 13.svg";
 import calendary from "../../public/icons/tasks/Icon 14.svg";
 import camera from "../../public/icons/tasks/Icon 15.svg";
 import acessibility from "../../public/icons/tasks/acessibility.png";
-
 import suun from "../../public/icons/Group 2.svg";
-
-import { format } from "date-fns";
-
-import {AirplaneInFlight,BatteryPlus,Bluetooth,CaretLeft,CaretRight,Moon,PersonArmsSpread,WifiHigh } from "@phosphor-icons/react";
-import MusicPlayer from "./ReactPlayer";
-import axios from "axios";
-import { useEffect, useState } from "react";
-
 import notepad from "../../public/icons/tasks/Icon 2.svg";
 import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
+import {AirplaneInFlight,BatteryPlus,Bluetooth,CaretLeft,CaretRight,Moon,PersonArmsSpread,WifiHigh } from "@phosphor-icons/react";
+
+import { format } from "date-fns";
+
+import MusicPlayer from "./ReactPlayer";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+
 import WindowsComponent from "./WindowsComponent";
 import { useMusic } from "../context/Context";
+import Link from "next/link";
 
 function FooterComponent() {
   type ModalContent = {
@@ -186,24 +185,6 @@ function FooterComponent() {
         </div>
       </div>
     ),
-    desktopmaginer: (
-      <div>
-        <h2>Conteúdo específico para Desktop Magner</h2>
-        <p>Aqui está o conteúdo para o Desktop Magner...</p>
-      </div>
-    ),
-    chat: (
-      <div>
-        <h2>Conteúdo específico para Chat</h2>
-        <p>Aqui está o conteúdo para o Chat...</p>
-      </div>
-    ),
-    microsoft: (
-      <div>
-        <h2>Conteúdo específico para Microsoft</h2>
-        <p>Aqui está o conteúdo para o Microsoft...</p>
-      </div>
-    ),
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -335,21 +316,21 @@ function FooterComponent() {
             <Image height={24} width={24} src={search} alt="clima" />
           </button>
 
-          <button onClick={() => toggleModalWithContent("desktopmaginer")}>
-            <Image height={24} width={24} src={maniger} alt="clima" />
-          </button>
+          <a href="https://store.steampowered.com" target="_blank" >
+            <Image height={30} width={30} src={steam} alt="clima" />
+          </a>
 
-          <button onClick={() => toggleModalWithContent("chat")}>
-            <Image height={24} width={24} src={chat} alt="clima" />
-          </button>
+          <a target="_blank" href="https://discord.com" >
+          <Image src={discord} alt="discord" width={30} height={30} />
+          </a>
 
-          <button onClick={() => toggleModalWithContent("explorer")}>
+          <Link href={"unlocked/projects"} >
             <Image height={24} width={24} src={explorer} alt="clima" />
-          </button>
+          </Link>
 
-          <button onClick={() => toggleModalWithContent("microsoft")}>
+          <a target="_blank" href="https://pablo-me.vercel.app" >
             <Image height={24} width={24} src={microsoft} alt="clima" />
-          </button>
+          </a>
         </div>
 
         <div className="w-[180px] mr-6 gap-2 flex">
