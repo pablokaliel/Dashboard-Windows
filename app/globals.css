@@ -19,4 +19,5 @@
 body {
   color: rgb(var(--foreground-rgb));
   background-color: rgba(5, 20, 43, 1);
+  max-height: 100vh;
 }

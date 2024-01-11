@@ -46,7 +46,7 @@ export function BottomSpotify({
   const { musicNames, currentMusicIndex } = useMusic();
 
   return (
-    <footer className={`bg-zinc-800 border-zinc-700 px-6 pt-3 pb-${expanded ? '20' : '0'} flex items-center justify-between`}>
+    <footer className={`bg-zinc-800 border-zinc-700 px-6 pt-3 ${expanded ? 'pb-20' : 'pb-0'} flex items-center justify-between`}>
       <div className="flex items-center gap-3">
         <Image src={RectangleThree} alt="play now" />
         <div className="flex flex-col">
