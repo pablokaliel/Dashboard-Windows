@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
 
   const divClass = expanded
-    ? "w-full z-40 h-full overflow-hidden "
+    ? "w-full z-20 h-full overflow-hidden "
     : "z-40 min-h-[450px] max-w-[590px] max-h-[450px]";
 
   return (
@@ -158,7 +158,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="flex-grow flex-1 h-full">{children}</div>
           <div className=" bg-[#3a3a3a] ">
-            <RightMe />
+            <RightMe expanded={expanded}/>
           </div>
         </div>
       </div>

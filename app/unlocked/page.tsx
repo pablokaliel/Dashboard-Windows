@@ -18,7 +18,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <main className="min-h-screen w-full">
+    <main className="max-h-screen w-full">
       <video
         autoPlay
         muted
@@ -28,7 +28,7 @@ export default function Page() {
         <source src="/background.mp4" type="video/mp4" />
         Seu navegador não suporta vídeos em HTML5.
       </video>
-      <div className="flex  flex-col w-full h-screen ">
+      <div className="flex flex-col w-full h-screen ">
         <div className="flex h-full justify-between">
           <div className=" z-20 grid grid-cols-2 gap-2 h-fit">
             <Link
