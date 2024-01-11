@@ -40,11 +40,15 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     "The Scientist-João Torres",
     "Those Eyes-João Torres",
     "Leão-João Torres",
+    "Until I Found You-Stephen Sanchez",
+    "Shameless-Camila Cabello ",
+    "Say Yes To Heaven-Lana Del Rey",
     "Rap do Chopper-7MZ",
     "Rap do Luffy-7MZ",
     "Rap do Law-7MZ",
     "Rap do Crocodile-7MZ",
     "Rap do Usopp-7MZ",
+    "Rap do Kratos e Atreus-7MZ",
   ]);
 
   const musicas = [
@@ -57,11 +61,15 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     "/TheScientist.mp3",
     "/ThoseEyes.mp3",
     "/leao.mp3",
+    "/FoundYou.mp3",
+    "/shameless.mp3",
+    "/YesToHeaven.mp3",
     "/RapChopper.mp3",
     "/RapLuffy.mp3",
     "/RapLaw.mp3",
     "/RapCrocodile.mp3",
     "/RapUsopp.mp3",
+    "/RapKratos.mp3",
   ];
   const playMusic = (index: number) => {
     setCurrentMusicIndex(index);

@@ -33,14 +33,13 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import {AirplaneInFlight,BatteryPlus,Bluetooth,CaretLeft,CaretRight,Moon,PersonArmsSpread,WifiHigh } from "@phosphor-icons/react";
+import { AirplaneInFlight, BatteryPlus, Bluetooth, CaretLeft, CaretRight, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 
 import MusicPlayer from "./ReactPlayer";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 
 import WindowsComponent from "./WindowsComponent";
 import { useMusic } from "../context/Context";
@@ -153,8 +152,8 @@ function FooterComponent() {
           <h2 className="text-[17px] font-bold">Pinned</h2>
         </div>
         <span className="text-sm font-thin">results</span>
-        <div className=" flex flex-col gap-3 max-h-[370px] overflow-scroll ">
-          <div className="flex flex-col gap-3 max-h-[370px] overflow-scroll">
+        <div className=" flex flex-col gap-3 max-h-[370px] overflow-y-auto ">
+          <div className="flex flex-col gap-3 max-h-[370px] overflow-y-auto">
             {filteredButtons.length > 0 ? (
               <div>
                 {filteredButtons.map((button: Button, index: number) => (
@@ -316,19 +315,19 @@ function FooterComponent() {
             <Image height={24} width={24} src={search} alt="clima" />
           </button>
 
-          <a href="https://store.steampowered.com" target="_blank" >
+          <a href="https://store.steampowered.com" target="_blank">
             <Image height={30} width={30} src={steam} alt="clima" />
           </a>
 
-          <a target="_blank" href="https://discord.com" >
-          <Image src={discord} alt="discord" width={30} height={30} />
+          <a target="_blank" href="https://discord.com">
+            <Image src={discord} alt="discord" width={30} height={30} />
           </a>
 
-          <Link href={"unlocked/projects"} >
+          <Link href={"unlocked/projects"}>
             <Image height={24} width={24} src={explorer} alt="clima" />
           </Link>
 
-          <a target="_blank" href="https://pablo-me.vercel.app" >
+          <a target="_blank" href="https://pablo-me.vercel.app">
             <Image height={24} width={24} src={microsoft} alt="clima" />
           </a>
         </div>

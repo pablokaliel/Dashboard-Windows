@@ -7,7 +7,6 @@ import searchIcon from "./../../public/icons/spotify/search.svg";
 export function SideSpotify() {
   return (
     <aside className="w-1/4 h-screen  bg-zinc-950 p-6 max-md:hidden">
-
       <nav className="space-y-5 mt-10">
         <a
           href="#"

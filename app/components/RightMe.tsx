@@ -2,9 +2,13 @@ interface BottomSpotifyProps {
   expanded: boolean;
 }
 
-function RightMe({expanded }: BottomSpotifyProps) {
+function RightMe({ expanded }: BottomSpotifyProps) {
   return (
-    <div className={`w-full ${expanded ? 'pb-24' : 'pb-0'} flex px-1 border-t border-white border-opacity-20`}>
+    <div
+      className={`w-full ${
+        expanded ? "pb-24" : "pb-0"
+      } flex px-1 border-t border-white border-opacity-20`}
+    >
       <div className="border-r flex-1 border-white border-opacity-20 px-[10px]">
         <span className="text-xs">Ln 1, Col 1</span>
       </div>

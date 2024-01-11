@@ -46,7 +46,7 @@ function AsideProjects() {
             onClick={toggleOptions}
           >
             <div className="flex gap-2">
-              <Image src={fav1} alt="" width={22} height={22} />
+              <Image src={fav1} alt="favorites" width={22} height={22} />
               <span>Favorites</span>
             </div>
             {expanded ? <CaretDown /> : <CaretUp />}
@@ -55,28 +55,37 @@ function AsideProjects() {
             <div className="flex gap-1 flex-col mb-3">
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <Link href={"/unlocked/projects"} className="flex gap-2">
-                  <Image src={fav8} alt="" width={22} height={22} />
+                  <Image src={fav8} alt="all" width={22} height={22} />
                   <span className="text-sm text-gray-300">Todos</span>
                 </Link>
                 <PushPin />
               </button>
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
-                <Link href={"/unlocked/projects/dashboard"} className="flex gap-2">
-                  <Image src={fav8} alt="" width={22} height={22} />
+                <Link
+                  href={"/unlocked/projects/dashboard"}
+                  className="flex gap-2"
+                >
+                  <Image src={fav8} alt="folderdash" width={22} height={22} />
                   <span className="text-sm text-gray-300">Dashboard</span>
                 </Link>
                 <PushPin />
               </button>
-              <Link  href={"/unlocked/projects/boracodar"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+              <Link
+                href={"/unlocked/projects/boracodar"}
+                className="w-full hover:bg-white/30 pl-4 flex items-center justify-between"
+              >
                 <div className="flex gap-2">
-                  <Image src={fav8} alt="" width={22} height={22} />
+                  <Image src={fav8} alt="foldercodar" width={22} height={22} />
                   <span className="text-sm text-gray-300">#BoraCodar</span>
                 </div>
                 <PushPin />
               </Link>
-              <Link  href={"/unlocked/projects/landingpage"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+              <Link
+                href={"/unlocked/projects/landingpage"}
+                className="w-full hover:bg-white/30 pl-4 flex items-center justify-between"
+              >
                 <div className="flex gap-2">
-                  <Image src={fav8} alt="" width={22} height={22} />
+                  <Image src={fav8} alt="folderlanding" width={22} height={22} />
                   <span className="text-sm text-gray-300">Landing</span>
                 </div>
                 <PushPin />
@@ -91,7 +100,7 @@ function AsideProjects() {
             onClick={toggleOptionsPC}
           >
             <div className="flex gap-2">
-              <Image src={fav2} alt="" width={22} height={22} />
+              <Image src={fav2} alt="mypc" width={22} height={22} />
               <span>Meu PC</span>
             </div>
             {expandedMyPC ? <CaretDown /> : <CaretUp />}
@@ -100,43 +109,49 @@ function AsideProjects() {
             <div className="flex gap-1 flex-col mb-3">
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
-                  <Image src={fav7} alt="" width={22} height={22} />
+                  <Image src={fav7} alt="desktop" width={22} height={22} />
                   <span className="text-sm text-gray-400">Desktop</span>
                 </div>
                 <PushPin />
               </button>
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
-                  <Image src={fav8} alt="" width={22} height={22} />
+                  <Image src={fav8} alt="docs" width={22} height={22} />
                   <span className="text-sm text-gray-400">Documentos</span>
                 </div>
                 <PushPin />
               </button>
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
-                  <Image src={fav3} alt="" width={22} height={22} />
+                  <Image src={fav3} alt="downloads" width={22} height={22} />
                   <span className="text-sm text-gray-400">Downloads</span>
                 </div>
                 <PushPin />
               </button>
-              <Link  href={"/unlocked/projects/imagesproject"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+              <Link
+                href={"/unlocked/projects/imagesproject"}
+                className="w-full hover:bg-white/30 pl-4 flex items-center justify-between"
+              >
                 <div className="flex gap-2">
-                  <Image src={fav4} alt="" width={22} height={22} />
+                  <Image src={fav4} alt="fotos" width={22} height={22} />
                   <span className="text-sm text-gray-400">Fotos</span>
                 </div>
                 <PushPin />
               </Link>
               <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
                 <div className="flex gap-2">
-                  <Image src={fav5} alt="" width={22} height={22} />
+                  <Image src={fav5} alt="videos" width={22} height={22} />
                   <span className="text-sm text-gray-400">Videos</span>
                 </div>
                 <PushPin />
               </button>
 
-              <Link href={"/unlocked/projects/musicproject"} className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
+              <Link
+                href={"/unlocked/projects/musicproject"}
+                className="w-full hover:bg-white/30 pl-4 flex items-center justify-between"
+              >
                 <div className="flex gap-2">
-                  <Image src={fav6} alt="" width={22} height={22} />
+                  <Image src={fav6} alt="music" width={22} height={22} />
                   <span className="text-sm text-gray-400">Musicas</span>
                 </div>
                 <PushPin />
@@ -147,13 +162,16 @@ function AsideProjects() {
 
         <button className="w-full hover:bg-white/30 pl-4 flex items-center justify-between">
           <div className="flex gap-2">
-            <Image src={fav8} alt="" width={22} height={22} />
+            <Image src={fav8} alt="folderdrive" width={22} height={22} />
             <span className="text-sm text-gray-400">Cloud Drivers</span>
           </div>
           <PushPin />
         </button>
       </div>
-      <div className="p-1 absolute flex items-center gap-2 bottom-0 "> <GearSix/>Settings</div>
+      <div className="p-1 absolute flex items-center gap-2 bottom-0 ">
+        <GearSix />
+        Settings
+      </div>
     </div>
   );
 }

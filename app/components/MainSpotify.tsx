@@ -14,7 +14,7 @@ export function MainSpotify() {
   const sevenMZMusicNames = musicNames.filter((name) => name.includes("7MZ"));
 
   return (
-    <main className="flex-1  overflow-scroll p-6 h-screen bg-black/90 ">
+    <main className="flex-1 overflow-y-auto p-6 h-screen bg-black/90 ">
       <div className="w-full flex justify-between ">
         <div className="flex gap-6 ">
           <button className="p-1.5 hover:bg-black/20 rounded-full bg-black/40 flex items-center justify-center">
@@ -41,7 +41,7 @@ export function MainSpotify() {
       </div>
       <h1 className="font-bold text-3xl mt-12">Musicas do momento</h1>
 
-      <div className="grid  grid-cols-3 gap-4 mt-4 max-md:grid-cols-2">
+      <div className="grid grid-cols-3 gap-4 mt-4 max-md:grid-cols-2">
         {otherMusicNames.map((musicName, index) => (
           <div
             key={index}
@@ -49,7 +49,19 @@ export function MainSpotify() {
             className="bg-white/10 hover:bg-white/20 transition-all group rounded flex items-center gap-4"
           >
             <Image src={RectangleOne} alt="image playlist" />
-            <strong>{musicName}</strong>
+            <strong
+              style={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "normal",
+                WebkitLineClamp: 3,
+                width: "300px",
+              }}
+            >
+              {musicName}
+            </strong>
             <button className="w-12 h-12 bg-green-500 group-hover:visible rounded-full flex items-center justify-center ml-auto mr-7 invisible">
               <Image src={arrowright} alt="play" />
             </button>
@@ -57,7 +69,7 @@ export function MainSpotify() {
         ))}
         <h1 className="font-bold text-3xl mt-4">7MinutoZ</h1>
       </div>
-      <div className="grid grid-cols-5 gap-4 max-md:flex max-md:overflow-x-scroll md:max-md:w-full mt-4">
+      <div className="grid grid-cols-3 gap-4 overflow-x-scroll mt-4">
         {sevenMZMusicNames.map((musicName, index) => (
           <div
             key={index}
@@ -65,7 +77,20 @@ export function MainSpotify() {
             className="bg-white/10 relative hover:bg-white/20 transition-all group rounded flex p-2 items-center gap-4"
           >
             <Image src={RectangleOne} alt="image playlist" />
-            <strong>{musicName}</strong>
+            <strong
+              style={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "normal",
+                WebkitLineClamp: 2,
+                width: "300px",
+              }}
+            >
+              {musicName}
+            </strong>
+
             <button className="w-12 h-12 bg-green-500 group-hover:visible rounded-full absolute flex items-center justify-center right-0 invisible">
               <Image src={arrowright} alt="play" />
             </button>
