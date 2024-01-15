@@ -49,7 +49,7 @@ export default function Page() {
         const data = await response.json();
 
         const projects = data.filter((repo: { topics: string[] }) => {
-          return repo.topics && repo.topics.includes("landingpage");
+          return repo.topics && repo.topics.includes("react");
         });
 
         const reposWithImages: Repo[] = [];

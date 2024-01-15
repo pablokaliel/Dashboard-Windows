@@ -101,13 +101,14 @@ export default function Page() {
             <tbody>
               {repos.map((repo, i) => (
                 <tr className="text-sm hover:bg-white/30" key={i}>
-                  <td className="py-2 flex gap-2">
-                    <Image src={folder} alt="" />
+                      <td className="py-2 ">
                     <a
                       href={repo.html_url}
                       target="_blank"
+                      className="flex gap-2"
                       rel="noopener noreferrer"
                     >
+                    <Image src={folder} alt="" />
                       {repo.name}
                     </a>
                   </td>
