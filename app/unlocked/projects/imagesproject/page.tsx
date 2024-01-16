@@ -74,9 +74,9 @@ export default function Page() {
       const container = gridContainerRef.current;
       if (container) {
         const containerWidth = container.offsetWidth;
-        console.log("Container Width:", containerWidth); // Add this line for debugging
+        console.log("Container Width:", containerWidth);
         const newGridColumns = containerWidth < 600 ? 'grid-cols-3' : 'grid-cols-5';
-        console.log("New Grid Columns:", newGridColumns); // Add this line for debugging
+        console.log("New Grid Columns:", newGridColumns);
         setGridColumns(newGridColumns);
       }
     }
@@ -101,11 +101,13 @@ export default function Page() {
           <p>Carregando...</p>
         ) : (
           <div>
-           <div className={`grid ${gridColumns} place-content-center gap-2`}>
+           <div className={`grid ${gridColumns} pb-8 place-content-center gap-2`}>
               {repos.map((repo, index) => (
                 <>
                   {repo.images.map((imageUrl, imageIndex) => (
-                    <div
+                    <a href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                       className="hover:bg-white/30 max-h-[200px] max-w-[200px] p-2"
                       key={`${index}-${imageIndex}`}
                     >
@@ -126,7 +128,7 @@ export default function Page() {
                       >
                         <span className="text-xs">{repo.name}</span>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </>
               ))}

@@ -33,7 +33,16 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import { AirplaneInFlight, BatteryPlus, Bluetooth, CaretLeft, CaretRight, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
+import {
+  AirplaneInFlight,
+  BatteryPlus,
+  Bluetooth,
+  CaretLeft,
+  CaretRight,
+  Moon,
+  PersonArmsSpread,
+  WifiHigh,
+} from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 
@@ -44,6 +53,7 @@ import { useEffect, useState } from "react";
 import WindowsComponent from "./WindowsComponent";
 import { useMusic } from "../context/Context";
 import Link from "next/link";
+import { CustomButton } from "./ButtonCustom";
 
 function FooterComponent() {
   type ModalContent = {
@@ -98,6 +108,17 @@ function FooterComponent() {
       { src: acessibility, alt: "camera", name: "Acessibilidade" },
     ],
   };
+
+  const buttons = [
+    { id: "wifi", label: "Wi-Fi", icon: WifiHigh },
+    { id: "bluetooth", label: "Bluetooth", icon: Bluetooth },
+    { id: "airplane", label: "Airplane Mode", icon: AirplaneInFlight },
+    { id: "battery", label: "Battery Saver", icon: BatteryPlus },
+    { id: "focus", label: "Focus Assist", icon: Moon },
+    { id: "acessibility", label: "Acessibility", icon: PersonArmsSpread },
+    // ... adicione outros botões
+  ];
+  
 
   const [showSeconds, setShowSeconds] = useState(false);
   const [, setTimeFormat] = useState("HH:mm");
@@ -274,7 +295,9 @@ function FooterComponent() {
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
     try {
-      let res = await axios.get( "https://api.openweathermap.org/data/2.5/weather", {
+      let res = await axios.get(
+        "https://api.openweathermap.org/data/2.5/weather",
+        {
           params: {
             lat: lat,
             lon: lon,
@@ -289,10 +312,25 @@ function FooterComponent() {
       console.error("Error fetching weather data: ", error);
     }
   };
+
+  const [activeButtons, setActiveButtons] = useState<string[]>([
+    "wifi",
+    "battery",
+  ]);
+
+  const handleButtonClick = (buttonId: string) => {
+    const newActiveButtons = activeButtons.includes(buttonId)
+      ? activeButtons.filter((id) => id !== buttonId)
+      : [...activeButtons, buttonId];
+
+    setActiveButtons(newActiveButtons);
+  };
+  const isButtonActive = (buttonId: string) => activeButtons.includes(buttonId);
+
   return (
     <div className="fixed z-20 bottom-0 w-full">
-      <footer className="flex justify-between bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
-        <div className="ml-4 items-center h-[50px] flex gap-3">
+      <footer className="flex  bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
+        <div className="ml-4 w-1/4 items-center h-[50px] flex gap-3">
           <Image src={suun} alt="clima" />
           <div>
             {weather && weather.main && (
@@ -332,7 +370,7 @@ function FooterComponent() {
           </a>
         </div>
 
-        <div className="w-[180px] mr-6 gap-2 flex">
+        <div className="justify-end w-1/4 mr-6 gap-2 flex">
           <div className="flex gap-1">
             <Image src={overflow} alt="overflow" />
             <Image src={wifi} alt="wifi" />
@@ -401,42 +439,16 @@ function FooterComponent() {
             className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[400px] rounded shadow-lg"
           >
             <div className="px-5 gap-4 w-full py-8 grid grid-cols-3">
-              <div className=" text-center">
-                <div className="bg-[#60CDFF] mb-2 border rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] ">
-                  <WifiHigh size={21} weight="light" color="black" />
-                </div>
-                <span className=" text-sm">Wi-Fi</span>
-              </div>
-              <div className=" text-center">
-                <div className="bg-[#60CDFF] mb-2 border rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] ">
-                  <Bluetooth size={21} weight="light" color="black" />
-                </div>
-                <span className=" text-sm">Bluetooth</span>
-              </div>
-              <div className=" text-center">
-                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
-                  <AirplaneInFlight size={21} weight="light" />
-                </div>
-                <span className=" text-sm">AirPlane Mode</span>
-              </div>
-              <div className=" text-center">
-                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
-                  <BatteryPlus size={32} weight="light" />
-                </div>
-                <span className=" text-sm">Battery Saver</span>
-              </div>
-              <div className=" text-center">
-                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 border-white flex items-center justify-center w-[110] h-[60px] mb-2">
-                  <Moon size={21} weight="light" />
-                </div>
-                <span className=" text-sm">Focus Assist</span>
-              </div>
-              <div className=" text-center">
-                <div className="border bg-[#FFFFFF0F] rounded-md border-opacity-20 mb-2 border-white flex items-center justify-center w-[120px] h-[60px] ">
-                  <PersonArmsSpread size={21} weight="light" />
-                </div>
-                <span className=" text-sm">Acessibility</span>
-              </div>
+            {buttons.map(({ id, label, icon }) => (
+    <div className="text-center" key={id}>
+      <CustomButton
+        onClick={() => handleButtonClick(id)}
+        isActive={isButtonActive(id)}
+        icon={icon}
+        label={label}
+      />
+    </div>
+  ))}
             </div>
             <div className="px-5">
               <div className="flex gap-5">

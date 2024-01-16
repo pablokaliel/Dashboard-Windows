@@ -20,4 +20,9 @@ body {
   color: rgb(var(--foreground-rgb));
   background-color: rgba(5, 20, 43, 1);
   max-height: 100vh;
+  background-image: url('./../public/bgwin.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(5, 20, 43, 1);
 }
