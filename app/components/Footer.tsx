@@ -33,26 +33,16 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import {
-  AirplaneInFlight,
-  BatteryPlus,
-  Bluetooth,
-  CaretLeft,
-  CaretRight,
-  Moon,
-  PersonArmsSpread,
-  WifiHigh,
-} from "@phosphor-icons/react";
+import { AirplaneInFlight, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 
 import { format } from "date-fns";
-
-import MusicPlayer from "./ReactPlayer";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import MusicPlayer from "./ReactPlayer";
 import WindowsComponent from "./WindowsComponent";
 import { useMusic } from "../context/Context";
-import Link from "next/link";
 import { CustomButton } from "./ButtonCustom";
 
 function FooterComponent() {
@@ -116,16 +106,14 @@ function FooterComponent() {
     { id: "battery", label: "Battery Saver", icon: BatteryPlus },
     { id: "focus", label: "Focus Assist", icon: Moon },
     { id: "acessibility", label: "Acessibility", icon: PersonArmsSpread },
-    // ... adicione outros botões
   ];
-  
 
   const [showSeconds, setShowSeconds] = useState(false);
   const [, setTimeFormat] = useState("HH:mm");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   const [weather, setWeather] = useState<any>(null);
-  const [, setLocationAccess] = useState(false);
+  const [locationAccess, setLocationAccess] = useState(false);
 
   const {
     handleNext,
@@ -255,19 +243,6 @@ function FooterComponent() {
     return () => clearInterval(clockInterval);
   }, [showSeconds]);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocationAccess(true);
-        getWeather(position.coords.latitude, position.coords.longitude);
-      },
-      (error) => {
-        console.error("Error getting location:", error);
-        setLocationAccess(false);
-      }
-    );
-  }, []);
-
   const toggleSeconds = () => {
     setShowSeconds(!showSeconds);
     setTimeFormat(showSeconds ? "HH:mm" : "HH:mm:ss");
@@ -292,6 +267,35 @@ function FooterComponent() {
     setShowSpeakerModal((prevShowSpeakerModal) => !prevShowSpeakerModal);
   };
 
+  const [showClimaModal, setShowClimaModal] = useState(false);
+
+  const toggleClimaModal = () => {
+    setShowClimaModal((prevShowClimaModal) => !prevShowClimaModal);
+  };
+
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
+
+  const toggleNotificationModal = () => {
+    setShowNotificationModal(
+      (prevShowNotificationModal) => !prevShowNotificationModal
+    );
+  };
+
+  const [cityName, setCityName] = useState("");
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocationAccess(true);
+        getWeather(position.coords.latitude, position.coords.longitude);
+      },
+      (error) => {
+        console.error("Error getting location:", error);
+        setLocationAccess(false);
+      }
+    );
+  }, []);
+
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
     try {
@@ -299,14 +303,17 @@ function FooterComponent() {
         "https://api.openweathermap.org/data/2.5/weather",
         {
           params: {
-            lat: lat,
-            lon: lon,
+            lat: lat.toString(),
+            lon: lon.toString(),
             appid: apiKey,
             lang: "pt",
             units: "metric",
           },
         }
       );
+      const city = res.data.name;
+      setCityName(city);
+
       setWeather(res.data);
     } catch (error) {
       console.error("Error fetching weather data: ", error);
@@ -329,9 +336,11 @@ function FooterComponent() {
 
   return (
     <div className="fixed z-20 bottom-0 w-full">
-      <footer className="flex  bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
+      <footer className="flex bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
         <div className="ml-4 w-1/4 items-center h-[50px] flex gap-3">
-          <Image src={suun} alt="clima" />
+          <button onClick={toggleClimaModal}>
+            <Image src={suun} alt="clima" />
+          </button>
           <div>
             {weather && weather.main && (
               <>
@@ -370,7 +379,7 @@ function FooterComponent() {
           </a>
         </div>
 
-        <div className="justify-end w-1/4 mr-6 gap-2 flex">
+        <div className="justify-end  items-center w-1/4 mr-4 gap-2 flex">
           <div className="flex gap-1">
             <Image src={overflow} alt="overflow" />
             <Image src={wifi} alt="wifi" />
@@ -384,6 +393,9 @@ function FooterComponent() {
             <p className="cursor-pointer">{time}</p>
             <p>{date}</p>
           </div>
+          <button className="p-2" onClick={toggleNotificationModal}>
+            <BellRinging weight="fill" className="text-[#60cdff]" />
+          </button>
         </div>
       </footer>
 
@@ -439,16 +451,16 @@ function FooterComponent() {
             className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[400px] rounded shadow-lg"
           >
             <div className="px-5 gap-4 w-full py-8 grid grid-cols-3">
-            {buttons.map(({ id, label, icon }) => (
-    <div className="text-center" key={id}>
-      <CustomButton
-        onClick={() => handleButtonClick(id)}
-        isActive={isButtonActive(id)}
-        icon={icon}
-        label={label}
-      />
-    </div>
-  ))}
+              {buttons.map(({ id, label, icon }) => (
+                <div className="text-center" key={id}>
+                  <CustomButton
+                    onClick={() => handleButtonClick(id)}
+                    isActive={isButtonActive(id)}
+                    icon={icon}
+                    label={label}
+                  />
+                </div>
+              ))}
             </div>
             <div className="px-5">
               <div className="flex gap-5">
@@ -500,6 +512,101 @@ function FooterComponent() {
                 <Image src={config} alt="config" width={18} height={18} />
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        onClick={toggleClimaModal}
+        className={`fixed ${
+          showClimaModal ? "translate-y-0" : "translate-y-full"
+        } transition-transform duration-300 inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none`}
+      >
+        <div className="relative mx-auto w-full h-full flex items-end justify-start px-5 pb-[70px]">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl  rounded shadow-lg"
+          >
+            <div className="px-10 flex flex-col gap-8">
+              <div className=" pt-6 gap-3 text-center flex flex-col">
+                <span className="text-xl">{date}</span>
+                <label className=" bg-[#1e1e1e] py-2">
+                  <input
+                    className="bg-transparent outline-none w-full h-full "
+                    placeholder="Search the web"
+                  />
+                </label>
+              </div>
+
+              <div className="grid grid-cols-2 4 max-h-[600px] gap-3 overflow-auto">
+                <div className="w-[317px] bg-gradient-to-b from-[#2D2C2C] from-0.8% to-[#413D2B] to-96.4% h-[211px]">
+                  <div className="flex gap-2 items-center py-2 px-3">
+                    <CloudSun size={24} color="#64cdff" weight="fill" />{" "}
+                    <span>Weather</span>
+                  </div>
+                  <div className="px-6 gap-2 text-center">
+                    <div>
+                      {locationAccess && (
+                        <div>
+                          <p>{cityName}</p>
+                        </div>
+                      )}
+                      {!locationAccess && (
+                        <p>Não foi possível obter a localização.</p>
+                      )}
+                    </div>
+                    <div className="flex  items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Image src={suun} alt="" width={40} height={40} />
+
+                        {weather && weather.main && (
+                          <p className="text-3xl">
+                            {weather.main.temp.toFixed(1)}°C
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-end ">
+                        {weather && weather.main && (
+                          <>
+                            <p className="text-base">
+                              {weather.weather[0].description}
+                            </p>
+                            <p className="text-sm font-normal flex gap-3 ">
+                              <span> {weather.main.pressure}hPa</span>
+                              {weather.main.humidity.toFixed(1)}%
+                            </p>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-8 text-center">
+                    <a className="text-purple-300" href="https://www.climatempo.com.br/previsao-do-tempo">
+                      See full forecast
+                    </a>
+                  </div>
+                </div>
+                <div className="w-[317px] bg-red-400 h-[211px]">oi</div>
+                <div className="w-[317px] bg-green-400 h-[211px]">oi</div>
+                <div className="w-[317px] bg-yellow-400 h-[326px]">oi</div>
+                <div className="w-[317px] bg-pink-400 h-[326px]">oi</div>
+                <div className="w-[317px] bg-cyan-400 h-[211px]">oi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        onClick={toggleNotificationModal}
+        className={`fixed ${
+          showNotificationModal ? "translate-y-0" : "translate-y-full"
+        } transition-transform duration-300 inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none`}
+      >
+        <div className="relative mx-auto w-full h-full flex items-end justify-end px-5 pb-[70px]">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[400px] rounded shadow-lg"
+          >
+            aqui fica o modal de notifição
           </div>
         </div>
       </div>
