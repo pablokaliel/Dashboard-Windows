@@ -547,67 +547,27 @@ function FooterComponent() {
                   />
                 </label>
               </div>
-              <div className="h-[600px] w-full overflow-y-scroll">
-
-                <div className="columns-2 h-[1200px]  gap-3  ">
-                  <div className="w-[317px] mb-3 flex-shrink-0 bg-gradient-to-b from-[#2D2C2C] from-0.8% to-[#413D2B] to-96.4% h-[211px]">
-                    <div className="flex gap-2 items-center py-2 px-3">
-                      <CloudSun size={24} color="#64cdff" weight="fill" />{" "}
-                      <span>Weather</span>
-                    </div>
-                    <div className="px-6 gap-2 text-center">
-                      <div>
-                        {locationAccess && (
-                          <div>
-                            <p>{cityName}</p>
-                          </div>
-                        )}
-                        {!locationAccess && (
-                          <p>Não foi possível obter a localização.</p>
-                        )}
-                      </div>
-                      <div className="flex  items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Image src={suun} alt="" width={40} height={40} />
-
-                          {weather && weather.main && (
-                            <p className="text-3xl">
-                              {weather.main.temp.toFixed(1)}°C
-                            </p>
-                          )}
-                        </div>
-                        <div className="text-end ">
-                          {weather && weather.main && (
-                            <>
-                              <p className="text-base">
-                                {weather.weather[0].description}
-                              </p>
-                              <p className="text-sm font-normal flex gap-3 ">
-                                <span> {weather.main.pressure}hPa</span>
-                                {weather.main.humidity.toFixed(1)}%
-                              </p>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-8 text-center">
-                      <a
-                        className="text-purple-300"
-                        href="https://www.climatempo.com.br/previsao-do-tempo"
-                      >
-                        See full forecast
-                      </a>
-                    </div>
+              <div className="max-h-[600px] w-full overflow-y-scroll">
+                <div className="columns-2  gap-3 ">
+                  <div className="w-[317px] mb-3 bg-gradient-to-b from-[#2D2C2C] from-0.8% to-[#413D2B] to-96.4% h-[211px]">
+                    lorem
                   </div>
-                  <div className="w-[317px] mb-3 flex-shrink-0 bg-red-400 h-[211px]">oi</div>
-                  <div className="w-[317px] mb-3 flex-shrink-0 bg-green-400 h-[211px]">
-                    oi
+                  <div className="w-[317px] mb-3 bg-red-400 h-[211px]">
+                    lorem
                   </div>
-                  <div className="w-[317px] mb-3 flex-shrink-0 bg-yellow-400 h-[211px]">oi</div>
+                  <div className="w-[317px] mb-3 bg-green-400 h-[326px]">
+                    lorem
+                  </div>
 
-                  <div className="w-[317px] mb-3 flex-shrink-0 bg-pink-400 h-[326px]">oi</div>
-                  <div className="w-[317px] mb-3 flex-shrink-0 bg-cyan-400 h-[211px]">oi</div>
+                  <div className="w-[317px] mb-3 bg-yellow-400 h-[211px]">
+                    lorem
+                  </div>
+                  <div className="w-[317px] mb-3 bg-pink-400 h-[326px]">
+                    lorem
+                  </div>
+                  <div className="w-[317px] mb-3 bg-cyan-400 h-[211px]">
+                    lorem
+                  </div>
                 </div>
               </div>
             </div>
