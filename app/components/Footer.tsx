@@ -536,8 +536,9 @@ function FooterComponent() {
                   />
                 </label>
               </div>
+<div className="max-h-[600px] overflow-y-scroll">
 
-              <div className="columns-2 overflow-auto max-h-[600px] gap-3">
+              <div className="columns-2 overflow-auto  gap-3">
                 <div className="w-[317px] mb-3 bg-gradient-to-b from-[#2D2C2C] from-0.8% to-[#413D2B] to-96.4% h-[211px]">
                   <div className="flex gap-2 items-center py-2 px-3">
                     <CloudSun size={24} color="#64cdff" weight="fill" />{" "}
@@ -591,6 +592,7 @@ function FooterComponent() {
                 <div className="w-[317px] mb-3 bg-pink-400 h-[326px]">oi</div>
                 <div className="w-[317px] mb-3 bg-cyan-400 h-[211px]">oi</div>
               </div>
+</div>
             </div>
           </div>
         </div>
