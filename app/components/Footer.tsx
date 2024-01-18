@@ -33,25 +33,7 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import {
-  AirplaneInFlight,
-  ArrowClockwise,
-  BatteryPlus,
-  BellRinging,
-  Bluetooth,
-  Car,
-  CaretLeft,
-  CaretRight,
-  ChartLineUp,
-  CheckCircle,
-  CheckFat,
-  Cloud,
-  CloudSun,
-  MicrosoftOutlookLogo,
-  Moon,
-  PersonArmsSpread,
-  WifiHigh,
-} from "@phosphor-icons/react";
+import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 import axios from "axios";
@@ -62,6 +44,11 @@ import MusicPlayer from "./ReactPlayer";
 import WindowsComponent from "./WindowsComponent";
 import { useMusic } from "../context/Context";
 import { CustomButton } from "./ButtonCustom";
+import WatchListComp from "./TemperatureModal/watchlist";
+import PhotosComp from "./TemperatureModal/photos";
+import TrafficComp from "./TemperatureModal/Traffic";
+import OutlookCalendarComp from "./TemperatureModal/OutlookCalendar";
+import ToDoComp from "./TemperatureModal/Todo";
 
 function FooterComponent() {
   type ModalContent = {
@@ -314,9 +301,7 @@ function FooterComponent() {
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
     try {
-      let res = await axios.get(
-        "https://api.openweathermap.org/data/2.5/weather",
-        {
+      let res = await axios.get( "https://api.openweathermap.org/data/2.5/weather", {
           params: {
             lat: lat.toString(),
             lon: lon.toString(),
@@ -642,222 +627,11 @@ function FooterComponent() {
                       </a>
                     </div>
                   </div>
-                  <div className="w-[317px] mb-3 bg-[#2C2C2C] h-[211px]">
-                    <div className="flex gap-2 items-center py-2 px-3">
-                      <ChartLineUp size={24} color="#64cdff" weight="fill" />{" "}
-                      <span>Watchlist Movers</span>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center justify-around">
-                        <div className="flex flex-col">
-                          <span>AAPL</span>
-                          <span className="text-zinc-400">APPLE INC.</span>
-                        </div>
-
-                        <span>141.85</span>
-                        <div className="flex items-center gap-3">
-                          <span className="text-[#FF99A4]">-0,67</span>
-                          <CheckCircle
-                            weight="fill"
-                            className="text-gray-400"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-around">
-                        <div className="flex flex-col">
-                          <span>TSlA</span>
-                          <span className="text-zinc-400">TESLA, INC.</span>
-                        </div>
-
-                        <span>807.22</span>
-                        <div className="flex items-center gap-3">
-                          <span className="text-[#6CCB5F]">+1,93</span>
-                          <CheckCircle
-                            weight="fill"
-                            className="text-gray-400"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-8 text-center">
-                      <a
-                        className="text-purple-300"
-                        href="https://www.infomoney.com.br/cotacoes/b3/"
-                      >
-                        Go to witchlist
-                      </a>
-                    </div>
-                  </div>
-                  <div className="w-[317px] overflow-hidden mb-3 bg-[#333] h-[326px]">
-                    <div className="flex gap-2 items-center py-2 px-3">
-                      <Cloud size={24} color="#64cdff" weight="fill" />{" "}
-                      <span>Photos</span>
-                    </div>
-                    <div className="px-5 flex mb-3 flex-col">
-                      <span className="text-base">On this day</span>
-                      <span className="text-xs text-zinc-500">
-                        Oct 5 • 33 items
-                      </span>
-                    </div>
-                    <a
-                      href="https://boracodar20.vercel.app"
-                      target="_blank"
-                      className="grid grid-cols-2"
-                    >
-                      <div className="col-span-1 row-span-3">
-                        <Image
-                          src="https://source.unsplash.com/random/?sky"
-                          alt=""
-                          width={160}
-                          height={210}
-                        />
-                      </div>
-                      <div className=" h-full col-span-1">
-                        <Image
-                          src="https://source.unsplash.com/random/?florest"
-                          alt=""
-                          width={160}
-                          height={105}
-                        />
-                      </div>
-                      <div className=" h-full col-span-1">
-                        <Image
-                          src="https://source.unsplash.com/random/?universe"
-                          alt=""
-                          width={160}
-                          height={105}
-                        />
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="w-[317px] mb-3 bg-pattern h-[211px]">
-                    <div className="flex gap-2 items-center py-2 px-3">
-                      <Car size={24} color="#64cdff" weight="fill" />{" "}
-                      <span>Traffic</span>
-                    </div>
-                    <div className="mt-2 flex flex-col gap-2 px-5">
-                      <span className="text-base">WA 520 E, Redmond</span>
-                      <span className="text-[#6CCB5F] text-sm">
-                        Faster than usual
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-[317px] mb-3 bg-[#0C1D2A] h-[326px]">
-                    <div className="flex gap-2 items-center py-2 px-3">
-                      <MicrosoftOutlookLogo
-                        size={24}
-                        color="#64cdff"
-                        weight="fill"
-                      />
-                      <span>Outlook Calendar</span>
-                    </div>
-                    <div className="mt-2 px-5">
-                      <div className="flex items-center justify-between">
-                        <span>November</span>
-                        <div className="flex items-center gap-1">
-                          <button className="w-6 h-6 text-black rounded-full bg-[#60CDFF]">
-                            5
-                          </button>
-                          <button className="w-6 h-6 rounded-full">6</button>
-                          <button className="w-6 h-6 rounded-full">7</button>
-                        </div>
-                      </div>
-                      <div className="mt-4 flex flex-col gap-2">
-                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
-                          <div className="flex items-center gap-2 w-14">
-                            <div className="w-[6px] h-8 rounded-lg bg-orange-500" />
-                            <span className="text-xs text-zinc-500">
-                              All Day
-                            </span>
-                          </div>
-                          <div>
-                            <span className="text-sm">Happy Brithday!</span>
-                          </div>
-                        </div>
-                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
-                          <div className="flex items-center gap-2 w-14">
-                            <div className="w-[6px] h-8 rounded-lg bg-blue-500" />
-                            <div className="flex flex-col">
-                              <span className="text-xs text-zinc-500">
-                                12pm
-                              </span>
-                              <span className="text-xs text-zinc-500">30m</span>
-                            </div>
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-sm">Lunch</span>
-                            <span className="text-xs text-zinc-400">
-                              Alex Jhonson
-                            </span>
-                          </div>
-                        </div>
-                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
-                          <div className="flex items-center gap-2 w-14">
-                            <div className="w-[6px] h-8 rounded-lg bg-blue-500" />
-                            <div className="flex flex-col">
-                              <span className="text-xs text-zinc-500">
-                                1:30pm
-                              </span>
-                              <span className="text-xs text-zinc-500">1h </span>
-                            </div>
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-sm">Presentation</span>
-                            <span className="text-xs text-zinc-400">
-                              Skype Meeting
-                            </span>
-                          </div>
-                        </div>
-                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
-                          <div className="flex items-center gap-2 w-14">
-                            <div className="w-[6px] h-8 rounded-lg bg-blue-500" />
-                            <div className="flex flex-col">
-                              <span className="text-xs text-zinc-500">6pm</span>
-                              <span className="text-xs text-zinc-500">3h </span>
-                            </div>
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-sm">Studio Theme</span>
-                            <span className="text-xs text-zinc-400">
-                              Conf Rm 32/35
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-[317px] mb-3 bg-gradient-to-r from-[#282C2F] from-0% to-[#031929] to-100.78% h-[211px]">
-                    <div className="flex gap-2 items-center py-2 px-3">
-                      <CheckFat size={24} color="#64cdff" weight="fill" />{" "}
-                      <span>To Do</span>
-                    </div>
-                    <h1 className="px-12 mb-3">My Day</h1>
-                    <div className="px-5 flex flex-col gap-2">
-                      <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
-                        <div className="flex items-center gap-2 w-8"></div>
-                        <div className="flex flex-col">
-                          <span className="text-sm">
-                            Send invites for review
-                          </span>
-                          <span className="text-xs text-zinc-400">
-                            Q4 planning
-                          </span>
-                        </div>
-                      </div>
-                      <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
-                        <div className="flex items-center gap-2 w-8"></div>
-                        <div className="flex flex-col">
-                          <span className="text-sm">Buy Mica</span>
-                          <span className="text-xs text-zinc-400">
-                            Tasks
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <WatchListComp />
+                  <PhotosComp />
+                  <TrafficComp />
+                  <OutlookCalendarComp />
+                  <ToDoComp />
                 </div>
               </div>
             </div>
