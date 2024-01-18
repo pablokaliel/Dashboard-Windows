@@ -35,12 +35,19 @@ import discord from "../../public/icons/tasks/discord.svg";
 
 import {
   AirplaneInFlight,
+  ArrowClockwise,
   BatteryPlus,
   BellRinging,
   Bluetooth,
+  Car,
   CaretLeft,
   CaretRight,
+  ChartLineUp,
+  CheckCircle,
+  CheckFat,
+  Cloud,
   CloudSun,
+  MicrosoftOutlookLogo,
   Moon,
   PersonArmsSpread,
   WifiHigh,
@@ -212,7 +219,6 @@ function FooterComponent() {
     const filtered = buttonsModal.search.filter((button) =>
       button.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
-
     setFilteredButtons(filtered);
   };
 
@@ -223,7 +229,6 @@ function FooterComponent() {
     const filtered = buttonsModal[category].filter((button) =>
       button.name.toLowerCase().includes(searchText.toLowerCase())
     );
-
     if (modalContent === "search") {
       const sortedFilteredButtons = filtered.sort((a, b) =>
         a.name.localeCompare(b.name)
@@ -265,7 +270,6 @@ function FooterComponent() {
         toggleModal();
       }
     };
-
     document.addEventListener("keydown", handleEscKey, false);
     return () => {
       document.removeEventListener("keydown", handleEscKey, false);
@@ -324,7 +328,6 @@ function FooterComponent() {
       );
       const city = res.data.name;
       setCityName(city);
-
       setWeather(res.data);
     } catch (error) {
       console.error("Error fetching weather data: ", error);
@@ -340,18 +343,38 @@ function FooterComponent() {
     const newActiveButtons = activeButtons.includes(buttonId)
       ? activeButtons.filter((id) => id !== buttonId)
       : [...activeButtons, buttonId];
-
     setActiveButtons(newActiveButtons);
   };
+
   const isButtonActive = (buttonId: string) => activeButtons.includes(buttonId);
+
+  const [gretting, setGreeting] = useState("");
+
+  useEffect(() => {
+    const checkHours = () => {
+      const now = new Date();
+      const hours = now.getHours();
+      if (hours >= 6 && hours < 12) {
+        setGreeting("Bom dia!");
+      } else if (hours >= 12 && hours < 18) {
+        setGreeting("Boa tarde!");
+      } else {
+        setGreeting("Boa noite!");
+      }
+    };
+    checkHours();
+  }, []);
 
   return (
     <div className="fixed z-20 bottom-0 w-full">
       <footer className="flex bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
-        <div className="ml-4 w-1/4 items-center h-[50px] flex gap-3">
-          <button onClick={toggleClimaModal}>
+        <div
+          onClick={toggleClimaModal}
+          className="ml-4 cursor-pointer w-1/4 items-center h-[50px] flex gap-3"
+        >
+          <div>
             <Image src={suun} alt="clima" />
-          </button>
+          </div>
           <div>
             {weather && weather.main && (
               <>
@@ -390,7 +413,7 @@ function FooterComponent() {
           </a>
         </div>
 
-        <div className="justify-end  items-center w-1/4 mr-4 gap-2 flex">
+        <div className="justify-end items-center w-1/4 mr-4 gap-2 flex">
           <div className="flex gap-1">
             <Image src={overflow} alt="overflow" />
             <Image src={wifi} alt="wifi" />
@@ -538,8 +561,29 @@ function FooterComponent() {
             className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl  rounded shadow-lg"
           >
             <div className="px-10 flex flex-col gap-8">
-              <div className=" pt-6 gap-3 text-center flex flex-col">
-                <span className="text-xl">{date}</span>
+              <div className=" pt-6 gap-3 flex flex-col">
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-col">
+                    <span>{date}</span>
+                    <span>{gretting}</span>
+                  </div>
+                  <div className="flex gap-3 items-center">
+                    <ArrowClockwise />
+                    <span
+                      onClick={toggleSeconds}
+                      className="text-xl cursor-pointer"
+                    >
+                      {time}
+                    </span>
+                    <Image
+                      src="https://github.com/pablokaliel.png"
+                      className="rounded-full"
+                      alt="foto de perfil do usuário"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                </div>
                 <label className=" bg-[#1e1e1e] py-2">
                   <input
                     className="bg-transparent outline-none w-full h-full "
@@ -547,26 +591,272 @@ function FooterComponent() {
                   />
                 </label>
               </div>
-              <div className="max-h-[600px] w-full overflow-y-scroll">
-                <div className="columns-2  gap-3 ">
+              <div className="max-h-[550px] w-full overflow-y-scroll">
+                <div className="columns-2 gap-3 ">
                   <div className="w-[317px] mb-3 bg-gradient-to-b from-[#2D2C2C] from-0.8% to-[#413D2B] to-96.4% h-[211px]">
-                    lorem
+                    <div className="flex gap-2 items-center py-2 px-3">
+                      <CloudSun size={24} color="#64cdff" weight="fill" />
+                      <span>Weather</span>
+                    </div>
+                    <div className="px-6 gap-2 text-center">
+                      <div>
+                        {locationAccess && (
+                          <div>
+                            <p>{cityName}</p>
+                          </div>
+                        )}
+                        {!locationAccess && (
+                          <p>Não foi possível obter a localização.</p>
+                        )}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Image src={suun} alt="" width={40} height={40} />
+                          {weather && weather.main && (
+                            <p className="text-3xl">
+                              {weather.main.temp.toFixed(1)}°C
+                            </p>
+                          )}
+                        </div>
+                        <div className="text-end ">
+                          {weather && weather.main && (
+                            <>
+                              <p className="text-base">
+                                {weather.weather[0].description}
+                              </p>
+                              <p className="text-sm font-normal flex gap-3 ">
+                                <span> {weather.main.pressure}hPa</span>
+                                {weather.main.humidity.toFixed(1)}%
+                              </p>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-8 text-center">
+                      <a
+                        className="text-purple-300"
+                        href="https://www.climatempo.com.br/previsao-do-tempo"
+                      >
+                        See full forecast
+                      </a>
+                    </div>
                   </div>
-                  <div className="w-[317px] mb-3 bg-red-400 h-[211px]">
-                    lorem
+                  <div className="w-[317px] mb-3 bg-[#2C2C2C] h-[211px]">
+                    <div className="flex gap-2 items-center py-2 px-3">
+                      <ChartLineUp size={24} color="#64cdff" weight="fill" />{" "}
+                      <span>Watchlist Movers</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center justify-around">
+                        <div className="flex flex-col">
+                          <span>AAPL</span>
+                          <span className="text-zinc-400">APPLE INC.</span>
+                        </div>
+
+                        <span>141.85</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-[#FF99A4]">-0,67</span>
+                          <CheckCircle
+                            weight="fill"
+                            className="text-gray-400"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-around">
+                        <div className="flex flex-col">
+                          <span>TSlA</span>
+                          <span className="text-zinc-400">TESLA, INC.</span>
+                        </div>
+
+                        <span>807.22</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-[#6CCB5F]">+1,93</span>
+                          <CheckCircle
+                            weight="fill"
+                            className="text-gray-400"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 text-center">
+                      <a
+                        className="text-purple-300"
+                        href="https://www.infomoney.com.br/cotacoes/b3/"
+                      >
+                        Go to witchlist
+                      </a>
+                    </div>
                   </div>
-                  <div className="w-[317px] mb-3 bg-green-400 h-[326px]">
-                    lorem
+                  <div className="w-[317px] overflow-hidden mb-3 bg-[#333] h-[326px]">
+                    <div className="flex gap-2 items-center py-2 px-3">
+                      <Cloud size={24} color="#64cdff" weight="fill" />{" "}
+                      <span>Photos</span>
+                    </div>
+                    <div className="px-5 flex mb-3 flex-col">
+                      <span className="text-base">On this day</span>
+                      <span className="text-xs text-zinc-500">
+                        Oct 5 • 33 items
+                      </span>
+                    </div>
+                    <a
+                      href="https://boracodar20.vercel.app"
+                      target="_blank"
+                      className="grid grid-cols-2"
+                    >
+                      <div className="col-span-1 row-span-3">
+                        <Image
+                          src="https://source.unsplash.com/random/?sky"
+                          alt=""
+                          width={160}
+                          height={210}
+                        />
+                      </div>
+                      <div className=" h-full col-span-1">
+                        <Image
+                          src="https://source.unsplash.com/random/?florest"
+                          alt=""
+                          width={160}
+                          height={105}
+                        />
+                      </div>
+                      <div className=" h-full col-span-1">
+                        <Image
+                          src="https://source.unsplash.com/random/?universe"
+                          alt=""
+                          width={160}
+                          height={105}
+                        />
+                      </div>
+                    </a>
                   </div>
 
-                  <div className="w-[317px] mb-3 bg-yellow-400 h-[211px]">
-                    lorem
+                  <div className="w-[317px] mb-3 bg-pattern h-[211px]">
+                    <div className="flex gap-2 items-center py-2 px-3">
+                      <Car size={24} color="#64cdff" weight="fill" />{" "}
+                      <span>Traffic</span>
+                    </div>
+                    <div className="mt-2 flex flex-col gap-2 px-5">
+                      <span className="text-base">WA 520 E, Redmond</span>
+                      <span className="text-[#6CCB5F] text-sm">
+                        Faster than usual
+                      </span>
+                    </div>
                   </div>
-                  <div className="w-[317px] mb-3 bg-pink-400 h-[326px]">
-                    lorem
+                  <div className="w-[317px] mb-3 bg-[#0C1D2A] h-[326px]">
+                    <div className="flex gap-2 items-center py-2 px-3">
+                      <MicrosoftOutlookLogo
+                        size={24}
+                        color="#64cdff"
+                        weight="fill"
+                      />
+                      <span>Outlook Calendar</span>
+                    </div>
+                    <div className="mt-2 px-5">
+                      <div className="flex items-center justify-between">
+                        <span>November</span>
+                        <div className="flex items-center gap-1">
+                          <button className="w-6 h-6 text-black rounded-full bg-[#60CDFF]">
+                            5
+                          </button>
+                          <button className="w-6 h-6 rounded-full">6</button>
+                          <button className="w-6 h-6 rounded-full">7</button>
+                        </div>
+                      </div>
+                      <div className="mt-4 flex flex-col gap-2">
+                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
+                          <div className="flex items-center gap-2 w-14">
+                            <div className="w-[6px] h-8 rounded-lg bg-orange-500" />
+                            <span className="text-xs text-zinc-500">
+                              All Day
+                            </span>
+                          </div>
+                          <div>
+                            <span className="text-sm">Happy Brithday!</span>
+                          </div>
+                        </div>
+                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
+                          <div className="flex items-center gap-2 w-14">
+                            <div className="w-[6px] h-8 rounded-lg bg-blue-500" />
+                            <div className="flex flex-col">
+                              <span className="text-xs text-zinc-500">
+                                12pm
+                              </span>
+                              <span className="text-xs text-zinc-500">30m</span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-sm">Lunch</span>
+                            <span className="text-xs text-zinc-400">
+                              Alex Jhonson
+                            </span>
+                          </div>
+                        </div>
+                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
+                          <div className="flex items-center gap-2 w-14">
+                            <div className="w-[6px] h-8 rounded-lg bg-blue-500" />
+                            <div className="flex flex-col">
+                              <span className="text-xs text-zinc-500">
+                                1:30pm
+                              </span>
+                              <span className="text-xs text-zinc-500">1h </span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-sm">Presentation</span>
+                            <span className="text-xs text-zinc-400">
+                              Skype Meeting
+                            </span>
+                          </div>
+                        </div>
+                        <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
+                          <div className="flex items-center gap-2 w-14">
+                            <div className="w-[6px] h-8 rounded-lg bg-blue-500" />
+                            <div className="flex flex-col">
+                              <span className="text-xs text-zinc-500">6pm</span>
+                              <span className="text-xs text-zinc-500">3h </span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-sm">Studio Theme</span>
+                            <span className="text-xs text-zinc-400">
+                              Conf Rm 32/35
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="w-[317px] mb-3 bg-cyan-400 h-[211px]">
-                    lorem
+
+                  <div className="w-[317px] mb-3 bg-gradient-to-r from-[#282C2F] from-0% to-[#031929] to-100.78% h-[211px]">
+                    <div className="flex gap-2 items-center py-2 px-3">
+                      <CheckFat size={24} color="#64cdff" weight="fill" />{" "}
+                      <span>To Do</span>
+                    </div>
+                    <h1 className="px-12 mb-3">My Day</h1>
+                    <div className="px-5 flex flex-col gap-2">
+                      <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
+                        <div className="flex items-center gap-2 w-8"></div>
+                        <div className="flex flex-col">
+                          <span className="text-sm">
+                            Send invites for review
+                          </span>
+                          <span className="text-xs text-zinc-400">
+                            Q4 planning
+                          </span>
+                        </div>
+                      </div>
+                      <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
+                        <div className="flex items-center gap-2 w-8"></div>
+                        <div className="flex flex-col">
+                          <span className="text-sm">Buy Mica</span>
+                          <span className="text-xs text-zinc-400">
+                            Tasks
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -574,6 +864,7 @@ function FooterComponent() {
           </div>
         </div>
       </div>
+
       <div
         onClick={toggleNotificationModal}
         className={`fixed ${
