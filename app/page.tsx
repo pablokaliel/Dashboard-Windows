@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import suun from "../public/icons/Group 2.svg";
 import wifi from "../public/icons/WiFi.svg";
@@ -20,6 +20,14 @@ export default function Home() {
   const [weather, setWeather] = useState<any>(null);
   const [locationAccess, setLocationAccess] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const passwordInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (passwordInputRef.current && document.visibilityState === 'visible') {
+      passwordInputRef.current.focus();
+    }
+  }, [passwordInputRef]);
 
   useEffect(() => {
     function handleKeyPress(event: KeyboardEvent) {
@@ -155,8 +163,10 @@ export default function Home() {
 
             <div className="flex flex-col items-center">
               <input
+               ref={passwordInputRef}
                 className="bg-[#1E1E1E]/70 rounded h-8 w-full focus:border border-blue-400"
                 type="password"
+                autoFocus
                 value={password}
                 onChange={handlePasswordInput}
                 onKeyDown={handlePasswordKeyDown}

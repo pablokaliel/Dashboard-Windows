@@ -33,7 +33,7 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
+import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CaretUp,CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 import axios from "axios";
@@ -49,6 +49,20 @@ import PhotosComp from "./TemperatureModal/photos";
 import TrafficComp from "./TemperatureModal/Traffic";
 import OutlookCalendarComp from "./TemperatureModal/OutlookCalendar";
 import ToDoComp from "./TemperatureModal/Todo";
+import NotificationsModalComp from "./NotificationsModal";
+
+interface WeatherProps {
+  base: string;
+  cod: number;
+  main: {
+    temp: number;
+    pressure: number;
+    humidity: number;
+  };
+  weather: {
+    description: string;
+  }[];
+}
 
 function FooterComponent() {
   type ModalContent = {
@@ -117,7 +131,7 @@ function FooterComponent() {
   const [, setTimeFormat] = useState("HH:mm");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
-  const [weather, setWeather] = useState<any>(null);
+  const [weather, setWeather] = useState<WeatherProps>();
   const [locationAccess, setLocationAccess] = useState(false);
 
   const {
@@ -301,7 +315,9 @@ function FooterComponent() {
   const getWeather = async (lat: number, lon: number) => {
     const apiKey = "0ec51c3697240d124db14a663d03e135";
     try {
-      let res = await axios.get( "https://api.openweathermap.org/data/2.5/weather", {
+      let res = await axios.get(
+        "https://api.openweathermap.org/data/2.5/weather",
+        {
           params: {
             lat: lat.toString(),
             lon: lon.toString(),
@@ -366,7 +382,7 @@ function FooterComponent() {
                 <p className="text-xs font-bold">
                   {weather.main.temp.toFixed(1)}°C
                 </p>
-                <p className="text-sm">{weather.weather[0].description}</p>
+                <p className="text-sm">{weather.weather[0]?.description}</p>
               </>
             )}
           </div>
@@ -648,9 +664,16 @@ function FooterComponent() {
         <div className="relative mx-auto w-full h-full flex items-end justify-end px-5 pb-[70px]">
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[400px] rounded shadow-lg"
+            className="bg-[#2c2c2c] border-white border-[1.4px] border-opacity-20 flex flex-col  backdrop-blur-xl w-[400px] rounded shadow-lg"
           >
-            aqui fica o modal de notifição
+            <NotificationsModalComp />
+            <div className="px-4 flex items-center justify-between py-4">
+              <div className="flex items-center gap-2">
+                {date}
+                <CaretUp />
+              </div>
+              <span>{time}</span>
+            </div>
           </div>
         </div>
       </div>
