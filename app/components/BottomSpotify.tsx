@@ -63,10 +63,10 @@ export function BottomSpotify({
       <div className="flex items-center flex-col">
         <div className="flex items-center gap-3">
           <button>
-            <Image src={infinity} alt="" />
+            <Image src={infinity} alt="infinity" />
           </button>
           <button onClick={handlePrevious}>
-            <Image src={prox} alt="" />
+            <Image src={prox} alt="prox" />
           </button>
           <button
             onClick={togglePlayPause}
@@ -75,23 +75,23 @@ export function BottomSpotify({
             {isPlaying ? <Pause /> : <Play />}{" "}
           </button>
           <button onClick={handleNext}>
-            <Image src={back} alt="" />
+            <Image src={back} alt="back" />
           </button>
           <button>
-            <Image src={randoom} alt="" />
+            <Image src={randoom} alt="randoom" />
           </button>
         </div>
       </div>
 
       <div className="flex gap-2 max-md:hidden">
         <button>
-          <Image height={24} width={24} src={mic} alt="" />
+          <Image height={24} width={24} src={mic} alt="mic" />
         </button>
         <button>
-          <Image height={24} width={24} src={queue} alt="" />
+          <Image height={24} width={24} src={queue} alt="queue" />
         </button>
         <button>
-          <Image height={24} width={24} src={pc} alt="" />
+          <Image height={24} width={24} src={pc} alt="pc" />
         </button>
         <div className="flex gap-5">
           <Image src={speaker} alt="speaker" height={21} width={21} />

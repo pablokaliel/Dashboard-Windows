@@ -104,7 +104,7 @@ export default function Page() {
                       className="flex gap-2"
                       rel="noopener noreferrer"
                     >
-                    <Image src={folder} alt="" />
+                    <Image src={folder} alt="folder" />
                       {repo.name}
                     </a>
                   </td>

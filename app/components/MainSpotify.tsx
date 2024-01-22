@@ -28,14 +28,14 @@ export function MainSpotify() {
         <div className="bg-black/40 w-36 h-10 rounded-full flex items-center gap-3 px-1">
           <Image
             src="https://github.com/pablokaliel.png"
-            alt=""
+            alt="foto perfil do usuário"
             width={40}
             height={40}
             className="rounded-full"
           />
           <h3 className="font-bold">Pablo</h3>
           <button>
-            <Image src={arrowdown} alt="" />
+            <Image src={arrowdown} alt="arrowdown" />
           </button>
         </div>
       </div>
@@ -63,7 +63,7 @@ export function MainSpotify() {
               {musicName}
             </strong>
             <button className="w-12 h-12 bg-green-500 group-hover:visible rounded-full flex items-center justify-center ml-auto mr-7 invisible">
-              <Image src={arrowright} alt="play" />
+              <Image src={arrowright} alt="arrowright" />
             </button>
           </div>
         ))}
@@ -92,7 +92,7 @@ export function MainSpotify() {
             </strong>
 
             <button className="w-12 h-12 bg-green-500 group-hover:visible rounded-full absolute flex items-center justify-center right-0 invisible">
-              <Image src={arrowright} alt="play" />
+              <Image src={arrowright} alt="arrowright" />
             </button>
           </div>
         ))}

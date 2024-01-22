@@ -126,7 +126,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex bg-[#272727] w-full justify-between items-end gap-2"
         >
           <div className="px-3 flex gap-2">
-            <Image src={notepad} alt="" height={20} width={20} />
+            <Image src={notepad} alt="notepad" height={20} width={20} />
             <NavLinks />
           </div>
           <div className="flex gap-4">

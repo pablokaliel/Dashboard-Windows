@@ -85,7 +85,12 @@ function AsideProjects() {
                 className="w-full hover:bg-white/30 pl-4 flex items-center justify-between"
               >
                 <div className="flex gap-2">
-                  <Image src={fav8} alt="folderlanding" width={22} height={22} />
+                  <Image
+                    src={fav8}
+                    alt="folderlanding"
+                    width={22}
+                    height={22}
+                  />
                   <span className="text-sm text-gray-300">Landing</span>
                 </div>
                 <PushPin />

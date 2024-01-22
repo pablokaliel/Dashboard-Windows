@@ -12,21 +12,21 @@ export function SideSpotify() {
           href="#"
           className="flex items-center gap-3 text-sm font-semibold text-zinc-200"
         >
-          <Image height={20} width={20} src={homeIcon} alt="icon" />
+          <Image height={20} width={20} src={homeIcon} alt="home" />
           home
         </a>
         <a
           href="#"
           className="flex items-center gap-3 text-sm font-semibold text-zinc-200"
         >
-          <Image height={20} width={20} src={searchIcon} alt="icon" />
+          <Image height={20} width={20} src={searchIcon} alt="search" />
           search
         </a>
         <a
           href="#"
           className="flex items-center gap-3 text-sm font-semibold text-zinc-200"
         >
-          <Image height={20} width={20} src={libraryIcon} alt="icon" />
+          <Image height={20} width={20} src={libraryIcon} alt="library" />
           Your Library
         </a>
       </nav>

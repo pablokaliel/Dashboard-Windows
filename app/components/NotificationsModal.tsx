@@ -96,7 +96,7 @@ function NotificationsModalComp() {
                 className="w-[85px] h-[85px] object-cover rounded-full"
                 width={85}
                 height={85}
-                alt=""
+                alt="pessoa aleatoria"
               />
               <div className="w-full flex flex-col">
                 <span> Robert Fox</span>

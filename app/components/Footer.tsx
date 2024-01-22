@@ -33,7 +33,7 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CaretUp,CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
+import {AirplaneInFlight,ArrowClockwise,BatteryPlus,BellRinging,Bluetooth,CaretLeft,CaretRight,CaretUp,CloudSun,Moon,PersonArmsSpread,WifiHigh } from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 import axios from "axios";
@@ -390,15 +390,15 @@ function FooterComponent() {
 
         <div className="flex flex-1 items-center justify-center gap-7">
           <button onClick={() => toggleModalWithContent("windows")}>
-            <Image height={24} width={24} src={windows} alt="clima" />
+            <Image height={24} width={24} src={windows} alt="windows" />
           </button>
 
           <button onClick={() => toggleModalWithContent("search")}>
-            <Image height={24} width={24} src={search} alt="clima" />
+            <Image height={24} width={24} src={search} alt="search" />
           </button>
 
           <a href="https://store.steampowered.com" target="_blank">
-            <Image height={30} width={30} src={steam} alt="clima" />
+            <Image height={30} width={30} src={steam} alt="steam" />
           </a>
 
           <a target="_blank" href="https://discord.com">
@@ -406,11 +406,11 @@ function FooterComponent() {
           </a>
 
           <Link href={"unlocked/projects"}>
-            <Image height={24} width={24} src={explorer} alt="clima" />
+            <Image height={24} width={24} src={explorer} alt="explorer" />
           </Link>
 
           <a target="_blank" href="https://pablo-me.vercel.app">
-            <Image height={24} width={24} src={microsoft} alt="clima" />
+            <Image height={24} width={24} src={microsoft} alt="microsoft" />
           </a>
         </div>
 
@@ -612,7 +612,12 @@ function FooterComponent() {
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Image src={suun} alt="" width={40} height={40} />
+                          <Image
+                            src={suun}
+                            alt="clima"
+                            width={40}
+                            height={40}
+                          />
                           {weather && weather.main && (
                             <p className="text-3xl">
                               {weather.main.temp.toFixed(1)}°C

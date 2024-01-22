@@ -140,7 +140,7 @@ export default function Page() {
         <div
         className="flex w-full  bg-[#272727]  justify-between items-center gap-2">
           <div className="px-3 flex gap-2">
-            <Image src={spotify} alt="" height={20} width={20} />
+            <Image src={spotify} alt="spotify" height={20} width={20} />
             <span>Spotify Music</span>
           </div>
           <div className="flex gap-4">
@@ -154,7 +154,6 @@ export default function Page() {
               className="cursor-pointer hover:bg-[white]/10 w-full h-full p-2"
               onClick={handleExpand}
             >
-              {" "}
               <Rectangle size={18} />
             </button>
             <Link
