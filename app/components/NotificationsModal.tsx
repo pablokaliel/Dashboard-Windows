@@ -1,7 +1,62 @@
-import { BellSimpleZ, Calendar, CaretDown, MicrosoftTeamsLogo, Moon, Newspaper } from "@phosphor-icons/react";
+"use client";
+
+import { BellSimpleZ, Calendar, CaretDown, CaretUp, MicrosoftTeamsLogo, Moon, Newspaper } from "@phosphor-icons/react";
 import Image from "next/image";
+import { useState } from "react";
+
+interface ExpandedBlocks {
+  teams: boolean;
+  news: boolean;
+  calendar: boolean;
+}
 
 function NotificationsModalComp() {
+  const [expandedBlocks, setExpandedBlocks] = useState<ExpandedBlocks>({
+    teams: false,
+    news: false,
+    calendar: false,
+  });
+
+  const handleCaretClick = (block: keyof ExpandedBlocks) => {
+    setExpandedBlocks((prevBlocks) => ({
+      ...prevBlocks,
+      [block]: !prevBlocks[block],
+    }));
+  };
+
+  const renderContent = (block: keyof ExpandedBlocks) => {
+    const contentText = getContentTextForBlock(block);
+    const lineClamp = expandedBlocks[block] ? "initial" : 2;
+    return (
+      <div>
+        <span
+          className="overflow-hidden text-sm text-zinc-400"
+          style={{
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: lineClamp,
+            textOverflow: "ellipsis",
+          }}
+        >
+          {contentText}
+        </span>
+      </div>
+    );
+  };
+
+  const getContentTextForBlock = (block: keyof ExpandedBlocks) => {
+    switch (block) {
+      case "teams":
+        return "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste corrupti dicta dolor explicabo doloremque ipsa suscipit reprehenderit, tenetur accusantium blanditiis, ducimus, rerum aliquam libero vitae nihil. Quisquam suscipit numquam dolore?";
+      case "news":
+        return "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nisi iure odio non suscipit perferendis itaque hic, totam incidunt dolores exercitationem cum dicta magnam omnis esse, ratione nihil quasi quae. Fuga nisi iure odio non suscipit perferendis itaque hic, totam incidunt dolores..";
+      case "calendar":
+        return "Texto para Calendar...";
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
       <div className="px-4 mb-4 ">
@@ -21,6 +76,7 @@ function NotificationsModalComp() {
           <span>Focus assist settings</span>
         </div>
       </div>
+
       <div className="flex max-h-[550px] overflow-y-scroll flex-col gap-2">
         <div className="px-2 ">
           <div className="px-5 py-4 bg-[#212121]/60 flex flex-col gap-6">
@@ -30,7 +86,9 @@ function NotificationsModalComp() {
             </div>
             <div className="flex items-center gap-2">
               <span>7:57m</span>
-              <CaretDown />
+              <button onClick={() => handleCaretClick("teams")}>
+                {expandedBlocks.teams ? <CaretUp /> : <CaretDown />}
+              </button>
             </div>
             <div className="flex items-center gap-2">
               <Image
@@ -40,57 +98,33 @@ function NotificationsModalComp() {
                 height={85}
                 alt=""
               />
-              <div className="w-full">
+              <div className="w-full flex flex-col">
                 <span> Robert Fox</span>
-                <span
-                  className="overflow-hidden text-sm text-zinc-400"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitBoxOrient: "vertical",
-                    WebkitLineClamp: 2,
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-                  eius officiis quia, perferendis atque nostrum corrupti
-                  consectetur dolorum. Perspiciatis sunt similique rem possimus
-                  impedit dolor adipisci inventore incidunt iusto quas.
-                </span>
+                {renderContent("teams")}
               </div>
             </div>
             <button className="bg-zinc-700 text-sm w-fit p-1 rounded">
-              +3 notifications
+              +7 notifications
             </button>
           </div>
         </div>
 
         <div className="px-2 ">
-          <div className="px-5  py-4 bg-[#212121]/60 flex flex-col gap-6">
+          <div className="px-5 py-4 bg-[#212121]/60 flex flex-col gap-6">
             <div className="flex items-center gap-2">
               <Newspaper />
               <span>Microsoft News</span>
             </div>
             <div className="flex items-center gap-2">
               <span>8:00m</span>
-              <CaretDown />
+              <button onClick={() => handleCaretClick("news")}>
+                {expandedBlocks.news ? <CaretUp /> : <CaretDown />}
+              </button>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-full">
                 <span> Tortoise beats rabbit in epic race</span>
-                <span
-                  className="overflow-hidden text-sm text-zinc-400"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitBoxOrient: "vertical",
-                    WebkitLineClamp: 2,
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-                  eius officiis quia, perferendis atque nostrum corrupti
-                  consectetur dolorum. Perspiciatis sunt similique rem possimus
-                  impedit dolor adipisci inventore incidunt iusto quas.
-                </span>
+                {renderContent("news")}
               </div>
             </div>
             <button className="bg-zinc-700 text-sm w-fit p-1 rounded">
@@ -107,7 +141,9 @@ function NotificationsModalComp() {
             </div>
             <div className="flex items-center gap-2">
               <span>6:05m</span>
-              <CaretDown />
+              <button>
+                <CaretDown />
+              </button>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-full">
@@ -126,7 +162,7 @@ function NotificationsModalComp() {
               </div>
             </div>
             <button className="bg-zinc-700 text-sm w-fit p-1 rounded">
-              +3 notifications
+              +1 notifications
             </button>
           </div>
         </div>
