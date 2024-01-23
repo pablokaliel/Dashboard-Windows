@@ -4,7 +4,7 @@ function WatchListComp() {
   return (
     <div className="w-[317px] mb-3 bg-[#2C2C2C] h-[211px]">
       <div className="flex gap-2 items-center py-2 px-3">
-        <ChartLineUp size={24} color="#64cdff" weight="fill" />{" "}
+        <ChartLineUp size={24} color="#64cdff" weight="fill" />
         <span>Watchlist Movers</span>
       </div>
 

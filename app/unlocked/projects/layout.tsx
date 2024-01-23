@@ -124,7 +124,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
 
       <div className={divClass}>
-        <div className="flex  top-0 bg-[#272727] w-full justify-between items-center gap-2"
+        <div className="flex top-0 bg-[#272727] w-full justify-between items-center gap-2"
         >
           <div className="px-3 items-center flex gap-2">
             <Image src={folder} alt="folder" height={20} width={20} />
@@ -153,7 +153,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="flex h-full">
       <aside className="w-1/4 "><AsideProjects/></aside>
-      <main className="flex-1 flex  flex-col">
+      <main className="flex-1 flex flex-col">
         <header className=""><HeaderProjects/></header>
         <div className="flex-1 overflow-y-scroll bg-[#272727]">{children}</div>
       </main>

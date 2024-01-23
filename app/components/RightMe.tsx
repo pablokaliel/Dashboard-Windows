@@ -18,7 +18,7 @@ function RightMe({ expanded }: BottomSpotifyProps) {
       <div className="border-r border-white border-opacity-20 px-[10px]">
         <span className="text-xs">Windows (CRLF)</span>
       </div>
-      <div className=" flex-1  px-[10px]">
+      <div className=" flex-1 px-[10px]">
         <span className="text-xs">UTF-8</span>
       </div>
     </div>

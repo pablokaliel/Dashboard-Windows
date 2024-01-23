@@ -446,7 +446,7 @@ function FooterComponent() {
             className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[700px] rounded shadow-lg"
           >
             <div className="flex justify-between items-center px-10 pr-10 pt-10">
-              <div className="h-[45px]  w-full bg-[#1e1e1e]/70">
+              <div className="h-[45px] w-full bg-[#1e1e1e]/70">
                 <input
                   className="w-full px-[55px] h-full bg-transparent"
                   placeholder="type here to search"
@@ -456,7 +456,7 @@ function FooterComponent() {
             </div>
 
             <div className="px-10">
-              <div className=" ">{modalContents[modalContent]}</div>
+              <div>{modalContents[modalContent]}</div>
             </div>
 
             <div className="h-16 border-t-[1.4px] flex-col flex justify-center border-white border-opacity-20 px-[70px] bg-black/10">
@@ -559,7 +559,7 @@ function FooterComponent() {
         <div className="relative mx-auto w-full h-full flex items-end justify-start px-5 pb-[70px]">
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl  rounded shadow-lg"
+            className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl rounded shadow-lg"
           >
             <div className="px-10 flex flex-col gap-8">
               <div className=" pt-6 gap-3 flex flex-col">
@@ -669,7 +669,7 @@ function FooterComponent() {
         <div className="relative mx-auto w-full h-full flex items-end justify-end px-5 pb-[70px]">
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#2c2c2c] border-white border-[1.4px] border-opacity-20 flex flex-col  backdrop-blur-xl w-[400px] rounded shadow-lg"
+            className="bg-[#2c2c2c] border-white border-[1.4px] border-opacity-20 flex flex-col backdrop-blur-xl w-[400px] rounded shadow-lg"
           >
             <NotificationsModalComp />
             <div className="px-4 flex items-center justify-between py-4">

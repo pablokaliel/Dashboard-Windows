@@ -72,7 +72,7 @@ export function BottomSpotify({
             onClick={togglePlayPause}
             className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center right-3 top-36"
           >
-            {isPlaying ? <Pause /> : <Play />}{" "}
+            {isPlaying ? <Pause /> : <Play />}
           </button>
           <button onClick={handleNext}>
             <Image src={back} alt="back" />

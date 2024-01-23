@@ -15,6 +15,7 @@ function ToDoComp() {
             <span className="text-xs text-zinc-400">Q4 planning</span>
           </div>
         </div>
+
         <div className="bg-[#3A3A3A4D] gap-6 flex items-center p-2 rounded">
           <div className="flex items-center gap-2 w-8"></div>
           <div className="flex flex-col">
