@@ -33,7 +33,7 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import {AirplaneInFlight,ArrowClockwise,BatteryPlus,BellRinging,Bluetooth,CaretLeft,CaretRight,CaretUp,CloudSun,Moon,PersonArmsSpread,WifiHigh } from "@phosphor-icons/react";
+import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CaretUp, CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 import axios from "axios";
@@ -366,6 +366,17 @@ function FooterComponent() {
     checkHours();
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
+  const toggleUpdate = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
+
+  useEffect(() => {}, [loading]);
+
   return (
     <div className="fixed z-20 bottom-0 w-full">
       <footer className="flex bg-[#444444]/30 backdrop-blur-xl items-center h-[60px] w-full">
@@ -565,16 +576,21 @@ function FooterComponent() {
               <div className=" pt-6 gap-3 flex flex-col">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span>{date}</span>
+                    <span
+                      className={`text-xl cursor-pointer ${ loading ? "text-xs" : ""  }`} >
+                      {loading ? "aguarde..." : date}
+                    </span>
                     <span>{gretting}</span>
                   </div>
+
                   <div className="flex gap-3 items-center">
-                    <ArrowClockwise />
+                    <button onClick={toggleUpdate}>
+                      <ArrowClockwise />
+                    </button>
                     <span
                       onClick={toggleSeconds}
-                      className="text-xl cursor-pointer"
-                    >
-                      {time}
+                      className={`text-xl cursor-pointer ${ loading ? "text-xs" : "" }`} >
+                      {loading ? "aguarde..." : time}
                     </span>
                     <Image
                       src="https://github.com/pablokaliel.png"
@@ -585,6 +601,7 @@ function FooterComponent() {
                     />
                   </div>
                 </div>
+
                 <label className=" bg-[#1e1e1e] py-2">
                   <input
                     className="bg-transparent outline-none w-full h-full "
@@ -592,6 +609,7 @@ function FooterComponent() {
                   />
                 </label>
               </div>
+
               <div className="max-h-[550px] w-full overflow-y-scroll">
                 <div className="columns-2 gap-3 ">
                   <div className="w-[317px] mb-3 bg-gradient-to-b from-[#2D2C2C] from-0.8% to-[#413D2B] to-96.4% h-[211px]">
@@ -599,6 +617,7 @@ function FooterComponent() {
                       <CloudSun size={24} color="#64cdff" weight="fill" />
                       <span>Weather</span>
                     </div>
+
                     <div className="px-6 gap-2 text-center">
                       <div>
                         {locationAccess && (
@@ -610,6 +629,7 @@ function FooterComponent() {
                           <p>Não foi possível obter a localização.</p>
                         )}
                       </div>
+
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <Image
@@ -619,26 +639,36 @@ function FooterComponent() {
                             height={40}
                           />
                           {weather && weather.main && (
-                            <p className="text-3xl">
-                              {weather.main.temp.toFixed(1)}°C
+                            <p
+                              className={`text-3xl ${loading ? "text-sm" : ""}`}
+                            >
+                              {loading
+                                ? "aguarde..."
+                                : `${weather.main.temp.toFixed(1)}°C`}
                             </p>
                           )}
                         </div>
+
                         <div className="text-end ">
                           {weather && weather.main && (
                             <>
-                              <p className="text-base">
-                                {weather.weather[0].description}
+                              <p
+                                className={`text-base ${ loading ? "text-base" : "" }`} >
+                                {loading ? "aguarde..." : `${weather.weather[0].description}`}
                               </p>
-                              <p className="text-sm font-normal flex gap-3 ">
-                                <span> {weather.main.pressure}hPa</span>
-                                {weather.main.humidity.toFixed(1)}%
+
+                              <p className="text-base font-normal flex gap-3">
+                                <span>
+                                {loading ? "aguarde..." : `${weather.main.pressure}hPa`} 
+                                </span>
+                                {loading ? "aguarde..." : `${weather.main.humidity.toFixed(1)}%`}
                               </p>
                             </>
                           )}
                         </div>
                       </div>
                     </div>
+
                     <div className="mt-8 text-center">
                       <a
                         className="text-purple-300"
