@@ -14,7 +14,7 @@ O objetivo deste projeto é criar a interface gráfica do Windows, destacando me
 <br>
 
 <p align="center">
-  <img src="https://github.com/pablokaliel/twitter-clone/assets/104238801/6f37d42d-79d0-4079-849b-5ed1953b9bf7" width="100%">
+  <img src="https://github.com/pablokaliel/Dashboard-Windows/assets/104238801/fa969ada-ec7a-4005-8740-1e459516ec8f" width="100%">
 </p>
 
 ## 🚀 Tecnologias
