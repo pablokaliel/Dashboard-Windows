@@ -21,13 +21,7 @@ export default function Home() {
   const [locationAccess, setLocationAccess] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const passwordInputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (passwordInputRef.current && document.visibilityState === 'visible') {
-      passwordInputRef.current.focus();
-    }
-  }, [passwordInputRef]);
+  const passwordInputRef = useRef<HTMLInputElement | null>(null); 
 
   useEffect(() => {
     function handleKeyPress(event: KeyboardEvent) {
