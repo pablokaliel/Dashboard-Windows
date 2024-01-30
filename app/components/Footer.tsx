@@ -33,7 +33,20 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CaretUp, CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
+import {
+  AirplaneInFlight,
+  ArrowClockwise,
+  BatteryPlus,
+  BellRinging,
+  Bluetooth,
+  CaretLeft,
+  CaretRight,
+  CaretUp,
+  CloudSun,
+  Moon,
+  PersonArmsSpread,
+  WifiHigh,
+} from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 import axios from "axios";
@@ -50,6 +63,7 @@ import TrafficComp from "./TemperatureModal/Traffic";
 import OutlookCalendarComp from "./TemperatureModal/OutlookCalendar";
 import ToDoComp from "./TemperatureModal/Todo";
 import NotificationsModalComp from "./NotificationsModal";
+import Calendar from "react-calendar";
 
 interface WeatherProps {
   base: string;
@@ -63,7 +77,9 @@ interface WeatherProps {
     description: string;
   }[];
 }
+type ValuePiece = Date | null;
 
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 function FooterComponent() {
   type ModalContent = {
     [key: string]: JSX.Element | undefined;
@@ -289,6 +305,12 @@ function FooterComponent() {
     setShowClimaModal((prevShowClimaModal) => !prevShowClimaModal);
   };
 
+  const [showCalendarModal, setShowCalendarModal] = useState(false);
+
+  const toggleCalendarModal = () => {
+    setShowCalendarModal((prevShowCalendarModal) => !prevShowCalendarModal);
+  };
+
   const [showNotificationModal, setShowNotificationModal] = useState(false);
 
   const toggleNotificationModal = () => {
@@ -367,6 +389,7 @@ function FooterComponent() {
   }, []);
 
   const [loading, setLoading] = useState(false);
+  const [value, onChange] = useState<Value>(new Date());
 
   const toggleUpdate = () => {
     setLoading(true);
@@ -437,7 +460,7 @@ function FooterComponent() {
           </div>
           <div onClick={toggleSeconds} className="text-end text-xs">
             <p className="cursor-pointer">{time}</p>
-            <p>{date}</p>
+            <p onClick={toggleCalendarModal}>{date}</p>
           </div>
           <button className="p-2" onClick={toggleNotificationModal}>
             <BellRinging weight="fill" className="text-[#60cdff]" />
@@ -482,6 +505,25 @@ function FooterComponent() {
                 <p className="text-sm font-normal">Pablo</p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        onClick={toggleCalendarModal}
+        className={`fixed ${
+          showCalendarModal ? "translate-y-0" : "translate-y-full"
+        } transition-transform duration-300 inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none`}
+      >
+        <div className="relative mx-auto w-full h-full flex items-end justify-end px-5 pb-[70px]">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#212121]/60 border-white border-[1.4px] border-opacity-20 flex flex-col gap-10 backdrop-blur-xl w-[400px] rounded shadow-lg"
+          >
+            <Calendar
+              onChange={onChange}
+              value={value}
+              className="text-black min-w-full bg-[#212121]"
+            />
           </div>
         </div>
       </div>
@@ -577,7 +619,10 @@ function FooterComponent() {
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
                     <span
-                      className={`text-xl cursor-pointer ${ loading ? "text-xs" : ""  }`} >
+                      className={`text-xl cursor-pointer ${
+                        loading ? "text-xs" : ""
+                      }`}
+                    >
                       {loading ? "aguarde..." : date}
                     </span>
                     <span>{gretting}</span>
@@ -589,7 +634,10 @@ function FooterComponent() {
                     </button>
                     <span
                       onClick={toggleSeconds}
-                      className={`text-xl cursor-pointer ${ loading ? "text-xs" : "" }`} >
+                      className={`text-xl cursor-pointer ${
+                        loading ? "text-xs" : ""
+                      }`}
+                    >
                       {loading ? "aguarde..." : time}
                     </span>
                     <Image
@@ -653,15 +701,24 @@ function FooterComponent() {
                           {weather && weather.main && (
                             <>
                               <p
-                                className={`text-base ${ loading ? "text-base" : "" }`} >
-                                {loading ? "aguarde..." : `${weather.weather[0].description}`}
+                                className={`text-base ${
+                                  loading ? "text-base" : ""
+                                }`}
+                              >
+                                {loading
+                                  ? "aguarde..."
+                                  : `${weather.weather[0].description}`}
                               </p>
 
                               <p className="text-base font-normal flex gap-3">
                                 <span>
-                                {loading ? "aguarde..." : `${weather.main.pressure}hPa`} 
+                                  {loading
+                                    ? "aguarde..."
+                                    : `${weather.main.pressure}hPa`}
                                 </span>
-                                {loading ? "aguarde..." : `${weather.main.humidity.toFixed(1)}%`}
+                                {loading
+                                  ? "aguarde..."
+                                  : `${weather.main.humidity.toFixed(1)}%`}
                               </p>
                             </>
                           )}
@@ -704,7 +761,7 @@ function FooterComponent() {
             <NotificationsModalComp />
             <div className="px-4 flex items-center justify-between py-4">
               <div className="flex items-center gap-2">
-                {date}
+                <span>{date}</span>
                 <CaretUp />
               </div>
               <span>{time}</span>
