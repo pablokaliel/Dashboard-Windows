@@ -33,20 +33,7 @@ import spotify from "../../public/icons/tasks/Icon 5.svg";
 import folder from "../../public/icons/tasks/Icon.svg";
 import discord from "../../public/icons/tasks/discord.svg";
 
-import {
-  AirplaneInFlight,
-  ArrowClockwise,
-  BatteryPlus,
-  BellRinging,
-  Bluetooth,
-  CaretLeft,
-  CaretRight,
-  CaretUp,
-  CloudSun,
-  Moon,
-  PersonArmsSpread,
-  WifiHigh,
-} from "@phosphor-icons/react";
+import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CaretUp, CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 
 import { format } from "date-fns";
 import axios from "axios";
@@ -77,9 +64,10 @@ interface WeatherProps {
     description: string;
   }[];
 }
-type ValuePiece = Date | null;
 
+type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 function FooterComponent() {
   type ModalContent = {
     [key: string]: JSX.Element | undefined;
@@ -455,13 +443,14 @@ function FooterComponent() {
             <button onClick={toggleSpeakerModal}>
               <Image src={speaker} alt="speaker" />
             </button>
-
             <Image src={battery} alt="battery" />
           </div>
-          <div onClick={toggleSeconds} className="text-end text-xs">
+
+          <div onClick={toggleCalendarModal} className="text-end cursor-pointer text-xs" >
             <p className="cursor-pointer">{time}</p>
-            <p onClick={toggleCalendarModal}>{date}</p>
+            <p>{date}</p>
           </div>
+
           <button className="p-2" onClick={toggleNotificationModal}>
             <BellRinging weight="fill" className="text-[#60cdff]" />
           </button>
@@ -508,6 +497,7 @@ function FooterComponent() {
           </div>
         </div>
       </div>
+
       <div
         onClick={toggleCalendarModal}
         className={`fixed ${
@@ -527,6 +517,7 @@ function FooterComponent() {
           </div>
         </div>
       </div>
+
       <div
         onClick={toggleSpeakerModal}
         className={`fixed ${
@@ -550,6 +541,7 @@ function FooterComponent() {
                 </div>
               ))}
             </div>
+
             <div className="px-5">
               <div className="flex gap-5">
                 <Image src={speaker} alt="speaker" height={21} width={21} />
@@ -562,7 +554,7 @@ function FooterComponent() {
                   onChange={handleVolumeChange}
                 />
               </div>
-              <div></div>
+
               <div className="flex mt-10 gap-5 justify-between items-center">
                 <button onClick={handlePrevious}>
                   <CaretLeft size={25} />
@@ -583,6 +575,7 @@ function FooterComponent() {
                   <CaretRight size={25} />
                 </button>
               </div>
+
               <div className="text-center mt-2">
                 <p className="text-sm truncate w-full">
                   {musicNames[currentMusicIndex]}
@@ -595,6 +588,7 @@ function FooterComponent() {
                 <Image src={battery} alt="battery" width={21} height={21} />
                 <p className="text-sm font-normal">92%</p>
               </div>
+
               <div className="flex gap-2">
                 <Image src={pencil} alt="pencil" width={18} height={18} />
                 <Image src={config} alt="config" width={18} height={18} />
@@ -603,6 +597,7 @@ function FooterComponent() {
           </div>
         </div>
       </div>
+
       <div
         onClick={toggleClimaModal}
         className={`fixed ${
@@ -619,11 +614,8 @@ function FooterComponent() {
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
                     <span
-                      className={`text-xl cursor-pointer ${
-                        loading ? "text-xs" : ""
-                      }`}
-                    >
-                      {loading ? "aguarde..." : date}
+                      className={`text-xl cursor-pointer ${ loading ? "text-xs" : "" }`} >
+                        {loading ? "aguarde..." : date}
                     </span>
                     <span>{gretting}</span>
                   </div>
@@ -634,10 +626,7 @@ function FooterComponent() {
                     </button>
                     <span
                       onClick={toggleSeconds}
-                      className={`text-xl cursor-pointer ${
-                        loading ? "text-xs" : ""
-                      }`}
-                    >
+                      className={`text-xl cursor-pointer ${  loading ? "text-xs" : ""  }`} >
                       {loading ? "aguarde..." : time}
                     </span>
                     <Image
@@ -690,9 +679,7 @@ function FooterComponent() {
                             <p
                               className={`text-3xl ${loading ? "text-sm" : ""}`}
                             >
-                              {loading
-                                ? "aguarde..."
-                                : `${weather.main.temp.toFixed(1)}°C`}
+                              {loading  ? "aguarde..."  : `${weather.main.temp.toFixed(1)}°C`}
                             </p>
                           )}
                         </div>
@@ -701,24 +688,16 @@ function FooterComponent() {
                           {weather && weather.main && (
                             <>
                               <p
-                                className={`text-base ${
-                                  loading ? "text-base" : ""
-                                }`}
+                                className={`text-base ${ loading ? "text-base" : "" }`}
                               >
-                                {loading
-                                  ? "aguarde..."
-                                  : `${weather.weather[0].description}`}
+                                {loading ? "aguarde..." : `${weather.weather[0].description}`}
                               </p>
 
                               <p className="text-base font-normal flex gap-3">
                                 <span>
-                                  {loading
-                                    ? "aguarde..."
-                                    : `${weather.main.pressure}hPa`}
+                                  {loading  ? "aguarde..."  : `${weather.main.pressure}hPa`}
                                 </span>
-                                {loading
-                                  ? "aguarde..."
-                                  : `${weather.main.humidity.toFixed(1)}%`}
+                                {loading ? "aguarde..." : `${weather.main.humidity.toFixed(1)}%`}
                               </p>
                             </>
                           )}
@@ -727,10 +706,7 @@ function FooterComponent() {
                     </div>
 
                     <div className="mt-8 text-center">
-                      <a
-                        className="text-purple-300"
-                        href="https://www.climatempo.com.br/previsao-do-tempo"
-                      >
+                      <a  className="text-purple-300"  href="https://www.climatempo.com.br/previsao-do-tempo" >
                         See full forecast
                       </a>
                     </div>
@@ -750,7 +726,7 @@ function FooterComponent() {
       <div
         onClick={toggleNotificationModal}
         className={`fixed ${
-          showNotificationModal ? "translate-y-0" : "translate-y-full"
+          showNotificationModal ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none`}
       >
         <div className="relative mx-auto w-full h-full flex items-end justify-end px-5 pb-[70px]">

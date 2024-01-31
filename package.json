@@ -17,8 +17,7 @@
     "react": "^18",
     "react-calendar": "^4.8.0",
     "react-dom": "^18",
-    "react-player": "^2.14.1",
-    "react-spring": "^9.7.3"
+    "react-player": "^2.14.1"
   },
   "devDependencies": {
     "@types/node": "^20",
