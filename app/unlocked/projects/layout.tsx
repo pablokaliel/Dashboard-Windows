@@ -17,8 +17,8 @@ import chrome from "../../../public/icons/tasks/chrome.svg";
 import discord from "../../../public/icons/tasks/discord.svg";
 
 import { useState } from "react";
-import HeaderProjects from "@/app/components/HeaderProjects";
-import AsideProjects from "@/app/components/AsideProjects";
+import HeaderProjects from "@/app/components/Projects/HeaderProjects";
+import AsideProjects from "@/app/components/Projects/AsideProjects";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [expanded, setExpanded] = useState(false);

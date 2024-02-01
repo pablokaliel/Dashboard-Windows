@@ -1,15 +1,15 @@
 "use client";
 import { CaretDown, CaretUp, GearSix, MagnifyingGlass, PushPin } from "@phosphor-icons/react/dist/ssr";
 
-import fav1 from "../../public/icons/explorer/Special Folders.svg";
-import fav2 from "../../public/icons/explorer/Special Folders 2.svg";
-import fav3 from "../../public/icons/explorer/Special Folders 3.svg";
-import fav4 from "../../public/icons/explorer/Special Folders 4.svg";
-import fav5 from "../../public/icons/explorer/Special Folders 5.svg";
-import fav6 from "../../public/icons/explorer/Special Folders 6.svg";
-import fav7 from "../../public/icons/explorer/Special Folders 7.svg";
+import fav1 from "../../../public/icons/explorer/Special Folders.svg";
+import fav2 from "../../../public/icons/explorer/Special Folders 2.svg";
+import fav3 from "../../../public/icons/explorer/Special Folders 3.svg";
+import fav4 from "../../../public/icons/explorer/Special Folders 4.svg";
+import fav5 from "../../../public/icons/explorer/Special Folders 5.svg";
+import fav6 from "../../../public/icons/explorer/Special Folders 6.svg";
+import fav7 from "../../../public/icons/explorer/Special Folders 7.svg";
 
-import fav8 from "../../public/icons/explorer/Folder.svg";
+import fav8 from "../../../public/icons/explorer/Folder.svg";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";

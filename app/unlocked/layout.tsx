@@ -1,5 +1,5 @@
 import { Open_Sans } from "next/font/google";
-import FooterComponent from "../components/Footer";
+import FooterComponent from "../components/Footer/Footer";
 import { MusicProvider } from "../context/Context";
 
 const openSans = Open_Sans({ subsets: ["latin"] });

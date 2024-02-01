@@ -3,8 +3,8 @@ import { Minus, Rectangle, X } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import notepad from "../../../public/icons/tasks/Icon 2.svg";
 import Image from "next/image";
-import LeftMe from "@/app/components/HeaderMe";
-import RightMe from "@/app/components/RightMe";
+import LeftMe from "@/app/components/Me/HeaderMe";
+import RightMe from "@/app/components/Me/RightMe";
 
 import word from "../../../public/icons/tasks/Icon 11.svg";
 
@@ -17,7 +17,7 @@ import spotify from "../../../public/icons/tasks/Icon 5.svg";
 import steam from "../../../public/icons/tasks/steam.svg";
 import chrome from "../../../public/icons/tasks/chrome.svg";
 import discord from "../../../public/icons/tasks/discord.svg";
-import NavLinks from "@/app/components/NavLinks";
+import NavLinks from "@/app/components/Me/NavLinks";
 import { useState } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-import homeIcon from "./../../public/icons/spotify/home.svg";
-import libraryIcon from "./../../public/icons/spotify/library.svg";
-import searchIcon from "./../../public/icons/spotify/search.svg";
+import homeIcon from "../../../public/icons/spotify/home.svg";
+import libraryIcon from "../../../public/icons/spotify/library.svg";
+import searchIcon from "../../../public/icons/spotify/search.svg";
 
 export function SideSpotify() {
   return (

@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import arrowright from "./../../public/icons/spotify/arrow-right.svg";
-import arrowleft from "./../../public/icons/spotify/arrow-left.svg";
-import arrowdown from "./../../public/icons/spotify/arrow-down.svg";
+import arrowright from "../../../public/icons/spotify/arrow-right.svg";
+import arrowleft from "../../../public/icons/spotify/arrow-left.svg";
+import arrowdown from "../../../public/icons/spotify/arrow-down.svg";
 
-import RectangleOne from "./../../public/icons/spotify/RectangleOne.png";
-import { useMusic } from "../context/Context";
+import RectangleOne from "../../../public/icons/spotify/RectangleOne.png";
+import { useMusic } from "../../context/Context";
 
 export function MainSpotify() {
   const { musicNames, playMusic } = useMusic();

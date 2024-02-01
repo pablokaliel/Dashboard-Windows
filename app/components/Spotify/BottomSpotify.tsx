@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { useMusic } from "../context/Context";
+import { useMusic } from "../../context/Context";
 import Image from "next/image";
 
-import img2 from "./../../public/icons/spotify/heart.svg";
-import img1 from "./../../public/icons/spotify/nohearth.png";
-import speaker from "../../public/icons/Speaker.svg";
-import prox from "./../../public/icons/spotify/prox.svg";
-import back from "./../../public/icons/spotify/back.svg";
-import randoom from "./../../public/icons/spotify/randoom.svg";
-import infinity from "./../../public/icons/spotify/infinity.svg";
-import mic from "./../../public/icons/spotify/mic.png";
-import pc from "./../../public/icons/spotify/pc.png";
-import queue from "./../../public/icons/spotify/queue.png";
-import RectangleThree from "./../../public/icons/spotify/RectangleThree.png";
+import img2 from "../../../public/icons/spotify/heart.svg";
+import img1 from "../../../public/icons/spotify/nohearth.png";
+import speaker from "../../../public/icons/Speaker.svg";
+import prox from "../../../public/icons/spotify/prox.svg";
+import back from "../../../public/icons/spotify/back.svg";
+import randoom from "../../../public/icons/spotify/randoom.svg";
+import infinity from "../../../public/icons/spotify/infinity.svg";
+import mic from "../../../public/icons/spotify/mic.png";
+import pc from "../../../public/icons/spotify/pc.png";
+import queue from "../../../public/icons/spotify/queue.png";
+import RectangleThree from "../../../public/icons/spotify/RectangleThree.png";
 
 import { Pause, Play } from "@phosphor-icons/react";
 

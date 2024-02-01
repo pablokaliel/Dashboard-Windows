@@ -1,8 +1,8 @@
 "use client";
 
-import { SideSpotify } from "@/app/components/SideSpotify";
-import { BottomSpotify } from "@/app/components/BottomSpotify";
-import { MainSpotify } from "@/app/components/MainSpotify";
+import { SideSpotify } from "@/app/components/Spotify/SideSpotify";
+import { BottomSpotify } from "@/app/components/Spotify/BottomSpotify";
+import { MainSpotify } from "@/app/components/Spotify/MainSpotify";
 import spotify from "../../../public/icons/tasks/Icon 5.svg";
 import { useMusic } from "@/app/context/Context";
 import Image from "next/image";

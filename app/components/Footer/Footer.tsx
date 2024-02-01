@@ -1,37 +1,36 @@
 "use client";
-
 import Image from "next/image";
 
-import wifi from "../../public/icons/WiFi.svg";
-import speaker from "../../public/icons/Speaker.svg";
-import battery from "../../public/icons/Battery.svg";
-import overflow from "../../public/icons/Overflow.svg";
-import microsoft from "../../public/icons/Microsoft edge.svg";
-import windows from "../../public/icons/Windows.svg";
-import search from "../../public/icons/Search.svg";
-import explorer from "../../public/icons/file Explorer.svg";
-import config from "../../public/icons/tasks/Icon 18.svg";
-import steam from "../../public/icons/tasks/steam.svg";
-import chrome from "../../public/icons/tasks/chrome.svg";
-import pencil from "../../public/icons/tasks/Icon 17.svg";
-import paint from "../../public/icons/tasks/Icon 3.svg";
-import calculator from "../../public/icons/tasks/Icon 4.svg";
-import settings from "../../public/icons/tasks/Icon 6.svg";
-import mail from "../../public/icons/tasks/Icon 7.svg";
-import photos from "../../public/icons/tasks/Icon 8.svg";
-import xbox from "../../public/icons/tasks/Icon 9.svg";
-import pdf from "../../public/icons/tasks/Icon 10.svg";
-import word from "../../public/icons/tasks/Icon 11.svg";
-import excel from "../../public/icons/tasks/Icon 12.svg";
-import store from "../../public/icons/tasks/Icon 13.svg";
-import calendary from "../../public/icons/tasks/Icon 14.svg";
-import camera from "../../public/icons/tasks/Icon 15.svg";
-import acessibility from "../../public/icons/tasks/acessibility.png";
-import suun from "../../public/icons/Group 2.svg";
-import notepad from "../../public/icons/tasks/Icon 2.svg";
-import spotify from "../../public/icons/tasks/Icon 5.svg";
-import folder from "../../public/icons/tasks/Icon.svg";
-import discord from "../../public/icons/tasks/discord.svg";
+import wifi from "../../../public/icons/WiFi.svg";
+import speaker from "../../../public/icons/Speaker.svg";
+import battery from "../../../public/icons/Battery.svg";
+import overflow from "../../../public/icons/Overflow.svg";
+import microsoft from "../../../public/icons/Microsoft edge.svg";
+import windows from "../../../public/icons/Windows.svg";
+import search from "../../../public/icons/Search.svg";
+import explorer from "../../../public/icons/file Explorer.svg";
+import config from "../../../public/icons/tasks/Icon 18.svg";
+import steam from "../../../public/icons/tasks/steam.svg";
+import chrome from "../../../public/icons/tasks/chrome.svg";
+import pencil from "../../../public/icons/tasks/Icon 17.svg";
+import paint from "../../../public/icons/tasks/Icon 3.svg";
+import calculator from "../../../public/icons/tasks/Icon 4.svg";
+import settings from "../../../public/icons/tasks/Icon 6.svg";
+import mail from "../../../public/icons/tasks/Icon 7.svg";
+import photos from "../../../public/icons/tasks/Icon 8.svg";
+import xbox from "../../../public/icons/tasks/Icon 9.svg";
+import pdf from "../../../public/icons/tasks/Icon 10.svg";
+import word from "../../../public/icons/tasks/Icon 11.svg";
+import excel from "../../../public/icons/tasks/Icon 12.svg";
+import store from "../../../public/icons/tasks/Icon 13.svg";
+import calendary from "../../../public/icons/tasks/Icon 14.svg";
+import camera from "../../../public/icons/tasks/Icon 15.svg";
+import acessibility from "../../../public/icons/tasks/acessibility.png";
+import suun from "../../../public/icons/Group 2.svg";
+import notepad from "../../../public/icons/tasks/Icon 2.svg";
+import spotify from "../../../public/icons/tasks/Icon 5.svg";
+import folder from "../../../public/icons/tasks/Icon.svg";
+import discord from "../../../public/icons/tasks/discord.svg";
 
 import { AirplaneInFlight, ArrowClockwise, BatteryPlus, BellRinging, Bluetooth, CaretLeft, CaretRight, CaretUp, CloudSun, Moon, PersonArmsSpread, WifiHigh } from "@phosphor-icons/react";
 
@@ -42,13 +41,13 @@ import { useEffect, useState } from "react";
 
 import MusicPlayer from "./ReactPlayer";
 import WindowsComponent from "./WindowsComponent";
-import { useMusic } from "../context/Context";
-import { CustomButton } from "./ButtonCustom";
-import WatchListComp from "./TemperatureModal/watchlist";
-import PhotosComp from "./TemperatureModal/photos";
-import TrafficComp from "./TemperatureModal/Traffic";
-import OutlookCalendarComp from "./TemperatureModal/OutlookCalendar";
-import ToDoComp from "./TemperatureModal/Todo";
+import { useMusic } from "../../context/Context";
+import { CustomButton } from "../Buttons/ButtonCustom";
+import WatchListComp from "../TemperatureModal/watchlist";
+import PhotosComp from "../TemperatureModal/photos";
+import TrafficComp from "../TemperatureModal/Traffic";
+import OutlookCalendarComp from "../TemperatureModal/OutlookCalendar";
+import ToDoComp from "../TemperatureModal/Todo";
 import NotificationsModalComp from "./NotificationsModal";
 import Calendar from "react-calendar";
 
@@ -171,12 +170,6 @@ function FooterComponent() {
         filteredButtons={filteredButtons}
         recommendedWindows={recommendedWindows}
       />
-    ),
-    explorer: (
-      <div>
-        <h2>Conteúdo específico para Explorer</h2>
-        <p>Aqui está o conteúdo para o Explorer...</p>
-      </div>
     ),
     search: (
       <div className="flex flex-col gap-4">
