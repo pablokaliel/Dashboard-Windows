@@ -436,7 +436,7 @@ function FooterComponent() {
             <button onClick={toggleSpeakerModal}>
               <Image src={speaker} alt="speaker" />
             </button>
-            <Image src={battery} alt="battery" />
+            <Image src={battery} alt="battery" className="block md:hidden"/>
           </div>
 
           <div onClick={toggleCalendarModal} className="text-end cursor-pointer text-xs" >
@@ -619,7 +619,7 @@ function FooterComponent() {
                     </button>
                     <span
                       onClick={toggleSeconds}
-                      className={`text-xl cursor-pointer ${  loading ? "text-xs" : ""  }`} >
+                      className={`text-xl cursor-pointer ${  loading ? "text-xs" : "" }`} >
                       {loading ? "aguarde..." : time}
                     </span>
                     <Image
